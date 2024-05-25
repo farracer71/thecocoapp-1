@@ -1,7 +1,7 @@
 
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import Page from "../component/Page";
+import Page from "../../component/Page";
 
 export default function NotFound(props) {
   

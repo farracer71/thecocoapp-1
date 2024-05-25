@@ -7,7 +7,7 @@ import { createTheme } from "../theme";
 const defaultSettings = {
   direction: "ltr",
   responsiveFontSizes: true,
-  theme: "DARK",
+  theme: "LIGHT",
 };
 
 const restoreSettings = () => {

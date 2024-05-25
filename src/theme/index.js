@@ -5,11 +5,104 @@ import {
 } from "@mui/material/styles";
 import _ from "lodash";
 
+// Define your typography styles with unitless line heights
+const typography = {
+  h1: {
+    fontWeight: 500,
+    fontSize: 40,
+    fontFamily: "'Poppins', sans-serif",
+    lineHeight: 1.2, // Unitless line height
+    "@media(max-width:767px)": {
+      fontSize: "25px !important",
+      lineHeight: 1.6, // Unitless line height
+    },
+  },
+  h2: {
+    fontWeight: 500,
+    fontSize: 30,
+    fontFamily: "'Poppins', sans-serif",
+    lineHeight: 1.2, // Unitless line height
+    "@media(max-width:767px)": {
+      fontSize: "23px !important",
+      lineHeight: 1.3, // Unitless line height
+    },
+  },
+  h3: {
+    fontWeight: 500,
+    fontSize: 24,
+    fontFamily: "'Poppins', sans-serif",
+    lineHeight: 1.2, // Unitless line height
+    "@media(max-width:767px)": {
+      fontSize: "20px !important",
+      lineHeight: 1.3, // Unitless line height
+    },
+  },
+  h4: {
+    fontWeight: 500,
+    fontSize: 20,
+    fontFamily: "'Poppins', sans-serif",
+    lineHeight: 1.2, // Unitless line height
+    "@media(max-width:767px)": {
+      fontSize: "18px !important",
+      lineHeight: 1.3, // Unitless line height
+    },
+  },
+  h5: {
+    fontWeight: 500,
+    fontSize: 18,
+    fontFamily: "'Poppins', cursive",
+    lineHeight: 1.67, // Unitless line height
+    "@media(max-width:767px)": {
+      fontSize: "16px !important",
+      lineHeight: 1.3, // Unitless line height
+    },
+  },
+  h6: {
+    fontWeight: 300,
+    fontSize: 16,
+    fontFamily: "'Poppins', sans-serif",
+    lineHeight: 1.75, // Unitless line height
+    "@media(max-width:767px)": {
+      fontSize: "14px !important",
+      lineHeight: 1.3, // Unitless line height
+    },
+  },
+  overline: {
+    fontWeight: 500,
+    fontFamily: "'Poppins', sans-serif",
+  },
+  button: {
+    textTransform: "capitalize",
+    borderRadius: 27,
+    fontFamily: "'Poppins', sans-serif",
+  },
+  body1: {
+    fontSize: 14,
+    fontWeight: 300,
+    fontFamily: "'Poppins', sans-serif",
+    lineHeight: 1.79, // Unitless line height
+    "@media(max-width:767px)": {
+      fontSize: "12px !important",
+      lineHeight: 1.67, // Unitless line height
+    },
+  },
+  body2: {
+    fontSize: 12,
+    fontWeight: 300,
+    fontFamily: "'Poppins', sans-serif",
+    lineHeight: 1.5, // Unitless line height
+  },
+  subtitle1: {
+    fontSize: 11,
+    fontFamily: "'Poppins', sans-serif",
+    fontWeight: 300,
+    lineHeight: 1.2, // Unitless line height
+  },
+};
+
 const baseOptions = {
   direction: "ltr",
-  typography: {
-
-  },
+  typography,
   components: {
     // Define your component overrides here
   },

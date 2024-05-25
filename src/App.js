@@ -1,21 +1,14 @@
-import React, { useContext } from "react";
-import { Button, CssBaseline } from "@mui/material";
-import SettingsContext from "./context/SettingsContext";
+import React from "react";
+import {  CssBaseline } from "@mui/material";
+import AppRouter from "./AppRouter";
 
 function App() {
-  const { settings, saveSettings } = useContext(SettingsContext);
 
-  const toggleTheme = () => {
-    saveSettings({ theme: settings.theme === "LIGHT" ? "DARK" : "LIGHT" });
-  };
   return (
     <div className="App">
       <div>
         <CssBaseline />
-        <h1>Current Theme: {settings.theme}</h1>
-        <Button variant="contained" onClick={toggleTheme}>
-          Toggle Theme
-        </Button>
+        <AppRouter />
       </div>
     </div>
   );

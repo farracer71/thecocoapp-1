@@ -47,10 +47,11 @@ const Logo = styled("img")({
 
 const RegisterBox = styled(Box)({
   display: "flex",
+  gap:"15px"
 });
 
 const LinkButton = styled(Button)({
-  fontFamily: "'Noto Sans', sans-serif",
+  fontFamily: "'Nunito Sans', sans-serif",
   fontStyle: "normal",
   fontWeight: "600",
   fontSize: "16px",
@@ -116,9 +117,17 @@ export default function TopBar() {
               </LinkButtonsDiv>
             </Box>
             <RegisterBox>
-              {logIn && <Button>Dashboard</Button>}
-              {!logIn && <Button onClick={() => {}}>Sign Up</Button>}
-              {!logIn && <Button onClick={() => {}}>Sign In</Button>}
+              {logIn && <Button variant="contained">Dashboard</Button>}
+              {!logIn && (
+                <Button variant="contained" onClick={() => { navigate("/login");}}>
+                  Sign Up
+                </Button>
+              )}
+              {!logIn && (
+                <Button variant="contained" onClick={() => {navigate("/login");}}>
+                  Sign In
+                </Button>
+              )}
             </RegisterBox>
           </ToolbarStyled>
         </AppBar>

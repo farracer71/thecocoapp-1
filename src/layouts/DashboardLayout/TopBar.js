@@ -43,7 +43,7 @@ const styles ={
       color: "rgb(23, 38, 36)",
       display: "flex",
       textTransform: "uppercase",
-      fontFamily: "'Noto Sans', sans-serif",
+      fontFamily: "'Nunito Sans', sans-serif",
       fontStyle: "normal",
       fontWeight: "600",
       fontSize: "16px",

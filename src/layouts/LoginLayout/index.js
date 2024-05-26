@@ -48,7 +48,7 @@ const styles ={
     zIndex: "-1",
   },
   imageside: {
-    width: "100%",
+    width: "-webkit-fill-available",
     height: "100vh",
     "@media (max-width: 950px)": {
       display: "none !important",
@@ -70,41 +70,22 @@ const LoginLayout = ({ children }) => {
   return (
     <Box sx={styles.mainScreenBack}>
       <Grid container style={{ height: "100vh" }}>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={7}
-          lg={7}
-          sx={styles.firstscreen}
-        >
-          <div onClick={() => navigate("/")}>
-            <img sx={styles.logo} src="images/Logo.png" />
-          </div>
-
-          <Box>
-            <Box sx={styles.content}>
-              {children}
-              {/* <Box style={{ display: "grid", justifyContent: "center", alignItems:"end" }}>
-              <Typography sx={styles.dontacctypo}>Don’t have an account? <span sx={styles.signupspan} onClick={() => { navigate("/register") }} style={{ cursor: "pointer" }}>Sign up</span></Typography>
-            </Box> */}
-            </Box>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={5}
-          lg={5}
-          sx={styles.sideimagegrid}
-        >
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           <Box>
             <img
-              sx={styles.imageside}
+              style={{ width: "-webkit-fill-available" }}
               src="/images/Sideimage.png"
               alt="Side_Image"
             />
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <div onClick={() => navigate("/")}>
+            <img sx={styles.logo} src="images/Logo.png" alt=""/>
+          </div>
+
+          <Box>
+            <Box sx={styles.content}>{children}</Box>
           </Box>
         </Grid>
       </Grid>

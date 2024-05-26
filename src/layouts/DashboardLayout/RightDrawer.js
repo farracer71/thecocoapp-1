@@ -110,7 +110,7 @@ const styles ={
     gap: "15px",
   },
   menuListText: {
-    fontFamily: "'Noto Sans', sans-serif !important",
+    fontFamily: "'Nunito Sans', sans-serif",
     fontStyle: "normal",
     fontWeight: "400",
     fontSize: "16px",
@@ -120,7 +120,7 @@ const styles ={
     cursor: "pointer",
   },
   balanceText: {
-    fontFamily: "'Noto Sans', sans-serif !important",
+    fontFamily: "'Nunito Sans', sans-serif",
     fontStyle: "normal",
     fontWeight: "600",
     fontSize: "24px",

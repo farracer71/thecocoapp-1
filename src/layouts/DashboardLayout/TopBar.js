@@ -65,10 +65,8 @@ const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
   return (
     <AppBar
       style={{
-        backgroundColor: "#172624",
         height: "64px",
         justifyContent: "center",
-        borderBottom: "1px solid rgba(247, 246, 241, 0.20)",
       }}
     >
       <Toolbar sx={styles.toolbar}>

@@ -168,7 +168,7 @@ const NavBar = () => {
                 {exchangeBalance}
               </Typography>
             )}
-            {exchangeBalance && <img src="/images/Credit card.svg" />}
+            {exchangeBalance && <img alt="" src="/images/Credit card.svg" />}
           </Box>
         </Box>
         <Box style={{ display: "grid", gap: "20px", padding: "0 34px" }}>

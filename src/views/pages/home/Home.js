@@ -1,7 +1,21 @@
 import React, { useContext } from "react";
 import Page from "../../../component/Page";
 import SettingsContext from "src/context/SettingsContext";
-import { Button, Typography } from "@mui/material";
+import HeroSection from "./HeroSection";
+import FreeFunEffective from "./FreeFunEffective";
+import OurMission from "./OurMission";
+import FeedBack from "./FeedBack";
+import { Container } from "@mui/material";
+import styled from "@emotion/styled";
+
+const SectionFunBack = styled("section")(({ theme }) => ({
+  backgroundImage: "url('/images/FreeFunBackground.png')",
+  backgroundSize: "cover",
+  paddingBottom: "5px",
+  paddingTop: "40px",
+  minHeight: "200px",
+  width: "100%",
+}));
 
 function Home() {
   const { settings, saveSettings } = useContext(SettingsContext);
@@ -11,10 +25,20 @@ function Home() {
   };
   return (
     <Page title="Home">
-      <Typography variant="h1">Current Theme: {settings.theme}</Typography>
-      <Button variant="contained" onClick={toggleTheme}>
-        Toggle Theme
-      </Button>
+      <Container maxWidth="lg">
+        <section>
+          <HeroSection />
+        </section>
+        <SectionFunBack>
+          <FreeFunEffective />
+        </SectionFunBack>
+        <section>
+          <OurMission />
+        </section>
+        <section>
+          <FeedBack />
+        </section>
+      </Container>
     </Page>
   );
 }

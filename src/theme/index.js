@@ -8,63 +8,65 @@ import _ from "lodash";
 // Define your typography styles with unitless line heights
 const typography = {
   h1: {
-    fontWeight: 500,
-    fontSize: 40,
+    fontWeight: 700,
+    fontSize: 32,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.2, // Unitless line height
+    lineHeight: 1.5,
     "@media(max-width:767px)": {
       fontSize: "25px !important",
-      lineHeight: 1.6, // Unitless line height
+      lineHeight: 1.6,
+      fontWeight: 600,
     },
   },
   h2: {
-    fontWeight: 500,
-    fontSize: 30,
+    fontWeight: 700,
+    fontSize: 24,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.2, // Unitless line height
+    lineHeight: 1.2,
     "@media(max-width:767px)": {
-      fontSize: "23px !important",
-      lineHeight: 1.3, // Unitless line height
+      fontSize: "20px !important",
+      lineHeight: 1.3,
+      fontWeight: 600,
     },
   },
   h3: {
     fontWeight: 500,
-    fontSize: 24,
+    fontSize: 22,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.2, // Unitless line height
+    lineHeight: 1.2,
     "@media(max-width:767px)": {
       fontSize: "20px !important",
-      lineHeight: 1.3, // Unitless line height
+      lineHeight: 1.3,
     },
   },
   h4: {
     fontWeight: 500,
     fontSize: 20,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.2, // Unitless line height
+    lineHeight: 1.2,
     "@media(max-width:767px)": {
       fontSize: "18px !important",
-      lineHeight: 1.3, // Unitless line height
+      lineHeight: 1.3,
     },
   },
   h5: {
     fontWeight: 500,
     fontSize: 18,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.67, // Unitless line height
+    lineHeight: 1.67,
     "@media(max-width:767px)": {
       fontSize: "16px !important",
-      lineHeight: 1.3, // Unitless line height
+      lineHeight: 1.3,
     },
   },
   h6: {
     fontWeight: 300,
     fontSize: 16,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.75, // Unitless line height
+    lineHeight: 1.75,
     "@media(max-width:767px)": {
       fontSize: "14px !important",
-      lineHeight: 1.3, // Unitless line height
+      lineHeight: 1.3,
     },
   },
   overline: {
@@ -77,26 +79,30 @@ const typography = {
     fontFamily: "'Nunito Sans', sans-serif",
   },
   body1: {
-    fontSize: 14,
+    fontSize: 20,
     fontWeight: 300,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.79, // Unitless line height
+    lineHeight: 1.79,
     "@media(max-width:767px)": {
-      fontSize: "12px !important",
-      lineHeight: 1.67, // Unitless line height
+      fontSize: "18px !important",
+      lineHeight: 1.67,
     },
   },
   body2: {
-    fontSize: 12,
+    fontSize: 18,
     fontWeight: 300,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.5, // Unitless line height
+    lineHeight: 1.5,
+    "@media(max-width:767px)": {
+      fontSize: "16px !important",
+      lineHeight: 1.4,
+    },
   },
   subtitle1: {
     fontSize: 11,
     fontFamily: "'Nunito Sans', sans-serif",
     fontWeight: 300,
-    lineHeight: 1.2, // Unitless line height
+    lineHeight: 1.2,
   },
 };
 
@@ -133,6 +139,8 @@ const themesOptions = [
         styleOverrides: {
           root: {
             backgroundColor: "#fff",
+            boxShadow: "none",
+            border: "1px solid #E5E5E5",
           },
         },
       },
@@ -242,45 +250,56 @@ const themesOptions = [
           containedPrimary: {
             color: "#fff",
             padding: "10px 35px",
-            fontWeight: "500",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "22px",
             borderRadius: "8px",
-            backgroundColor: "rgba(11, 20, 38, 1)",
+            backgroundColor: "#FE8A36",
             "&:hover": {
-              color: "#000",
-              backgroundColor: "rgba(11, 20, 38, 0.7)",
+              color: "#fff",
+              backgroundColor: "#00BAF2",
             },
           },
           containedSecondary: {
-            backgroundColor: "rgba(0, 0, 0, 0.03);",
+            backgroundColor: "#FE8A36",
             padding: "8px 27px",
             filter: "drop-shadow(0px 13px 27px rgba(0, 0, 0, 0.25))",
-            fontSize: "14px",
-            fontWeight: "500",
-            lineHeight: "21px",
-            color: "#000000",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "22px",
+            color: "#fff",
             borderRadius: "50px",
             border: "2px solid ",
-            borderColor: "rgba(0, 0, 0, 0.03);",
+            borderColor: "#FE8A36",
             "&:hover": {
-              color: "#000",
-              background: "transparent",
+              color: "#fff",
+              background: "#00BAF2",
+              borderColor: "#00BAF2",
               boxShadow:
                 "0 1px 0 0 #fe5aeb, 0 -1px 0 0 #f4a91b, 1px 0 0 0 #fe5aeb, -1px 0 0 0 rgb(254 90 235), 1px -1px 0 0 #f4a91b, -1px 1px 0 0 rgb(254 90 235), 1px 1px 0 0 rgb(254 90 235), -1px -1px 0 0 rgb(244 168 26)",
-              backgroundColor: "transparent",
+              backgroundColor: "#00BAF2",
             },
           },
           contained: {
+            background: "#FE8A36",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "22px",
             "&.Mui-disabled": {
               backgroundColor: "rgba(0, 0, 0, 0.03) ",
             },
           },
           outlinedPrimary: {
-            color: "rgba(11, 20, 38, 1)",
-            border: "2px solid rgba(11, 20, 38, 1) !important",
+            color: "#fff",
+            backgroundColor: "#FE8A36",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "22px",
+            border: "2px solid #FE8A36 !important",
             "&:hover": {
               color: "#fff",
               boxShadow: "none !important",
-              backgroundColor: "rgba(11, 20, 38, 1)",
+              backgroundColor: "#FE8A36",
             },
           },
         },
@@ -328,6 +347,8 @@ const themesOptions = [
         styleOverrides: {
           root: {
             backgroundColor: "#0B1426",
+            boxShadow: "none",
+            border: "1px solid #f1f1f1",
           },
         },
       },
@@ -434,50 +455,58 @@ const themesOptions = [
       MuiButton: {
         styleOverrides: {
           containedPrimary: {
-            color: "rgba(11, 20, 38, 1)",
+            color: "#fff",
             padding: "10px 35px",
-            lineHeight: "21px",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "22px",
             borderRadius: "8px",
-            backgroundColor: "#fff",
-            fontWeight: "600",
+            backgroundColor: "#FE8A36",
             "&:hover": {
-              color: "#000",
-              backgroundColor: "#fff",
+              color: "#fff",
+              backgroundColor: "#00BAF2",
             },
           },
           containedSecondary: {
-            backgroundColor: "rgba(255, 255, 255, 0.04)",
+            backgroundColor: "#FE8A36",
             padding: "8px 27px",
             filter: "drop-shadow(0px 13px 27px rgba(0, 0, 0, 0.25))",
-            fontSize: "14px",
-            fontWeight: "500",
-            lineHeight: "21px",
-            color: "#ffffff",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "22px",
+            color: "#fff",
             borderRadius: "50px",
             border: "2px solid ",
-            borderColor: "rgba(255, 255, 255, 0.04)",
+            borderColor: "#FE8A36",
             "&:hover": {
-              color: "#ffffff",
-              background: "transparent",
+              color: "#fff",
+              background: "#00BAF2",
+              borderColor: "#00BAF2",
               boxShadow:
-                "0 1px 0 0 #ff00cd, 0 -1px 0 0 #7d00b9, 1px 0 0 0 #f5673f, -1px 0 0 0 #f5673f, 1px -1px 0 0 #f5673f, -1px 1px 0 0 #f5673f, 1px 1px 0 0 #f5673f, -1px -1px 0 0 #f5673f",
-              backgroundColor: "transparent",
+                "0 1px 0 0 #fe5aeb, 0 -1px 0 0 #f4a91b, 1px 0 0 0 #fe5aeb, -1px 0 0 0 rgb(254 90 235), 1px -1px 0 0 #f4a91b, -1px 1px 0 0 rgb(254 90 235), 1px 1px 0 0 rgb(254 90 235), -1px -1px 0 0 rgb(244 168 26)",
+              backgroundColor: "#00BAF2",
             },
           },
           contained: {
+            background: "#FE8A36",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "22px",
             "&.Mui-disabled": {
-              backgroundColor: "rgba(255, 255, 255, 0.025) ",
-              color: "#ffffff45",
+              backgroundColor: "rgba(0, 0, 0, 0.03) ",
             },
           },
           outlinedPrimary: {
-            border: "1px solid rgba(255, 255, 255, 1) !important",
-            fontWeight: "600",
             color: "#fff",
+            backgroundColor: "#FE8A36",
+            fontWeight: "800",
+            fontSize: "16px",
+            lineHeight: "22px",
+            border: "2px solid #FE8A36 !important",
             "&:hover": {
-              color: "#000",
+              color: "#fff",
               boxShadow: "none !important",
-              backgroundColor: "#f5f5f5",
+              backgroundColor: "#FE8A36",
             },
           },
         },

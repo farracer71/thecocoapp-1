@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import TopBar from "./TopBar";
 import { useLocation } from "react-router-dom";
+import { Box } from "@mui/material";
 
 
 const styles={
@@ -10,6 +11,7 @@ const styles={
     height: "100%",
     // overflow: "hidden",
     width: "100%",
+    
   },
   wrapper: {
     display: "flex",
@@ -92,7 +94,7 @@ const MainLayout = ({ children }) => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
   return (
-    <div sx={styles.root}>
+    <Box sx={styles.root}>
       <TopBar />
 
       {location.pathname === "/login" ||
@@ -101,35 +103,45 @@ const MainLayout = ({ children }) => {
       location.pathname === "/verify-otp" ||
       location.pathname === "/company-information" ||
       location.pathname === "/reset-password" ? (
-        <div
-        sx={`${styles.wrapperAuth} ${
-          ["/forget-password", "/verify-otp", "/company-information", "/reset-password"].includes(location.pathname)
-            ? styles.forgetWrapper
-            : ""
-        }`}
-      >
-        <div
-          sx={`${styles.contentLoginDiv} ${
-            ["/forget-password", "/verify-otp", "/reset-password"].includes(location.pathname)
-              ? styles.forgetAuth
+        <Box
+          sx={`${styles.wrapperAuth} ${
+            [
+              "/forget-password",
+              "/verify-otp",
+              "/company-information",
+              "/reset-password",
+            ].includes(location.pathname)
+              ? styles.forgetWrapper
               : ""
           }`}
         >
-          <div sx={styles.contentLogin}>{children}</div>
-        </div>
-      </div>
-      
+          <Box
+            sx={`${styles.contentLoginDiv} ${
+              ["/forget-password", "/verify-otp", "/reset-password"].includes(
+                location.pathname
+              )
+                ? styles.forgetAuth
+                : ""
+            }`}
+          >
+            <Box sx={styles.contentLogin}>{children}</Box>
+          </Box>
+        </Box>
       ) : (
-        <div
+        <Box
           sx={styles.wrapper}
-          style={location.pathname === "/map" || location.pathname === "/verify" ? { minHeight: "auto" } : {}}
+          style={
+            location.pathname === "/map" || location.pathname === "/verify"
+              ? { minHeight: "auto" }
+              : {}
+          }
         >
-          <div sx={styles.contentContainer}>
-            <div sx={styles.content}>{children}</div>
-          </div>{" "}
-        </div>
+          <Box sx={styles.contentContainer}>
+            <Box sx={styles.content}>{children}</Box>
+          </Box>{" "}
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
 

@@ -8,11 +8,14 @@ import {
   Grid,
   List,
   ListItem,
+  Typography,
+  Container,
 } from "@mui/material";
 import { MdMenu as MenuIcon } from "react-icons/md";
 import { useNavigate, useLocation } from "react-router-dom";
 import Scroll from "react-scroll";
 import { styled } from "@mui/system";
+import { LuMail } from "react-icons/lu";
 
 const ScrollLink = Scroll.Link;
 
@@ -47,7 +50,7 @@ const Logo = styled("img")({
 
 const RegisterBox = styled(Box)({
   display: "flex",
-  gap:"15px"
+  gap: "15px",
 });
 
 const LinkButton = styled(Button)({
@@ -59,7 +62,19 @@ const LinkButton = styled(Button)({
   color: "#FDFAFE",
   cursor: "pointer",
 });
+const BackgroundDiv = styled("div")(({ theme }) => ({
+  
+  background: "#F3F8FB",
+  padding: "8px",
+}));
 
+const styles = {
+  flexDiv: {
+    display: "flex",
+    gap: "4px",
+    alignItems: "center",
+  },
+};
 export default function TopBar() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -90,16 +105,40 @@ export default function TopBar() {
   return (
     <>
       <Root>
+        <BackgroundDiv>
+          <Container maxWidth="lg">
+            <Box
+              sx={{
+                display: "flex",
+                gap: "15px",
+                justifyContent: "end",
+                alignItems: "center",
+              }}
+            >
+              <Box sx={styles.flexDiv}>
+                <LuMail />
+                <Typography variant="body1">hello@thecocoapp.com</Typography>
+              </Box>
+              <Box sx={styles.flexDiv}>
+                <LuMail />
+                <Typography variant="body1">
+                  edupartners@thecocoapp.com
+                </Typography>
+              </Box>
+            </Box>
+          </Container>
+        </BackgroundDiv>
         <AppBar position="static">
-          <ToolbarStyled>
-            <Box display="flex" alignItems="center" gap="32px">
-              <Logo
-                src="/images/Logo.png"
-                onClick={() => {
-                  navigate("/");
-                }}
-              />
-              <LinkButtonsDiv>
+          <Container maxWidth="lg">
+            <ToolbarStyled style={{padding:"0"}}>
+              <Box display="flex" alignItems="center" gap="32px">
+                <Logo
+                  src="/images/Logo.png"
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                />
+                {/* <LinkButtonsDiv>
                 <LinkButton>
                   <ScrollLink
                     onClick={() => {
@@ -114,22 +153,33 @@ export default function TopBar() {
                     </span>
                   </ScrollLink>
                 </LinkButton>
-              </LinkButtonsDiv>
-            </Box>
-            <RegisterBox>
-              {logIn && <Button variant="contained">Dashboard</Button>}
-              {!logIn && (
-                <Button variant="contained" onClick={() => { navigate("/login");}}>
-                  Sign Up
-                </Button>
-              )}
-              {!logIn && (
-                <Button variant="contained" onClick={() => {navigate("/login");}}>
+              </LinkButtonsDiv> */}
+              </Box>
+              <RegisterBox>
+                {logIn && <Button variant="contained">Dashboard</Button>}
+                {!logIn && (
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      navigate("/login");
+                    }}
+                  >
+                    Get Started
+                  </Button>
+                )}
+                {/* {!logIn && (
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    navigate("/login");
+                  }}
+                >
                   Sign In
                 </Button>
-              )}
-            </RegisterBox>
-          </ToolbarStyled>
+              )} */}
+              </RegisterBox>
+            </ToolbarStyled>
+          </Container>
         </AppBar>
       </Root>
       <Root1>
@@ -179,19 +229,18 @@ export default function TopBar() {
                       style={{ cursor: "pointer", fontSize: "28px" }}
                     />
                   </ListItem>
-                  <ListItem
+                  {/* <ListItem
                     onClick={() => {
                       navigate("/");
                     }}
-                    style={{ color: "#172624" }}
+                 
                   >
                     Home
-                  </ListItem>
+                  </ListItem> */}
                   {logIn && (
                     <ListItem
-                      style={{ color: "#172624" }}
                       onClick={() => {
-                        navigate("/register");
+                        navigate("/login");
                       }}
                     >
                       Dashboard
@@ -200,19 +249,11 @@ export default function TopBar() {
                   {!logIn && (
                     <Button
                       onClick={() => {
-                        navigate("/register");
-                      }}
-                    >
-                      Sign Up
-                    </Button>
-                  )}
-                  {!logIn && (
-                    <Button
-                      onClick={() => {
                         navigate("/login");
                       }}
                     >
-                      Sign In
+                      {" "}
+                      Get Started
                     </Button>
                   )}
                 </List>

@@ -80,9 +80,9 @@ const LoginLayout = ({ children }) => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          <div onClick={() => navigate("/")}>
+          {/* <div onClick={() => navigate("/")}>
             <img sx={styles.logo} src="images/Logo.png" alt=""/>
-          </div>
+          </div> */}
 
           <Box>
             <Box sx={styles.content}>{children}</Box>

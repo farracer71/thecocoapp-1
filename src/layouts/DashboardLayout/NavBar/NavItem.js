@@ -131,7 +131,6 @@ const NavItem = ({
         <Button
           sx={styles.button}
           onClick={handleToggle}
-        // style={{ color: "#ccc" }}
         >
           {Icon && <Icon sx={styles.icon} size="20" />}
           <span sx={styles.title}>{title}</span>

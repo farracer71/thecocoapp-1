@@ -1,13 +1,15 @@
 import React, { useEffect, useContext } from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
-import { AppBar, Toolbar, IconButton, Hidden, SvgIcon } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Hidden, SvgIcon, Typography } from "@mui/material";
 import { Menu as MenuIcon } from "react-feather";
 import { TopBarData } from "src/layouts/DashboardLayout/TopBar";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "src/context/Auth";
 
-const styles={
+
+
+const styles = {
   root: {
     background: "transparent",
   },
@@ -51,27 +53,31 @@ const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
     }
   }, []);
   return (
-    <AppBar
-      elevation={0}
-      sx={clsx(styles.root, sx)}
-      color="inherit"
-      {...rest}
-    >
-      <Toolbar sx={styles.toolbar}>
-        <Hidden lgUp>
-          <IconButton
-            color="#FF2626"
-            onClick={onMobileNavOpen}
-            style={{ marginRight: 10 }}
-            size="large">
-            <SvgIcon fontSize="small">
-              <MenuIcon style={{ color: "#fff" }} />
-            </SvgIcon>
-          </IconButton>
-        </Hidden>
-        <TopBarData />
-      </Toolbar>
-    </AppBar>
+    <>
+    
+      <AppBar
+        elevation={0}
+        sx={clsx(styles.root, sx)}
+        color="inherit"
+        {...rest}
+      >
+        <Toolbar sx={styles.toolbar}>
+          <Hidden lgUp>
+            <IconButton
+              color="#FF2626"
+              onClick={onMobileNavOpen}
+              style={{ marginRight: 10 }}
+              size="large"
+            >
+              <SvgIcon fontSize="small">
+                <MenuIcon  />
+              </SvgIcon>
+            </IconButton>
+          </Hidden>
+          <TopBarData />
+        </Toolbar>
+      </AppBar>
+    </>
   );
 };
 
@@ -79,7 +85,7 @@ TopBar.propTypes = {
   sx: PropTypes.string,
 };
 TopBar.defaultProps = {
-  onMobileNavOpen: () => { },
+  onMobileNavOpen: () => {},
 };
 
 export default TopBar;

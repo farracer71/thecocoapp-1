@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 
 
@@ -29,25 +29,27 @@ const DeskTopTitle = styled("h1")(({ theme }) => ({
 
 function HeroSection() {
   return (
-    <Box >
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <DeskTopTitle>
-            Helping children to make smart money choices !
-          </DeskTopTitle>
-          <Typography variant="h5">
-            Start them young! Cocoapp equips children with the financial
-            knowledge they need to make smart choices.
-          </Typography>
-          <Button variant="contained">Get started</Button>
+    <Container maxWidth="lg">
+      <Box>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <DeskTopTitle>
+              Helping children to make smart money choices !
+            </DeskTopTitle>
+            <Typography variant="h5">
+              Start them young! Cocoapp equips children with the financial
+              knowledge they need to make smart choices.
+            </Typography>
+            <Button variant="contained">Get started</Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Box>
+              <StyledImg alt="heroSection" src="images/boyWithMobile.svg" />
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Box>
-            <StyledImg alt="heroSection" src="images/boyWithMobile.svg" />
-          </Box>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </Container>
   );
 }
 

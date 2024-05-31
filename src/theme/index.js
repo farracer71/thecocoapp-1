@@ -172,9 +172,11 @@ const themesOptions = [
         styleOverrides: {
           root: {
             backgroundColor: "rgba(255, 255, 255, 1)",
+            borderRadius: "14px",
           },
           elevation2: {
             backgroundColor: "rgba(255, 255, 255, 1)",
+            borderRadius: "14px",
           },
         },
       },
@@ -380,9 +382,11 @@ const themesOptions = [
         styleOverrides: {
           root: {
             backgroundColor: "rgba(23, 32, 49, 1)",
+            borderRadius: "14px",
           },
           elevation2: {
             backgroundColor: "#232B3B",
+            borderRadius: "14px",
           },
         },
       },

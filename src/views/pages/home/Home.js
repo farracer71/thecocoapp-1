@@ -5,7 +5,6 @@ import HeroSection from "./HeroSection";
 import FreeFunEffective from "./FreeFunEffective";
 import OurMission from "./OurMission";
 import FeedBack from "./FeedBack";
-import { Container } from "@mui/material";
 import styled from "@emotion/styled";
 
 const SectionFunBack = styled("section")(({ theme }) => ({
@@ -15,6 +14,7 @@ const SectionFunBack = styled("section")(({ theme }) => ({
   paddingTop: "40px",
   minHeight: "200px",
   width: "100%",
+  backgroundColor: "#F3F8FB",
 }));
 
 function Home() {
@@ -25,7 +25,7 @@ function Home() {
   };
   return (
     <Page title="Home">
-      <Container maxWidth="lg">
+      
         <section>
           <HeroSection />
         </section>
@@ -38,7 +38,7 @@ function Home() {
         <section>
           <FeedBack />
         </section>
-      </Container>
+     
     </Page>
   );
 }

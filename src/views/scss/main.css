@@ -24,3 +24,21 @@ body {
     gap: 30px;
     animation: scroll 20s linear infinite;
 }
+
+/* Change the background color and text color of selected text */
+::selection {
+    background-color: #FE8A36; /* Background color of the selected text */
+    color: #ffffff;           /* Text color of the selected text */
+}
+
+/* For webkit browsers (Chrome, Safari) */
+::-webkit-selection {
+    background-color: #FE8A36; /* Background color of the selected text */
+    color: #ffffff;           /* Text color of the selected text */
+}
+
+/* For Mozilla Firefox */
+::-moz-selection {
+    background-color: #FE8A36; /* Background color of the selected text */
+    color: #ffffff;           /* Text color of the selected text */
+}

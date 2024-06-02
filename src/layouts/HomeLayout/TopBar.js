@@ -22,16 +22,16 @@ const ScrollLink = Scroll.Link;
 const Root = styled("div")(({ theme }) => ({
   flexGrow: 1,
   display: "block",
-  [theme.breakpoints.down("md")]: {
-    display: "none",
-  },
+  // [theme.breakpoints.down("md")]: {
+  //   display: "none",
+  // },
 }));
 
 const Root1 = styled("div")(({ theme }) => ({
   display: "none",
-  [theme.breakpoints.down("md")]: {
-    display: "block",
-  },
+  // [theme.breakpoints.down("md")]: {
+  //   display: "block",
+  // },
 }));
 
 const ToolbarStyled = styled(Toolbar)({
@@ -108,6 +108,7 @@ export default function TopBar() {
         <BackgroundDiv>
           <Container maxWidth="lg">
             <Box
+              className="scroll-container"
               sx={{
                 display: "flex",
                 gap: "15px",
@@ -115,22 +116,24 @@ export default function TopBar() {
                 alignItems: "center",
               }}
             >
-              <Box sx={styles.flexDiv}>
-                <LuMail />
-                <Typography variant="body1">hello@thecocoapp.com</Typography>
-              </Box>
-              <Box sx={styles.flexDiv}>
-                <LuMail />
-                <Typography variant="body1">
-                  edupartners@thecocoapp.com
-                </Typography>
+              <Box className="scroll-content">
+                <Box sx={styles.flexDiv}>
+                  <LuMail />
+                  <Typography variant="body1">hello@thecocoapp.com</Typography>
+                </Box>
+                <Box sx={styles.flexDiv}>
+                  <LuMail />
+                  <Typography variant="body1">
+                    edupartners@thecocoapp.com
+                  </Typography>
+                </Box>
               </Box>
             </Box>
           </Container>
         </BackgroundDiv>
         <AppBar position="static">
           <Container maxWidth="lg">
-            <ToolbarStyled style={{padding:"0"}}>
+            <ToolbarStyled style={{ padding: "0" }}>
               <Box display="flex" alignItems="center" gap="32px">
                 <Logo
                   src="/images/Logo.png"

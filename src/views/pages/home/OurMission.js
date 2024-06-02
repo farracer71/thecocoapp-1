@@ -8,8 +8,26 @@ const style = {
   mappedBox: {
     display: "grid",
     gap: "30px",
+    "@media(max-width:767px)": {
+      gap: "15px",
+    },
   },
-  
+  HandleMargin: {
+    margin: "40px 0",
+    "@media(max-width:1000px)": {
+      margin: "30px 0",
+    },
+    "@media(max-width:767px)": {
+      margin: "20px 0",
+    },
+  },
+  DesignBox: {
+    background: "#E5D5FD",
+    padding: "5px",
+    maxWidth: "125px",
+    borderRadius: "20px",
+    marginBottom: "10px",
+  },
 };
 const StyledImg = styled("img")(({ theme }) => ({
   width: "-webkit-fill-available",
@@ -36,9 +54,19 @@ function OurMission() {
     ];
   return (
     <Container maxWidth="lg">
-      <Box mt={2}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+      <Box sx={style.HandleMargin}>
+        <Grid container spacing={4}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={{
+              display: {
+                xs: "none",
+                sm: "block",
+              },
+            }}
+          >
             <Box mt={2}>
               <StyledImg alt="" src="images/ourMission.svg" />
             </Box>
@@ -46,7 +74,9 @@ function OurMission() {
           <Grid item xs={12} sm={6}>
             <Box mt={2} sx={style.mappedBox}>
               <CustomBox>
-                <Box>🏆 Our Mission</Box>
+                <Box sx={style.DesignBox}>
+                  <Typography variant="body2">🏆 Our Mission</Typography>
+                </Box>
                 <Typography variant="h2" sx={{ color: "#fff" }}>
                   To make financial literacy accessible and engaging for all
                   children. We believe that it is a crucial life skill that
@@ -58,16 +88,35 @@ function OurMission() {
                   Cocoapp is more than just an app; it's a gateway to a brighter
                   financial future for children.
                 </Typography>
-                <Typography variant="h5">
+                <Typography variant="h5" sx={{ marginTop: "8px" }}>
                   The right support at the right time makes all the difference.
                 </Typography>
               </Box>
 
               <Box sx={style.innerBox}>
                 {CardData.map((value, index) => {
-                  return <Typography variant="h6">{value.text}</Typography>;
+                  return (
+                    <Typography variant="h6" sx={{ marginTop: "5px" }}>
+                      {value.text}
+                    </Typography>
+                  );
                 })}{" "}
               </Box>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={{
+              display: {
+                xs: "block",
+                sm: "none",
+              },
+            }}
+          >
+            <Box mt={2}>
+              <StyledImg alt="" src="images/ourMission.svg" />
             </Box>
           </Grid>
         </Grid>

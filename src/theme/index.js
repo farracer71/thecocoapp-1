@@ -89,13 +89,12 @@ const typography = {
     },
   },
   body2: {
-    fontSize: 18,
-    fontWeight: 300,
+    fontSize: 14,
+    fontWeight: 400,
     fontFamily: "'Nunito Sans', sans-serif",
-    lineHeight: 1.5,
+    lineHeight: "20px",
     "@media(max-width:767px)": {
-      fontSize: "16px !important",
-      lineHeight: 1.4,
+      fontSize: "14px !important",
     },
   },
   subtitle1: {
@@ -141,6 +140,7 @@ const themesOptions = [
             backgroundColor: "#fff",
             boxShadow: "none",
             border: "1px solid #E5E5E5",
+            borderRadius: "0",
           },
         },
       },
@@ -173,10 +173,14 @@ const themesOptions = [
           root: {
             backgroundColor: "rgba(255, 255, 255, 1)",
             borderRadius: "14px",
+            boxShadow:
+              "0px 2px 1px -1px rgba(0,0,0,0.06),0px 1px 1px 0px rgba(0,0,0,0.064),0px 1px 3px 0px rgba(0,0,0,0.06)",
           },
           elevation2: {
             backgroundColor: "rgba(255, 255, 255, 1)",
             borderRadius: "14px",
+            boxShadow:
+              "0px 2px 1px -1px rgba(0,0,0,0.06),0px 1px 1px 0px rgba(0,0,0,0.064),0px 1px 3px 0px rgba(0,0,0,0.06)",
           },
         },
       },
@@ -261,6 +265,9 @@ const themesOptions = [
               color: "#fff",
               backgroundColor: "#00BAF2",
             },
+            "@media(max-width:767px)": {
+              padding: "10px 15px",
+            },
           },
           containedSecondary: {
             backgroundColor: "#FE8A36",
@@ -281,6 +288,9 @@ const themesOptions = [
                 "0 1px 0 0 #fe5aeb, 0 -1px 0 0 #f4a91b, 1px 0 0 0 #fe5aeb, -1px 0 0 0 rgb(254 90 235), 1px -1px 0 0 #f4a91b, -1px 1px 0 0 rgb(254 90 235), 1px 1px 0 0 rgb(254 90 235), -1px -1px 0 0 rgb(244 168 26)",
               backgroundColor: "#00BAF2",
             },
+            "@media(max-width:767px)": {
+              padding: "10px 15px",
+            },
           },
           contained: {
             background: "#FE8A36",
@@ -289,6 +299,9 @@ const themesOptions = [
             lineHeight: "22px",
             "&.Mui-disabled": {
               backgroundColor: "rgba(0, 0, 0, 0.03) ",
+            },
+            "@media(max-width:767px)": {
+              padding: "10px 15px",
             },
           },
           outlinedPrimary: {
@@ -302,6 +315,9 @@ const themesOptions = [
               color: "#fff",
               boxShadow: "none !important",
               backgroundColor: "#FE8A36",
+            },
+            "@media(max-width:767px)": {
+              padding: "10px 15px",
             },
           },
         },
@@ -351,6 +367,7 @@ const themesOptions = [
             backgroundColor: "#0B1426",
             boxShadow: "none",
             border: "1px solid #f1f1f1",
+            borderRadius: "0",
           },
         },
       },
@@ -383,10 +400,14 @@ const themesOptions = [
           root: {
             backgroundColor: "rgba(23, 32, 49, 1)",
             borderRadius: "14px",
+            boxShadow:
+              "0px 2px 1px -1px rgba(0,0,0,0.06),0px 1px 1px 0px rgba(0,0,0,0.064),0px 1px 3px 0px rgba(0,0,0,0.06)",
           },
           elevation2: {
             backgroundColor: "#232B3B",
             borderRadius: "14px",
+            boxShadow:
+              "0px 2px 1px -1px rgba(0,0,0,0.06),0px 1px 1px 0px rgba(0,0,0,0.064),0px 1px 3px 0px rgba(0,0,0,0.06)",
           },
         },
       },
@@ -470,6 +491,9 @@ const themesOptions = [
               color: "#fff",
               backgroundColor: "#00BAF2",
             },
+            "@media(max-width:767px)": {
+              padding: "10px 15px",
+            },
           },
           containedSecondary: {
             backgroundColor: "#FE8A36",
@@ -490,6 +514,9 @@ const themesOptions = [
                 "0 1px 0 0 #fe5aeb, 0 -1px 0 0 #f4a91b, 1px 0 0 0 #fe5aeb, -1px 0 0 0 rgb(254 90 235), 1px -1px 0 0 #f4a91b, -1px 1px 0 0 rgb(254 90 235), 1px 1px 0 0 rgb(254 90 235), -1px -1px 0 0 rgb(244 168 26)",
               backgroundColor: "#00BAF2",
             },
+            "@media(max-width:767px)": {
+              padding: "10px 15px",
+            },
           },
           contained: {
             background: "#FE8A36",
@@ -498,6 +525,9 @@ const themesOptions = [
             lineHeight: "22px",
             "&.Mui-disabled": {
               backgroundColor: "rgba(0, 0, 0, 0.03) ",
+            },
+            "@media(max-width:767px)": {
+              padding: "10px 15px",
             },
           },
           outlinedPrimary: {
@@ -511,6 +541,9 @@ const themesOptions = [
               color: "#fff",
               boxShadow: "none !important",
               backgroundColor: "#FE8A36",
+            },
+            "@media(max-width:767px)": {
+              padding: "10px 15px",
             },
           },
         },

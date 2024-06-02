@@ -6,6 +6,11 @@ import FreeFunEffective from "./FreeFunEffective";
 import OurMission from "./OurMission";
 import FeedBack from "./FeedBack";
 import styled from "@emotion/styled";
+import CocoApp from "./CocoApp";
+import BenifitsSection from "./BenifitsSection";
+import GettingStarted from "./GettingStarted";
+import AskQuestions from "./AskQuestions";
+import Footer from "src/views/content/Footer";
 
 const SectionFunBack = styled("section")(({ theme }) => ({
   backgroundImage: "url('/images/FreeFunBackground.png')",
@@ -17,6 +22,39 @@ const SectionFunBack = styled("section")(({ theme }) => ({
   backgroundColor: "#F3F8FB",
 }));
 
+const SectionFeedBack = styled("section")(({ theme }) => ({
+  backgroundImage: "url('/images/feedbackBackground.png')",
+  backgroundSize: "cover",
+  paddingBottom: "5px",
+  paddingTop: "40px",
+  minHeight: "200px",
+  width: "100%",
+  backgroundColor: "#FCF7FF",
+  "@media(max-width:1000px)": {
+    paddingTop: "20px",
+  },
+  "@media(max-width:767px)": {
+    paddingTop: "5px",
+  },
+}));
+const SectionBenifits = styled("section")(({ theme }) => ({
+  backgroundImage: "url('/images/Benifits.png')",
+  backgroundSize: "cover",
+  paddingBottom: "5px",
+  paddingTop: "40px",
+  minHeight: "200px",
+  width: "100%",
+  backgroundColor: "#FCF7FF",
+}));
+const AskQuestionsBack = styled("section")(({ theme }) => ({
+  backgroundImage: "url('/images/askQuestions.png')",
+  backgroundSize: "cover",
+  paddingBottom: "5px",
+  paddingTop: "40px",
+  minHeight: "200px",
+  width: "100%",
+  backgroundColor: "#FCF7FF",
+}));
 function Home() {
   const { settings, saveSettings } = useContext(SettingsContext);
 
@@ -25,20 +63,33 @@ function Home() {
   };
   return (
     <Page title="Home">
-      
-        <section>
-          <HeroSection />
-        </section>
-        <SectionFunBack>
-          <FreeFunEffective />
-        </SectionFunBack>
-        <section>
-          <OurMission />
-        </section>
-        <section>
-          <FeedBack />
-        </section>
-     
+      <section>
+        <HeroSection />
+      </section>
+      <SectionFunBack>
+        <FreeFunEffective />
+      </SectionFunBack>
+      <section>
+        <OurMission />
+      </section>
+      <SectionFeedBack>
+        <FeedBack />
+      </SectionFeedBack>
+      <section>
+        <CocoApp />
+      </section>
+      <SectionBenifits>
+        <BenifitsSection />
+      </SectionBenifits>
+      <section>
+        <GettingStarted />
+      </section>
+      <AskQuestionsBack>
+<AskQuestions/>
+      </AskQuestionsBack>
+      <div>
+        <Footer />
+      </div>
     </Page>
   );
 }

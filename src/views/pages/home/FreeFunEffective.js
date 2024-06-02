@@ -12,18 +12,44 @@ const style = {
     display: "flex",
     gap: "16px",
     alignItem: "center",
-    padding:"20px"
+    padding: "20px",
+    "@media(max-width:600px)": {
+      display: "block",
+    },
   },
-  innerBox:{
-    display:"grid",
-    gap:"8px"
-  }
+  innerBox: {
+    display: "grid",
+    gap: "8px",
+  },
+  handleimgPosiotion: {
+    marginTop: "40px",
+  },
+  HandleMargin: {
+    marginTop: "40px",
+    marginBottom: "60px",
+    "@media(max-width:1000px)": {
+      marginTop: "30px",
+      marginBottom: "40px",
+    },
+    "@media(max-width:767px)": {
+      marginTop: "20px",
+      marginBottom: "20px",
+    },
+  },
 };
 const StyledImg = styled("img")(({ theme }) => ({
   width: "-webkit-fill-available",
   height: "auto",
 }));
-
+const StyledImgM = styled("img")(({ theme }) => ({
+  width: "-webkit-fill-available",
+  height: "auto",
+  marginTop: "12vw",
+  "@media(max-width:600px)": {
+    marginTop: "0px",
+  },
+  
+}));
 const BoxCenter = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "center",
@@ -52,14 +78,24 @@ function FreeFunEffective() {
 
   return (
     <Container maxWidth="lg">
-      <Box mt={2} mb={4}>
-        <Grid container spacing={3}>
+      <Box sx={style.HandleMargin}>
+        <Grid container spacing={4}>
           <Grid item xs={12}>
             <BoxCenter>
               <Typography variant="h1">Free Fun Effective</Typography>
             </BoxCenter>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={{
+              display: {
+                xs: "none",
+                sm: "block",
+              },
+            }}
+          >
             <Box mt={2}>
               <StyledImg alt="" src="images/mobileScreen.svg" />
             </Box>
@@ -81,9 +117,26 @@ function FreeFunEffective() {
               })}
             </Box>
           </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            sx={{
+              display: {
+                xs: "block",
+                sm: "none",
+              },
+            }}
+          >
+            <Box sx={style.handleimgPosiotion}>
+              <StyledImgM alt="" src="images/mobileScreen.svg" />
+            </Box>
+          </Grid>
           <Grid item xs={12}>
-            <BoxCenter style={{marginTop:"20px"}}>
-              <Button variant="contained">Get started</Button>
+            <BoxCenter style={{ marginTop: "20px" }}>
+              <Button variant="contained" sx={{ minWidth: "260px" }}>
+                Get started
+              </Button>
             </BoxCenter>
           </Grid>
         </Grid>

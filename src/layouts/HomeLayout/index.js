@@ -5,23 +5,27 @@ import { useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 
 
-const styles={
+const styles = {
   root: {
     // display: "flex",
     height: "100%",
     // overflow: "hidden",
     width: "100%",
-    
   },
   wrapper: {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
     paddingTop: "63px",
-    // backgroundImage:`url("/images/landing page.png")`,
     backgroundPosition: "unset",
     backgroundSize: "cover",
     minHeight: "100vh",
+    "@media(max-width:600px)": {
+      paddingTop: "28px !important",
+    },
+    "@media(max-width:960px)": {
+      paddingTop: "45px",
+    },
     // backgroundColor:"#0D2124"
   },
   wrapperAuth: {

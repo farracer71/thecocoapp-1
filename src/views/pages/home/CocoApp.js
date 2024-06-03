@@ -57,6 +57,7 @@ function CocoApp() {
               },
             }}
           >
+          <img className="positionAbosolute EnergyIconPositionContactSection" src="images/energy-icon.svg" style={{ top: "unset !important" }} />
             <Box sx={{ display: "grid", gap: "20px" }}>
               <DeskTopTitle>
                 Cocoapp
@@ -76,6 +77,7 @@ function CocoApp() {
                 Contact us
               </Button>
             </Box>
+            <img className="positionAbosolute StarIconPositionContactSection" src="images/star-icon.svg" />
           </Grid>
           <Grid
             item

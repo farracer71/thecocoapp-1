@@ -63,6 +63,15 @@ body {
         left: 5%;
     }
 
+    .EnergyIconPositionContactSection{
+        top: unset;
+        left: 5%;
+    }
+    
+    .StarIconPositionContactSection{
+        left: 85%;
+    }
+
     .StarIconPosition {
         bottom: unset;
         top: unset;
@@ -76,6 +85,15 @@ body {
         bottom: unset;
         top: 18%;
         left: 5%;
+    }
+
+    .EnergyIconPositionContactSection{
+        top: unset;
+        left: 5%;
+    }
+    
+    .StarIconPositionContactSection{
+        left: 85%;
     }
     
     .StarIconPosition {
@@ -93,6 +111,15 @@ body {
         top: 18%;
         left: 5%;
     }
+
+    .EnergyIconPositionContactSection{
+        top: unset;
+        left: 5%;
+    }
+    
+    .StarIconPositionContactSection{
+        left: 85%;
+    }
     
     .StarIconPosition {
         bottom: unset;
@@ -109,6 +136,15 @@ body {
         top: 18%;
         left: 5%;
     }
+
+    .EnergyIconPositionContactSection{
+        top: unset;
+        left: 5%;
+    }
+    
+    .StarIconPositionContactSection{
+        left: 40%;
+    }
     
     .StarIconPosition {
         bottom: 28%;
@@ -124,6 +160,15 @@ body {
         bottom: unset;
         top: 18%;
         left: 5%;
+    }
+
+    .EnergyIconPositionContactSection{
+        top: unset;
+        left: 5%;
+    }
+    
+    .StarIconPositionContactSection{
+        left: 40%;
     }
 
     .StarIconPosition {

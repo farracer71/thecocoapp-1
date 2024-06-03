@@ -22,7 +22,7 @@ body {
 .scroll-content {
     display: flex;
     gap: 30px;
-    animation: scroll 20s linear infinite;
+    /* animation: scroll 20s linear infinite; */
 }
 
 /* Change the background color and text color of selected text */

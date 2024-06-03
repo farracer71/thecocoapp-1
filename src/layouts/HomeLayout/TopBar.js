@@ -116,22 +116,24 @@ export default function TopBar() {
                 alignItems: "center",
               }}
             >
-              <Box className="scroll-content">
-                <Box sx={styles.flexDiv}>
-                  <LuMail />
-                  <Typography variant="body1">hello@thecocoapp.com</Typography>
+              <marquee behavior="scroll" direction="left">
+                <Box className="scroll-content">
+                  <Box sx={styles.flexDiv}>
+                    <LuMail />
+                    <Typography variant="body1">hello@thecocoapp.com</Typography>
+                  </Box>
+                  <Box sx={styles.flexDiv}>
+                    <LuMail />
+                    <Typography variant="body1">
+                      edupartners@thecocoapp.com
+                    </Typography>
+                  </Box>
                 </Box>
-                <Box sx={styles.flexDiv}>
-                  <LuMail />
-                  <Typography variant="body1">
-                    edupartners@thecocoapp.com
-                  </Typography>
-                </Box>
-              </Box>
+              </marquee>
             </Box>
           </Container>
         </BackgroundDiv>
-        <AppBar position="static">
+        <AppBar position="static" style={{ borderTop: "unset" }}>
           <Container maxWidth="lg">
             <ToolbarStyled style={{ padding: "0" }}>
               <Box display="flex" alignItems="center" gap="32px">

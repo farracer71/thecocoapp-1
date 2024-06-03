@@ -15,7 +15,30 @@ const style = {
       marginBottom: "30px",
     },
   },
+
+  EnergyIconPosition: {
+    position: "absolute",
+    zIndex: -1,
+    // top: "2%",
+    "@media(min-width: 1200px)": {
+      left: "-3%",
+    },
+    "@media(min-width: 992px) and (max-width: 1199px)": {
+      left: "-3%",
+    },
+    "@media(min-width: 768px) and (max-width: 991px)": {
+      left: "-3%",
+    },
+    "@media(max-width: 767px)": {
+      left: "2%",
+    },
+  }
 };
+
+// const TitleWrapper = styled('img')(({ theme }) => ({
+// }));
+
+
 const StyledImg = styled("img")(({ theme }) => ({
   width: "-webkit-fill-available",
   height: "auto",
@@ -71,6 +94,7 @@ function HeroSection() {
               },
             }}
           >
+            <img className="positionAbosolute EnergyIconPosition" src="images/energy-icon.svg" />
             <DeskTopTitle>
               Helping children to make smart money choices !
             </DeskTopTitle>
@@ -81,6 +105,7 @@ function HeroSection() {
             <Button variant="contained" sx={style.HandleMargin}>
               Get started
             </Button>
+            <img className="positionAbosolute StarIconPosition" src="images/star-icon.svg" />
           </Grid>
           <Grid
             item

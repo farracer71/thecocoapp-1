@@ -3,6 +3,7 @@ body {
     padding: 0;
     font-family: 'Nunito Sans', sans-serif;
 }
+
 @keyframes scroll {
     0% {
         transform: translateX(100%);
@@ -27,18 +28,107 @@ body {
 
 /* Change the background color and text color of selected text */
 ::selection {
-    background-color: #FE8A36; /* Background color of the selected text */
-    color: #ffffff;           /* Text color of the selected text */
+    background-color: #FE8A36;
+    /* Background color of the selected text */
+    color: #ffffff;
+    /* Text color of the selected text */
 }
 
 /* For webkit browsers (Chrome, Safari) */
 ::-webkit-selection {
-    background-color: #FE8A36; /* Background color of the selected text */
-    color: #ffffff;           /* Text color of the selected text */
+    background-color: #FE8A36;
+    /* Background color of the selected text */
+    color: #ffffff;
+    /* Text color of the selected text */
 }
 
 /* For Mozilla Firefox */
 ::-moz-selection {
-    background-color: #FE8A36; /* Background color of the selected text */
-    color: #ffffff;           /* Text color of the selected text */
+    background-color: #FE8A36;
+    /* Background color of the selected text */
+    color: #ffffff;
+    /* Text color of the selected text */
+}
+
+.positionAbosolute {
+    position: absolute !important;
+    z-index: -1;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .EnergyIconPosition {
+        bottom: 33%;
+        top: unset;
+        left: 5%;
+    }
+
+    .StarIconPosition {
+        bottom: unset;
+        top: unset;
+        left: 90%;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .EnergyIconPosition {
+        bottom: unset;
+        top: 18%;
+        left: 5%;
+    }
+    
+    .StarIconPosition {
+        bottom: unset;
+        top: unset;
+        left: 90%;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .EnergyIconPosition {
+        bottom: unset;
+        top: 18%;
+        left: 5%;
+    }
+    
+    .StarIconPosition {
+        bottom: unset;
+        top: unset;
+        left: 45%;
+    }
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .EnergyIconPosition {
+        bottom: unset;
+        top: 18%;
+        left: 5%;
+    }
+    
+    .StarIconPosition {
+        bottom: 28%;
+        top: unset;
+        left: 35%;
+    }
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .EnergyIconPosition {
+        bottom: unset;
+        top: 18%;
+        left: 5%;
+    }
+
+    .StarIconPosition {
+        bottom: 28%;
+        top: unset;
+        left: 35%;
+    }
 }

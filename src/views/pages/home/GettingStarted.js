@@ -1,7 +1,8 @@
-import React from "react";
-import { Box, Container, Grid, Typography, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Container, Grid, Typography, Button, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import styled from "@emotion/styled";
-import Paper from "@mui/material/Paper";
+import { MdOutlineExpandMore } from "react-icons/md";
+
 
 const style = {
   paperBox: {
@@ -13,6 +14,7 @@ const style = {
   innerBox: {
     display: "flex",
     gap: "20px",
+    alignItems:"center"
   },
   innerSmallBox: {
     display: "flex",
@@ -42,7 +44,7 @@ const BorderCss = styled("div")(({ theme }) => ({
   marginLeft: "16px",
   marginTop: "8px",
   marginBottom: "8px",
-  
+  minHeight:"106px"
 }));
 function GettingStarted() {
   const CardData = [
@@ -71,7 +73,11 @@ function GettingStarted() {
       ],
     },
   ];
+const [expanded, setExpanded] = useState(null); 
 
+const handleExpansion = (key) => {
+  setExpanded(expanded === key ? null : key);
+};
   return (
     <Container maxWidth="lg">
       <Box mt={2} mb={4}>
@@ -81,12 +87,23 @@ function GettingStarted() {
               <Typography variant="h1">Getting Started Is Easy</Typography>
             </BoxCenter>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <Box mt={2}>
               <StyledImg alt="" src="images/GettingStarted.svg" />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{
+              display: {
+                xs: "none",
+                sm: "none",
+                md: "block",
+              },
+            }}
+          >
             {CardData.map((value, index) => {
               return (
                 <Box mt={2}>
@@ -97,9 +114,25 @@ function GettingStarted() {
                     </Typography>
                   </Box>
                   <Box sx={style.innerBox}>
-                    <BorderCss></BorderCss>
+                    {index === 2 ? (
+                      <Box
+                        sx={{
+                          marginLeft: "16px",
+                          marginTop: "8px",
+                          marginBottom: "8px",
+                          minHeight: "106px",
+                        }}
+                      ></Box>
+                    ) : (
+                      <BorderCss></BorderCss>
+                    )}
                     <Box
-                      sx={{ marginLeft: "18px", display: "grid", gap: "5px", marginTop:"8px" }}
+                      sx={{
+                        marginLeft: "18px",
+                        display: "grid",
+                        gap: "5px",
+                        marginTop: "8px",
+                      }}
                     >
                       {value.subText.map((item) => {
                         return (
@@ -116,6 +149,66 @@ function GettingStarted() {
             })}
             <Box mt={3}>
               <Button variant="contained">Get started</Button>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={6}
+            sx={{
+              display: {
+                xs: "block",
+                sm: "block",
+                md: "none",
+              },
+            }}
+          >
+            <Box>
+              {CardData.map((value, index) => (
+                <Box key={index} sx={index === 0 ? {} : { marginTop: "15px" }}>
+                  <Accordion
+                    expanded={expanded === index}
+                    style={{ border: "0.5px solid #D2ECFF", padding: "10px" }}
+                  >
+                    <AccordionSummary
+                      expandIcon={
+                        <MdOutlineExpandMore
+                          style={{ color: "#4299E1", fontSize: "30px" }}
+                        />
+                      }
+                      onClick={() => handleExpansion(index)} // Handle click on summary
+                      aria-controls={`panel${index + 1}-content`}
+                      id={`panel${index + 1}-header`}
+                    >
+                      <Box sx={style.innerBox}>
+                        <Box sx={style.customCoutBox}>{index + 1}</Box>
+                        <Typography variant="h3" fontWeight={700}>
+                          {value.title}
+                        </Typography>
+                      </Box>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      {value.subText.map((subItem, subIndex) => (
+                        <Box
+                          sx={style.innerSmallBox}
+                          style={{ margin: "10px 0" }}
+                        >
+                          <img src="images/iconGreen.svg" alt="tick" />
+                          <Typography variant="h6" key={subIndex}>
+                            {subItem}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </AccordionDetails>
+                  </Accordion>
+                </Box>
+              ))}
+            </Box>
+            <Box mt={3} sx={{ display: "flex", justifyContent: "center" }}>
+              <Button variant="contained" sx={{ width: "260px" }}>
+                Get started
+              </Button>
             </Box>
           </Grid>
         </Grid>

@@ -88,11 +88,13 @@ function FreeFunEffective() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               display: {
                 xs: "none",
-                sm: "block",
+                sm: "none",
+                md: "block",
               },
             }}
           >
@@ -100,7 +102,7 @@ function FreeFunEffective() {
               <StyledImg alt="" src="images/mobileScreen.svg" />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <Box mt={2} sx={style.mappedBox}>
               {CardData.map((value, index) => {
                 return (
@@ -120,11 +122,13 @@ function FreeFunEffective() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               display: {
                 xs: "block",
                 sm: "none",
+                md: "none",
               },
             }}
           >

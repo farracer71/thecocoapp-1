@@ -34,11 +34,13 @@ function CocoApp() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               display: {
                 xs: "block",
-                sm: "none",
+                sm: "block",
+                md: "none",
               },
             }}
           >
@@ -49,15 +51,22 @@ function CocoApp() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               textAlign: {
                 xs: "center",
-                sm: "start",
+                sm: "center",
+                md: "start",
               },
             }}
           >
-          <img className="positionAbosolute EnergyIconPositionContactSection" src="images/energy-icon.svg" style={{ top: "unset !important" }} />
+            <img
+              alt=""
+              className="positionAbosolute EnergyIconPositionContactSection"
+              src="images/energy-icon.svg"
+              style={{ top: "unset !important" }}
+            />
             <Box sx={{ display: "grid", gap: "20px" }}>
               <DeskTopTitle>
                 Cocoapp
@@ -72,21 +81,30 @@ function CocoApp() {
               </Typography>
               <Button
                 variant="contained"
-                sx={{ margin: { xs: "auto", sm:"0" }, width: "260px", } }
+                sx={{
+                  margin: { xs: "auto", sm: "auto", md: "0" },
+                  width: "260px",
+                }}
               >
                 Contact us
               </Button>
             </Box>
-            <img className="positionAbosolute StarIconPositionContactSection" src="images/star-icon.svg" />
+            <img
+              alt=""
+              className="positionAbosolute StarIconPositionContactSection"
+              src="images/star-icon.svg"
+            />
           </Grid>
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               display: {
                 xs: "none",
-                sm: "block",
+                sm: "none",
+                md: "block",
               },
             }}
           >

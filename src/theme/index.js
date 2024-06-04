@@ -344,29 +344,29 @@ const themesOptions = [
   {
     name: "DARK",
     palette: {
-      mode: "dark",
+      mode: "light",
       primary: {
-        main: "#FFFFFF",
+        main: "#0B1426",
       },
       secondary: {
-        main: "#FFFFFF",
+        main: "#0B1426",
       },
       background: {
-        default: "#0B1426",
-        paper: "#232B3B",
+        default: "#F7F7F7",
+        paper: "#FFFFFF",
       },
       text: {
-        primary: "#FFFFFF",
-        secondary: "#FFFFFF",
+        primary: "#000000",
+        secondary: "#000000",
       },
     },
     components: {
       MuiAppBar: {
         styleOverrides: {
           root: {
-            backgroundColor: "#0B1426",
+            backgroundColor: "#fff",
             boxShadow: "none",
-            border: "1px solid #f1f1f1",
+            border: "1px solid #E5E5E5",
             borderRadius: "0",
           },
         },
@@ -374,7 +374,7 @@ const themesOptions = [
       MuiSvgIcon: {
         styleOverrides: {
           root: {
-            color: "#FFFFFF",
+            color: "#000",
           },
         },
       },
@@ -387,10 +387,10 @@ const themesOptions = [
       },
       MuiOutlinedInput: {
         styleOverrides: {
-          notchedOutline: { borderColor: "#f7f7f7" },
+          notchedOutline: { borderColor: "#0B1426" },
           root: {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "#f7f7f7",
+              borderColor: "#0B1426",
             },
           },
         },
@@ -398,13 +398,13 @@ const themesOptions = [
       MuiPaper: {
         styleOverrides: {
           root: {
-            backgroundColor: "rgba(23, 32, 49, 1)",
+            backgroundColor: "rgba(255, 255, 255, 1)",
             borderRadius: "14px",
             boxShadow:
               "0px 2px 1px -1px rgba(0,0,0,0.06),0px 1px 1px 0px rgba(0,0,0,0.064),0px 1px 3px 0px rgba(0,0,0,0.06)",
           },
           elevation2: {
-            backgroundColor: "#232B3B",
+            backgroundColor: "rgba(255, 255, 255, 1)",
             borderRadius: "14px",
             boxShadow:
               "0px 2px 1px -1px rgba(0,0,0,0.06),0px 1px 1px 0px rgba(0,0,0,0.064),0px 1px 3px 0px rgba(0,0,0,0.06)",
@@ -414,6 +414,7 @@ const themesOptions = [
       MuiTable: {
         styleOverrides: {
           root: {
+            borderRadius: "10px",
             border: "1px solid #E8E7E7",
           },
         },
@@ -432,7 +433,7 @@ const themesOptions = [
       MuiTableBody: {
         styleOverrides: {
           root: {
-            background: "#172031",
+            background: "#fff",
           },
         },
       },
@@ -454,18 +455,18 @@ const themesOptions = [
           head: {
             padding: "16px 16px",
             fontWeight: "500",
-            backgroundColor: "#fff",
-            color: "#0B1426",
+            backgroundColor: "#0B1426",
+            color: "#fff",
             whiteSpace: "pre",
             fontSize: "14px",
             textAlign: "center ",
           },
           body: {
-            color: "#fff",
+            color: "#0B1426",
             whiteSpace: "pre",
             fontSize: "14px",
             fontWeight: "500",
-            textAlign: "center ",
+            textAlign: "center",
           },
         },
       },
@@ -473,7 +474,7 @@ const themesOptions = [
         styleOverrides: {
           list: {
             outline: "0",
-            background: "#191919",
+            background: "#ffffff",
           },
         },
       },
@@ -551,15 +552,15 @@ const themesOptions = [
       MuiIconButton: {
         styleOverrides: {
           root: {
-            color: "#fff",
+            color: "#000000",
             "& svg": {
-              color: "#fff",
+              color: "#000000",
             },
           },
           MuiSvgIcon: {
             styleOverrides: {
               root: {
-                color: "#fff",
+                color: "#000",
               },
             },
           },

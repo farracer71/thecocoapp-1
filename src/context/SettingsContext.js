@@ -51,8 +51,7 @@ export const SettingsProvider = ({ children }) => {
 
   return (
     <SettingsContext.Provider
-      value={{ settings: currentSettings, saveSettings: handleSaveSettings }}
-    >
+      value={{ settings: currentSettings, saveSettings: handleSaveSettings }}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </SettingsContext.Provider>
   );

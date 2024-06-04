@@ -63,7 +63,8 @@ function OurMission() {
             sx={{
               display: {
                 xs: "none",
-                sm: "block",
+                sm: "none",
+                md: "block",
               },
             }}
           >
@@ -71,7 +72,7 @@ function OurMission() {
               <StyledImg alt="" src="images/ourMission.svg" />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <Box mt={2} sx={style.mappedBox}>
               <CustomBox>
                 <Box sx={style.DesignBox}>
@@ -107,11 +108,13 @@ function OurMission() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               display: {
                 xs: "block",
-                sm: "none",
+                sm: "block",
+                md: "none",
               },
             }}
           >

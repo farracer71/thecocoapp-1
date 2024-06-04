@@ -18,13 +18,43 @@ const style = {
     padding: "20px",
   },
   innerBox: {
-    marginBottom:"35px"
+    marginBottom: "35px",
+  },
+  dividerVisible: {
+    display: "none",
+    "@media(max-width:767px)": {
+      display: "block",
+      margin: "20px 0",
+    },
+  },
+  handleBlockUnblock: {
+    display: "block",
+    "@media(max-width:767px)": {
+      display: "none",
+    },
+  },
+  follow: {
+    display: "none",
+    "@media(max-width:767px)": {
+      display: "block",
+      margin: "10px 0",
+    },
+  },
+  handleBlock: {
+    display: "none",
+    "@media(max-width:767px)": {
+      display: "block",
+      margin: "10px 0",
+    },
   },
 };
 const FlexBox = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
+  "@media(max-width:767px)": {
+    display: "block",
+  },
 }));
 const Logo = styled("img")({
   maxWidth: "130px",
@@ -33,6 +63,9 @@ const IconFlex = styled("div")(({ theme }) => ({
   display: "flex",
   gap: "15px",
   alignItems: "center",
+  "@media(max-width:767px)": {
+    justifyContent: "center",
+  },
 }));
 
 function Footer() {
@@ -52,23 +85,32 @@ function Footer() {
               </Typography>
             </Box>
           </Box>
+          <Divider sx={style.dividerVisible} />
           <Box>
             <Typography variant="h4">About Us</Typography>
-            <Typography variant="h6" sx={{marginTop:"24px"}}>Terms & Conditions</Typography>
+            <Typography variant="h6" sx={{ marginTop: "24px" }}>
+              Terms & Conditions
+            </Typography>
             <Typography variant="h6">Privacy Policy</Typography>
             <Typography variant="h6">Contact us</Typography>
           </Box>
         </FlexBox>
         <Divider />
-        <FlexBox style={{marginTop:"20px"}}>
-          <Typography variant="h6">
+        <FlexBox style={{ marginTop: "20px" }}>
+          <Typography variant="h6" sx={style.handleBlockUnblock}>
             Copyright © 2024 Cocoapp Private Limited. All Rights Reserved
+          </Typography>
+          <Typography variant="h6" sx={style.follow}>
+            Follow us on
           </Typography>
           <IconFlex>
             <RiInstagramFill style={{ color: "#00A9DC" }} />
             <FaLinkedinIn style={{ color: "#00A9DC" }} />
             <FaYoutube style={{ color: "#00A9DC" }} />
           </IconFlex>
+          <Typography variant="h6" sx={style.handleBlock}>
+            Copyright © 2024 Cocoapp Private Limited. All Rights Reserved
+          </Typography>
         </FlexBox>
       </Box>
     </Container>

@@ -46,6 +46,14 @@ const SectionBenifits = styled("section")(({ theme }) => ({
   width: "100%",
   backgroundColor: "#FCF7FF",
 }));
+const GetStart = styled("section")(({ theme }) => ({
+  backgroundImage: "url('/images/getStart.png')",
+  backgroundSize: "cover",
+  paddingBottom: "5px",
+  paddingTop: "40px",
+  minHeight: "200px",
+  width: "100%",
+}));
 const AskQuestionsBack = styled("section")(({ theme }) => ({
   backgroundImage: "url('/images/askQuestions.png')",
   backgroundSize: "cover",
@@ -81,9 +89,9 @@ function Home() {
       <SectionBenifits>
         <BenifitsSection />
       </SectionBenifits>
-      <section>
+      <GetStart>
         <GettingStarted />
-      </section>
+      </GetStart>
       <AskQuestionsBack>
 <AskQuestions/>
       </AskQuestionsBack>

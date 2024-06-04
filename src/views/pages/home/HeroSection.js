@@ -71,11 +71,13 @@ function HeroSection() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               display: {
                 xs: "block",
-                sm: "none",
+                sm: "block",
+                md: "none",
               },
             }}
           >
@@ -86,15 +88,21 @@ function HeroSection() {
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               textAlign: {
                 xs: "center",
-                sm: "start",
+                sm: "center",
+                md: "start",
               },
             }}
           >
-            <img className="positionAbosolute EnergyIconPosition" src="images/energy-icon.svg" />
+            <img
+              className="positionAbosolute EnergyIconPosition"
+              src="images/energy-icon.svg"
+              alt=""
+            />
             <DeskTopTitle>
               Helping children to make smart money choices !
             </DeskTopTitle>
@@ -105,16 +113,21 @@ function HeroSection() {
             <Button variant="contained" sx={style.HandleMargin}>
               Get started
             </Button>
-            <img className="positionAbosolute StarIconPosition" src="images/star-icon.svg" />
+            <img
+              className="positionAbosolute StarIconPosition"
+              src="images/star-icon.svg"
+              alt=""
+            />
           </Grid>
           <Grid
             item
             xs={12}
-            sm={6}
+            sm={12}
+            md={6}
             sx={{
               display: {
                 xs: "none",
-                sm: "block",
+                sm: "none",
                 md: "block",
                 lg: "block",
               },

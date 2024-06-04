@@ -38,6 +38,7 @@ const style = {
     "@media(max-width:767px)": {
       display: "block",
       margin: "10px 0",
+      textAlign: "center",
     },
   },
   handleBlock: {
@@ -45,6 +46,7 @@ const style = {
     "@media(max-width:767px)": {
       display: "block",
       margin: "10px 0",
+      textAlign: "center",
     },
   },
 };

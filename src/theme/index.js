@@ -9,7 +9,7 @@ import _ from "lodash";
 const typography = {
   h1: {
     fontWeight: 700,
-    fontSize: 32,
+    fontSize: "32px",
     fontFamily: "'Nunito Sans', sans-serif",
     lineHeight: 1.5,
     "@media(max-width:767px)": {
@@ -20,7 +20,7 @@ const typography = {
   },
   h2: {
     fontWeight: 700,
-    fontSize: 24,
+    fontSize: "24px",
     fontFamily: "'Nunito Sans', sans-serif",
     lineHeight: 1.2,
     "@media(max-width:767px)": {
@@ -31,7 +31,7 @@ const typography = {
   },
   h3: {
     fontWeight: 500,
-    fontSize: 22,
+    fontSize: "22px",
     fontFamily: "'Nunito Sans', sans-serif",
     lineHeight: 1.2,
     "@media(max-width:767px)": {
@@ -41,7 +41,7 @@ const typography = {
   },
   h4: {
     fontWeight: 500,
-    fontSize: 20,
+    fontSize: "20px",
     fontFamily: "'Nunito Sans', sans-serif",
     lineHeight: 1.2,
     "@media(max-width:767px)": {
@@ -51,7 +51,7 @@ const typography = {
   },
   h5: {
     fontWeight: 500,
-    fontSize: 18,
+    fontSize: "18px",
     fontFamily: "'Nunito Sans', sans-serif",
     lineHeight: 1.67,
     "@media(max-width:767px)": {
@@ -61,7 +61,7 @@ const typography = {
   },
   h6: {
     fontWeight: 300,
-    fontSize: 16,
+    fontSize: "16px",
     fontFamily: "'Nunito Sans', sans-serif",
     lineHeight: 1.75,
     "@media(max-width:767px)": {
@@ -79,7 +79,7 @@ const typography = {
     fontFamily: "'Nunito Sans', sans-serif",
   },
   body1: {
-    fontSize: 20,
+    fontSize: "20px",
     fontWeight: 300,
     fontFamily: "'Nunito Sans', sans-serif",
     lineHeight: 1.79,
@@ -89,7 +89,7 @@ const typography = {
     },
   },
   body2: {
-    fontSize: 14,
+    fontSize: "14px",
     fontWeight: 400,
     fontFamily: "'Nunito Sans', sans-serif",
     lineHeight: "20px",
@@ -98,7 +98,7 @@ const typography = {
     },
   },
   subtitle1: {
-    fontSize: 11,
+    fontSize: "11px",
     fontFamily: "'Nunito Sans', sans-serif",
     fontWeight: 300,
     lineHeight: 1.2,

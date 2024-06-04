@@ -3,11 +3,9 @@
 // const url = "https://";
 //Local URL
 const url = "http://";
-const urlForImage = "http://";
 
 const ApiConfig = {
   //auth
-  
-  
+  login: url,
 };
 export default ApiConfig;

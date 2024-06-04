@@ -41,11 +41,7 @@ const styles ={
   },
   logo: {
     cursor: "pointer",
-    width: "149px",
-    padding: "20px",
-    position: "absolute",
-    top: "0",
-    zIndex: "-1",
+    maxWidth: "263px",
   },
   imageside: {
     width: "-webkit-fill-available",
@@ -80,12 +76,12 @@ const LoginLayout = ({ children }) => {
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
-          {/* <div onClick={() => navigate("/")}>
-            <img sx={styles.logo} src="images/Logo.png" alt=""/>
-          </div> */}
 
-          <Box>
-            <Box sx={styles.content}>{children}</Box>
+          <Box sx={styles.content}>
+             <div onClick={() => navigate("/")}> 
+            <img style={styles.logo} src="images/Logo.png" alt=""/>
+          </div> 
+            <Box>{children}</Box>
           </Box>
         </Grid>
       </Grid>

@@ -20,6 +20,9 @@ const SectionFunBack = styled("section")(({ theme }) => ({
   minHeight: "200px",
   width: "100%",
   backgroundColor: "#F3F8FB",
+  "@media(max-width:767px)": {
+    paddingTop: "15px",
+  },
 }));
 
 const SectionFeedBack = styled("section")(({ theme }) => ({
@@ -45,6 +48,9 @@ const SectionBenifits = styled("section")(({ theme }) => ({
   minHeight: "200px",
   width: "100%",
   backgroundColor: "#FCF7FF",
+  "@media(max-width:767px)": {
+    paddingTop: "15px",
+  },
 }));
 const GetStart = styled("section")(({ theme }) => ({
   backgroundImage: "url('/images/getStart.png')",
@@ -53,6 +59,9 @@ const GetStart = styled("section")(({ theme }) => ({
   paddingTop: "40px",
   minHeight: "200px",
   width: "100%",
+  "@media(max-width:767px)": {
+    paddingTop: "15px",
+  },
 }));
 const AskQuestionsBack = styled("section")(({ theme }) => ({
   backgroundImage: "url('/images/askQuestions.png')",
@@ -62,6 +71,9 @@ const AskQuestionsBack = styled("section")(({ theme }) => ({
   minHeight: "200px",
   width: "100%",
   backgroundColor: "#FCF7FF",
+  "@media(max-width:767px)": {
+    paddingTop: "15px",
+  },
 }));
 function Home() {
   const { settings, saveSettings } = useContext(SettingsContext);

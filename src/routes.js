@@ -17,6 +17,12 @@ export const routes = [
   },
   {
     exact: true,
+    path: "/sign-up",
+    layout: LoginLayout,
+    component: lazy(() => import("src/views/auth/signUp/SignUp")),
+  },
+  {
+    exact: true,
     path: "/404",
     component: lazy(() => import("src/views/errors/NotFound")),
   },

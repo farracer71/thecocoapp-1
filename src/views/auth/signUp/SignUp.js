@@ -11,13 +11,12 @@ import { Form, Formik } from "formik";
 import * as yup from "yup";
 import Page from "src/component/Page";
 import ApiConfig from "src/config/APICongig";
-import axios from "axios"; 
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-function Login(props) {
+function SignUp(props) {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
- const navigate = useNavigate();
+
   const formInitialSchema = isRememberMe
     ? {
         email: "",
@@ -48,7 +47,8 @@ function Login(props) {
       <Box sx={{ display: "grid", gap: "5px", textAlign: "center" }}>
         <Typography variant="h1">Login</Typography>
         <Typography variant="h5">
-          Welcome back! Login now to see<br/> where you left off
+          Welcome back! Login now to see
+          <br /> where you left off
         </Typography>
         <Formik
           onSubmit={handleFormSubmit}
@@ -107,7 +107,7 @@ function Login(props) {
                 >
                   <Typography variant="body1" color="primary">
                     Don’t have an account?
-                    <span onClick={() => {navigate("/sign-up");}}>&nbsp;Sign up</span>
+                    <span onClick={() => {}}>&nbsp;Sign up</span>
                   </Typography>
                 </Box>
               </Grid>
@@ -119,4 +119,4 @@ function Login(props) {
   );
 }
 
-export default Login;
+export default SignUp;

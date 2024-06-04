@@ -18,6 +18,17 @@ const style = {
     display: "grid",
     gap: "8px",
   },
+  handleMargin: {
+    marginTop: "32px",
+    marginBottom: "20px",
+    "@media(max-width:1000px)": {
+      marginTop: "26px",
+      marginBottom: "15px",
+    },
+    "@media(max-width:767px)": {
+      marginTop: "15px",
+    },
+  },
 };
 
 
@@ -45,8 +56,8 @@ function AskQuestions() {
 
   return (
     <Container maxWidth="lg">
-      <Box mt={2} mb={4}>
-        <Grid container spacing={4}>
+      <Box mt={2} sx={style.handleMargin}>
+        <Grid container spacing={3}>
           <Grid item xs={12}>
             <BoxCenter>
               <Typography variant="h1">Frequently asked questions</Typography>

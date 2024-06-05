@@ -1,0 +1,36 @@
+definitions:
+
+  user_generate_otp_def:
+    required:
+      - email
+    properties:
+      email:
+        type: string
+    example:
+      email: "rohit@mailinator.com"
+
+  user_verify_otp_def:
+    required:
+      - email
+      - otp
+    properties:
+      email:
+        type: string
+      otp:
+        type: number
+    example:
+      email: "rohit@mailinator.com"
+      otp: 5053
+
+  user_signup_def:
+    required:
+      - name
+      - email
+    properties:
+      name:
+        type: string
+      password:
+        type: string
+    example:
+      name: "Rohit Pandit"
+      email: "rohit@mailinator.com"

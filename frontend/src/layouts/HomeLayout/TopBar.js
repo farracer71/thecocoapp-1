@@ -39,10 +39,7 @@ const ToolbarStyled = styled(Toolbar)({
   justifyContent: "space-between",
 });
 
-const LinkButtonsDiv = styled(Box)({
-  display: "flex",
-  gap: "14px",
-});
+
 
 const Logo = styled("img")({
   maxWidth: "130px",
@@ -53,15 +50,6 @@ const RegisterBox = styled(Box)({
   gap: "15px",
 });
 
-const LinkButton = styled(Button)({
-  fontFamily: "'Nunito Sans', sans-serif",
-  fontStyle: "normal",
-  fontWeight: "600",
-  fontSize: "16px",
-  lineHeight: "16px",
-  color: "#FDFAFE",
-  cursor: "pointer",
-});
 const BackgroundDiv = styled("div")(({ theme }) => ({
   
   background: "#F3F8FB",
@@ -108,7 +96,6 @@ export default function TopBar() {
         <BackgroundDiv>
           <Container maxWidth="lg">
             <Box
-              className="scroll-container"
               sx={{
                 display: "flex",
                 gap: "15px",
@@ -116,8 +103,7 @@ export default function TopBar() {
                 alignItems: "center",
               }}
             >
-              <marquee behavior="scroll" direction="left">
-                <Box className="scroll-content">
+               
                   <Box sx={styles.flexDiv}>
                     <LuMail />
                     <Typography variant="body1">hello@thecocoapp.com</Typography>
@@ -127,9 +113,8 @@ export default function TopBar() {
                     <Typography variant="body1">
                       edupartners@thecocoapp.com
                     </Typography>
-                  </Box>
+                 
                 </Box>
-              </marquee>
             </Box>
           </Container>
         </BackgroundDiv>

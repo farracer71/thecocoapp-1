@@ -72,13 +72,13 @@ function CocoApp() {
                 Cocoapp
                 <br /> for Schools
               </DeskTopTitle>
-              <Typography variant="h6">
-                Teachers, we’re here to help you! Our free tools support your
-                <br />
-                students as they learn finance through the Cocoapp, both in and
-                out
-                <br /> of the classroom.
-              </Typography>
+              <Box sx={{ maxWidth: "493px" }}>
+                <Typography variant="h6">
+                  Teachers, we’re here to help you! Our free tools support your
+                  students as they learn finance through the Cocoapp, both in
+                  and out of the classroom.
+                </Typography>
+              </Box>
               <Button
                 variant="contained"
                 sx={{

@@ -64,7 +64,11 @@ function BenifitsSection() {
               {CardData.map((value, index) => {
                 return (
                   <Grid item xs={12} sm={index === 0 ? 12 : 6} md={4}>
-                    <Paper>
+                    <Paper
+                      style={{
+                        border: "1px solid #D8E5EE",
+                      }}
+                    >
                       <Box sx={style.paperBox}>
                         <StyledImg src={value.img} alt="icon" />
 

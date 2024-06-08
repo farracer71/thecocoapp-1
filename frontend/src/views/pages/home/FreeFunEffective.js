@@ -16,7 +16,6 @@ const style = {
     "@media(max-width:600px)": {
       display: "block",
     },
-    
   },
   innerBox: {
     display: "grid",
@@ -37,7 +36,16 @@ const style = {
       marginBottom: "20px",
     },
   },
+  
 };
+const HandleBox = styled("div")(({ theme }) => ({
+  marginTop: "20px",
+  display: "flex",
+  justifyContent: "center",
+  "@media(max-width:900px)": {
+    marginTop: "0px",
+  },
+}));
 const StyledImg = styled("img")(({ theme }) => ({
   width: "-webkit-fill-available",
   height: "auto",
@@ -45,7 +53,7 @@ const StyledImg = styled("img")(({ theme }) => ({
 const StyledImgM = styled("img")(({ theme }) => ({
   width: "-webkit-fill-available",
   height: "auto",
-  marginTop: "12vw",
+  marginTop: "4vw",
   "@media(max-width:600px)": {
     marginTop: "0px",
   },
@@ -80,7 +88,7 @@ function FreeFunEffective() {
   return (
     <Container maxWidth="lg">
       <Box sx={style.HandleMargin}>
-        <Grid container spacing={4}>
+        <Grid container spacing={3}>
           <Grid item xs={12}>
             <BoxCenter>
               <Typography variant="h1">Free Fun Effective</Typography>
@@ -99,8 +107,8 @@ function FreeFunEffective() {
               },
             }}
           >
-            <Box mt={2}>
-              <StyledImg alt="" src="images/mobileScreen.svg" />
+            <Box sx={style.handleimgPosiotion}>
+              <StyledImgM alt="" src="images/mobileScreen.svg" />
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
@@ -116,7 +124,11 @@ function FreeFunEffective() {
                     }}
                   >
                     <Box sx={style.paperBox}>
-                      <img src={value.img} alt="icon" style={{width:"64px", height:"64px"}}/>
+                      <img
+                        src={value.img}
+                        alt="icon"
+                        style={{ width: "64px", height: "64px" }}
+                      />
                       <Box sx={style.innerBox}>
                         <Typography variant="h3">{value.title}</Typography>
                         <Typography variant="h6">{value.cardText}</Typography>
@@ -135,21 +147,22 @@ function FreeFunEffective() {
             sx={{
               display: {
                 xs: "block",
-                sm: "none",
+                sm: "block",
                 md: "none",
               },
             }}
           >
-            <Box sx={style.handleimgPosiotion}>
-              <StyledImgM alt="" src="images/mobileScreen.svg" />
+            <Box mt={2}>
+              <StyledImg alt="" src="images/mobileScreen.svg" />
             </Box>
           </Grid>
+
           <Grid item xs={12}>
-            <BoxCenter style={{ marginTop: "20px" }}>
+            <HandleBox >
               <Button variant="contained" sx={{ minWidth: "260px" }}>
                 Get started
               </Button>
-            </BoxCenter>
+            </HandleBox>
           </Grid>
         </Grid>
       </Box>

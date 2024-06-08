@@ -68,16 +68,25 @@ function AskQuestions() {
             <Box mt={2} sx={style.mappedBox}>
               {CardData.map((value, index) => {
                 return (
-                  <Paper sx={{ border: "1px solid #D2ECFF" }}>
-                    <Box sx={style.paperBox}>
-                      <Box sx={style.innerBox}>
-                        <Typography variant="h5" fontWeight={600}>
-                          {value.title}
-                        </Typography>
-                        <Typography variant="h5">{value.cardText}</Typography>
+                  <Box
+                    sx={{
+                      transition: "transform 0.3s ease-in-out",
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                      },
+                    }}
+                  >
+                    <Paper sx={{ border: "1px solid #D2ECFF" }}>
+                      <Box sx={style.paperBox}>
+                        <Box sx={style.innerBox}>
+                          <Typography variant="h5" fontWeight={600}>
+                            {value.title}
+                          </Typography>
+                          <Typography variant="h5">{value.cardText}</Typography>
+                        </Box>
                       </Box>
-                    </Box>
-                  </Paper>
+                    </Paper>
+                  </Box>
                 );
               })}
               <Box>

@@ -16,6 +16,7 @@ const style = {
     "@media(max-width:600px)": {
       display: "block",
     },
+    
   },
   innerBox: {
     display: "grid",
@@ -106,7 +107,14 @@ function FreeFunEffective() {
             <Box mt={2} sx={style.mappedBox}>
               {CardData.map((value, index) => {
                 return (
-                  <Paper>
+                  <Paper
+                    sx={{
+                      transition: "transform 0.3s ease-in-out",
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                      },
+                    }}
+                  >
                     <Box sx={style.paperBox}>
                       <img src={value.img} alt="icon" />
                       <Box sx={style.innerBox}>

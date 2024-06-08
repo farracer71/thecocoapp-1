@@ -10,7 +10,10 @@ const style = {
     alignItem: "center",
     padding: "20px",
     width: "-webkit-fill-available",
-    minHeight:"290px"
+    minHeight: "440px",
+    "@media(max-width:600px)": {
+       minHeight: "auto"
+    },
   },
   innerBox: {
     display: "grid",
@@ -63,7 +66,18 @@ function BenifitsSection() {
             <Grid container spacing={4}>
               {CardData.map((value, index) => {
                 return (
-                  <Grid item xs={12} sm={index === 0 ? 12 : 6} md={4}>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={index === 0 ? 12 : 6}
+                    md={4}
+                    sx={{
+                      transition: "transform 0.3s ease-in-out",
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                      },
+                    }}
+                  >
                     <Paper
                       style={{
                         border: "1px solid #D8E5EE",

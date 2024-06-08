@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
+import { redirectToMail } from "src/utils";
+import { useNavigate } from "react-router-dom";
 
 
 const style = {
@@ -72,7 +74,7 @@ const IconFlex = styled("div")(({ theme }) => ({
 
 function Footer() {
 
-
+const navigate = useNavigate();
   return (
     <Container maxWidth="lg">
       <Box mt={2} mb={4}>
@@ -89,12 +91,40 @@ function Footer() {
           </Box>
           <Divider sx={style.dividerVisible} />
           <Box>
-            <Typography variant="h4">About Us</Typography>
-            <Typography variant="h6" sx={{ marginTop: "24px" }}>
+            <Typography variant="h4" sx={{ cursor: "pointer" }}>
+              About Us
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{ marginTop: "24px", cursor: "pointer" }}
+              onClick={() => {
+                window.open("/terms&condition", "_blank");
+              }}
+            >
               Terms & Conditions
             </Typography>
-            <Typography variant="h6">Privacy Policy</Typography>
-            <Typography variant="h6">Contact us</Typography>
+            <Typography
+              variant="h6"
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                window.open("/privacy-policy", "_blank");
+              }}
+            >
+              Privacy Policy
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{ cursor: "pointer" }}
+              onClick={() => {
+                redirectToMail(
+                  "hello@thecocoapp.com",
+                  "Inquiry About The Coco App",
+                  `Hi Team Coco,\n\nI hope this email finds you well.\n\nI am writing to inquire about the features and functionalities of The Coco App. I am particularly interested in understanding how it can benefit our organization in terms of productivity and collaboration.\n\nCould you please provide more information or arrange a demo session at your earliest convenience?\n\nThank you for your time and assistance.\n\nBest regards,\n[Your Name]\n[Your Contact Information]`
+                );
+              }}
+            >
+              Contact us
+            </Typography>
           </Box>
         </FlexBox>
         <Divider />

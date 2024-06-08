@@ -263,7 +263,7 @@ const themesOptions = [
             backgroundColor: "#FE8A36",
             "&:hover": {
               color: "#fff",
-              backgroundColor: "#00BAF2",
+              backgroundColor: "rgba(231, 126, 49, 1)",
             },
             "@media(max-width:767px)": {
               padding: "10px 15px",
@@ -282,11 +282,11 @@ const themesOptions = [
             borderColor: "#FE8A36",
             "&:hover": {
               color: "#fff",
-              background: "#00BAF2",
-              borderColor: "#00BAF2",
+              background: "rgba(231, 126, 49, 1)",
+              borderColor: "rgba(231, 126, 49, 1)",
               boxShadow:
                 "0 1px 0 0 #fe5aeb, 0 -1px 0 0 #f4a91b, 1px 0 0 0 #fe5aeb, -1px 0 0 0 rgb(254 90 235), 1px -1px 0 0 #f4a91b, -1px 1px 0 0 rgb(254 90 235), 1px 1px 0 0 rgb(254 90 235), -1px -1px 0 0 rgb(244 168 26)",
-              backgroundColor: "#00BAF2",
+              backgroundColor: "rgba(231, 126, 49, 1)",
             },
             "@media(max-width:767px)": {
               padding: "10px 15px",
@@ -314,7 +314,7 @@ const themesOptions = [
             "&:hover": {
               color: "#fff",
               boxShadow: "none !important",
-              backgroundColor: "#FE8A36",
+              backgroundColor: "rgba(231, 126, 49, 1)",
             },
             "@media(max-width:767px)": {
               padding: "10px 15px",
@@ -490,7 +490,7 @@ const themesOptions = [
             backgroundColor: "#FE8A36",
             "&:hover": {
               color: "#fff",
-              backgroundColor: "#00BAF2",
+              backgroundColor: "rgba(231, 126, 49, 1)",
             },
             "@media(max-width:767px)": {
               padding: "10px 15px",
@@ -509,11 +509,11 @@ const themesOptions = [
             borderColor: "#FE8A36",
             "&:hover": {
               color: "#fff",
-              background: "#00BAF2",
-              borderColor: "#00BAF2",
+              background: "rgba(231, 126, 49, 1)",
+              borderColor: "rgba(231, 126, 49, 1)",
               boxShadow:
                 "0 1px 0 0 #fe5aeb, 0 -1px 0 0 #f4a91b, 1px 0 0 0 #fe5aeb, -1px 0 0 0 rgb(254 90 235), 1px -1px 0 0 #f4a91b, -1px 1px 0 0 rgb(254 90 235), 1px 1px 0 0 rgb(254 90 235), -1px -1px 0 0 rgb(244 168 26)",
-              backgroundColor: "#00BAF2",
+              backgroundColor: "rgba(231, 126, 49, 1)",
             },
             "@media(max-width:767px)": {
               padding: "10px 15px",
@@ -541,7 +541,7 @@ const themesOptions = [
             "&:hover": {
               color: "#fff",
               boxShadow: "none !important",
-              backgroundColor: "#FE8A36",
+              backgroundColor: "rgba(231, 126, 49, 1)",
             },
             "@media(max-width:767px)": {
               padding: "10px 15px",

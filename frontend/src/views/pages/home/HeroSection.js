@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import styled from "@emotion/styled";
+import { redirectToMail } from "src/utils";
 
 const style = {
   HandleMargin: {
@@ -81,7 +82,14 @@ function HeroSection() {
               },
             }}
           >
-            <Box>
+            <Box
+              sx={{
+                transition: "transform 0.3s ease-in-out",
+                "&:hover": {
+                  transform: "scale(1.1)",
+                },
+              }}
+            >
               <StyledImg alt="heroSection" src="images/boyWithMobile.svg" />
             </Box>
           </Grid>
@@ -110,7 +118,17 @@ function HeroSection() {
               Start them young! Cocoapp equips children with the financial
               knowledge they need to make smart choices.
             </Typography>
-            <Button variant="contained" sx={style.HandleMargin}>
+            <Button
+              onClick={() => {
+                redirectToMail(
+                  "edupartners@thecocoapp.com",
+                  "Partnership Opportunity with The Coco App",
+                  `Dear Education Partnerships Team,\n\nI hope this email finds you well.\n\nMy name is [Your Name], and I represent [Your Institution/Organization]. We are very interested in exploring potential partnership opportunities with The Coco App to enhance our educational programs.\n\nCould we schedule a meeting to discuss how we can collaborate and the potential benefits for both parties? I am available at your earliest convenience.\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]\n[Your Contact Information]\n[Your Institution/Organization]`
+                );
+              }}
+              variant="contained"
+              sx={style.HandleMargin}
+            >
               Get started
             </Button>
             <img

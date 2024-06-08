@@ -125,7 +125,7 @@ const themesOptions = [
         main: "#0B1426",
       },
       background: {
-        default: "#F7F7F7",
+        default: "#fff",
         paper: "#FFFFFF",
       },
       text: {
@@ -352,7 +352,7 @@ const themesOptions = [
         main: "#0B1426",
       },
       background: {
-        default: "#F7F7F7",
+        default: "#fff",
         paper: "#FFFFFF",
       },
       text: {

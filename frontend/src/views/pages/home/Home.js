@@ -23,6 +23,9 @@ const SectionFunBack = styled("section")(({ theme }) => ({
   "@media(max-width:767px)": {
     paddingTop: "15px",
   },
+  "@media(max-width:900px)": {
+    backgroundImage: "url('/images/freeFunMobile.png')",
+  },
 }));
 
 const SectionFeedBack = styled("section")(({ theme }) => ({
@@ -38,6 +41,9 @@ const SectionFeedBack = styled("section")(({ theme }) => ({
   },
   "@media(max-width:767px)": {
     paddingTop: "5px",
+  },
+  "@media(max-width:900px)": {
+    backgroundImage: "url('/images/feedbackMobileScreen.png')",
   },
 }));
 const SectionBenifits = styled("section")(({ theme }) => ({
@@ -73,6 +79,9 @@ const AskQuestionsBack = styled("section")(({ theme }) => ({
   backgroundColor: "#FCF7FF",
   "@media(max-width:767px)": {
     paddingTop: "15px",
+  },
+  "@media(max-width:900px)": {
+    backgroundImage: "url('/images/askMobile.png')",
   },
 }));
 function Home() {

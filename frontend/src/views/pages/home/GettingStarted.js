@@ -89,7 +89,7 @@ const handleExpansion = (key) => {
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <Box mt={2}>
-              <StyledImg alt="" src="images/GettingStarted.svg" />
+              <StyledImg alt="" src="images/GettingStarted.png" />
             </Box>
           </Grid>
           <Grid

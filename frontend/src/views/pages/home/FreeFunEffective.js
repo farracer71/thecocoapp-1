@@ -61,19 +61,19 @@ function FreeFunEffective() {
       title: "Gamified modules",
       cardText:
         "It uses interactive games and engaging activities to make financial literacy fun. It's not just learning, it's an adventure!",
-      img: "images/IconGrid.svg",
+      img: "images/IconGrid.png",
     },
     {
       title: "Bit-sized lessons",
       cardText:
         "Short, engaging lessons break down complex financial concepts into easy-to-understand chunks. No overwhelming information here!",
-      img: "images/IconGrid1.svg",
+      img: "images/IconGrid1.png",
     },
     {
       title: "Practical based quizzes",
       cardText:
         "Its quizzes go beyond memorisation. They apply what you learn to real-world situations, helping you master financial skills. ",
-      img: "images/IconGrid2.svg",
+      img: "images/IconGrid2.png",
     },
   ];
 
@@ -116,7 +116,7 @@ function FreeFunEffective() {
                     }}
                   >
                     <Box sx={style.paperBox}>
-                      <img src={value.img} alt="icon" />
+                      <img src={value.img} alt="icon" style={{width:"64px", height:"64px"}}/>
                       <Box sx={style.innerBox}>
                         <Typography variant="h3">{value.title}</Typography>
                         <Typography variant="h6">{value.cardText}</Typography>

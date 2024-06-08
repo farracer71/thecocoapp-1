@@ -90,7 +90,7 @@ function HeroSection() {
                 },
               }}
             >
-              <StyledImg alt="heroSection" src="images/boyWithMobile.svg" />
+              <StyledImg alt="heroSection" src="images/boyWithMobile.png" />
             </Box>
           </Grid>
           <Grid
@@ -120,11 +120,7 @@ function HeroSection() {
             </Typography>
             <Button
               onClick={() => {
-                redirectToMail(
-                  "edupartners@thecocoapp.com",
-                  "Partnership Opportunity with The Coco App",
-                  `Dear Education Partnerships Team,\n\nI hope this email finds you well.\n\nMy name is [Your Name], and I represent [Your Institution/Organization]. We are very interested in exploring potential partnership opportunities with The Coco App to enhance our educational programs.\n\nCould we schedule a meeting to discuss how we can collaborate and the potential benefits for both parties? I am available at your earliest convenience.\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]\n[Your Contact Information]\n[Your Institution/Organization]`
-                );
+                redirectToMail("edupartners@thecocoapp.com");
               }}
               variant="contained"
               sx={style.HandleMargin}
@@ -152,7 +148,7 @@ function HeroSection() {
             }}
           >
             <Box>
-              <StyledImg alt="heroSection" src="images/boyWithMobile.svg" />
+              <StyledImg alt="heroSection" src="images/boyWithMobile.png" />
             </Box>
           </Grid>
         </Grid>

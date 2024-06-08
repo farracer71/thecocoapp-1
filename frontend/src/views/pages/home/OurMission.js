@@ -69,7 +69,7 @@ function OurMission() {
             }}
           >
             <Box mt={2}>
-              <StyledImg alt="" src="images/ourMission.svg" />
+              <StyledImg alt="" src="images/ourMission.png" />
             </Box>
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
@@ -119,7 +119,7 @@ function OurMission() {
             }}
           >
             <Box mt={2}>
-              <StyledImg alt="" src="images/ourMission.svg" />
+              <StyledImg alt="" src="images/ourMission.png" />
             </Box>
           </Grid>
         </Grid>

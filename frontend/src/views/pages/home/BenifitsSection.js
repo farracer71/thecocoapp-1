@@ -35,19 +35,19 @@ function BenifitsSection() {
       title: "Enhances school’s reputation",
       cardText:
         "Schools that collaborate with Cocoapp will be at the forefront of equipping students with crucial financial literacy skills. ",
-      img: "images/cardImage.svg",
+      img: "images/cardImage.png",
     },
     {
       title: "Standard aligned curriculum",
       cardText:
         "Our team of experienced educators, finance professionals is dedicated to empowering the next generation with the knowledge.",
-      img: "images/cardImage1.svg",
+      img: "images/cardImage1.png",
     },
     {
       title: "Student progress insights",
       cardText:
         "See how your students are progressing with in-depth insights like accuracy and time spent learning.",
-      img: "images/cardImage2.svg",
+      img: "images/cardImage2.png",
     },
   ];
 
@@ -69,7 +69,7 @@ function BenifitsSection() {
                   <Grid
                     item
                     xs={12}
-                    sm={index === 0 ? 12 : 6}
+                    sm={index === 2 ? 12 : 6}
                     md={4}
                     sx={{
                       transition: "transform 0.3s ease-in-out",

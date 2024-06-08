@@ -124,8 +124,6 @@ export default function TopBar() {
                 onClick={() => {
                   redirectToMail(
                     "hello@thecocoapp.com",
-                    "Inquiry About The Coco App",
-                    `Hi Team Coco,\n\nI hope this email finds you well.\n\nI am writing to inquire about the features and functionalities of The Coco App. I am particularly interested in understanding how it can benefit our organization in terms of productivity and collaboration.\n\nCould you please provide more information or arrange a demo session at your earliest convenience?\n\nThank you for your time and assistance.\n\nBest regards,\n[Your Name]\n[Your Contact Information]`
                   );
                 }}
               >
@@ -138,8 +136,6 @@ export default function TopBar() {
                 onClick={() => {
                   redirectToMail(
                     "edupartners@thecocoapp.com",
-                    "Partnership Opportunity with The Coco App",
-                    `Dear Education Partnerships Team,\n\nI hope this email finds you well.\n\nMy name is [Your Name], and I represent [Your Institution/Organization]. We are very interested in exploring potential partnership opportunities with The Coco App to enhance our educational programs.\n\nCould we schedule a meeting to discuss how we can collaborate and the potential benefits for both parties? I am available at your earliest convenience.\n\nLooking forward to your response.\n\nBest regards,\n[Your Name]\n[Your Contact Information]\n[Your Institution/Organization]`
                   );
                 }}
               >

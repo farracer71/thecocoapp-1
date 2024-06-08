@@ -27,6 +27,15 @@ const DeskTopTitle = styled("h1")(({ theme }) => ({
 }));
 
 function CocoApp() {
+
+  const sendMail = () => {
+    const email = 'edupartners@thecocoapp.com'; // Replace with the recipient's email address
+    const subject = '';
+    const body = '';
+    
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <Container maxWidth="lg">
       <Box mt={3} mb={3}>
@@ -80,6 +89,7 @@ function CocoApp() {
                 </Typography>
               </Box>
               <Button
+                onClick={() => sendMail()}
                 variant="contained"
                 sx={{
                   margin: { xs: "auto", sm: "auto", md: "0" },

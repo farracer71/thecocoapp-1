@@ -24,6 +24,9 @@ const ScrollLink = Scroll.Link;
 const Root = styled("div")(({ theme }) => ({
   flexGrow: 1,
   display: "block",
+  position: "fixed",
+  width: "-webkit-fill-available",
+  zIndex: "1",
   // [theme.breakpoints.down("md")]: {
   //   display: "none",
   // },
@@ -107,7 +110,7 @@ export default function TopBar() {
 
   return (
     <>
-      <Root>
+      <Root >
         <BackgroundDiv>
           <Container maxWidth="lg">
             <Box

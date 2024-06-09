@@ -1,7 +1,6 @@
-import React from "react";
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, Container, Grid, Snackbar, Typography } from "@mui/material";
 import styled from "@emotion/styled";
-import { redirectToMail } from "src/utils";
 
 const style = {
   HandleMargin: {
@@ -65,6 +64,15 @@ const DeskTopTitle = styled("h1")(({ theme }) => ({
 }));
 
 function HeroSection() {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    setOpen(false);
+  };
   return (
     <Container maxWidth="lg">
       <Box>
@@ -120,7 +128,8 @@ function HeroSection() {
             </Typography>
             <Button
               onClick={() => {
-                redirectToMail("edupartners@thecocoapp.com");
+                
+                handleClick()
               }}
               variant="contained"
               sx={style.HandleMargin}
@@ -153,6 +162,20 @@ function HeroSection() {
           </Grid>
         </Grid>
       </Box>
+      <Snackbar
+        ContentProps={{
+          sx: {
+            background: "rgba(20, 23, 25, 1)",
+          },
+        }}
+        bodyStyle={{ minWidth: "300px" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Cocoapp Launches in July!"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        // action={action}
+      />
     </Container>
   );
 }

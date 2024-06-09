@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Container, Grid, Typography, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import Paper from "@mui/material/Paper";
+import { redirectToMail } from "src/utils";
 
 const style = {
   mappedBox: {
@@ -64,7 +65,7 @@ function AskQuestions() {
             </BoxCenter>
           </Grid>
 
-          <Grid item xs={12} >
+          <Grid item xs={12}>
             <Box mt={2} sx={style.mappedBox}>
               {CardData.map((value, index) => {
                 return (
@@ -91,7 +92,15 @@ function AskQuestions() {
               })}
               <Box>
                 <Typography variant="h5">
-                  Trouble finding the answer to your question? <span style={{color:"#00A9DC"}}>Contact us</span>
+                  Trouble finding the answer to your question?{" "}
+                  <span
+                    onClick={() => {
+                      redirectToMail("hello@thecocoapp.com");
+                    }}
+                    style={{ color: "#00A9DC", cursor:"pointer" }}
+                  >
+                    Contact us
+                  </span>
                 </Typography>
               </Box>
             </Box>

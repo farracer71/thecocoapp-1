@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Container, Grid, Typography, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Container, Grid, Typography, Button, Snackbar } from "@mui/material";
 import styled from "@emotion/styled";
 import Paper from "@mui/material/Paper";
 
@@ -64,6 +64,15 @@ const BoxCenter = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 function FreeFunEffective() {
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+      setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+      setOpen(false);
+    };
   const CardData = [
     {
       title: "Gamified modules",
@@ -158,14 +167,32 @@ function FreeFunEffective() {
           </Grid>
 
           <Grid item xs={12}>
-            <HandleBox >
-              <Button variant="contained" sx={{ minWidth: "260px" }}>
+            <HandleBox>
+              <Button
+                variant="contained"
+                onClick={() => {handleClick()}}
+                sx={{ minWidth: "260px" }}
+              >
                 Get started
               </Button>
             </HandleBox>
           </Grid>
         </Grid>
       </Box>
+      <Snackbar
+        ContentProps={{
+          sx: {
+            background: "rgba(20, 23, 25, 1)",
+          },
+        }}
+        bodyStyle={{ minWidth: "300px" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Cocoapp Launches in July!"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        // action={action}
+      />
     </Container>
   );
 }

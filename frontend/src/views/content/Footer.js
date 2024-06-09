@@ -96,16 +96,23 @@ const navigate = useNavigate();
             </Typography>
             <Typography
               variant="h6"
-              sx={{ marginTop: "24px", cursor: "pointer" }}
+              sx={{
+                marginTop: "24px",
+                cursor: "pointer",
+                "&:hover": { textDecoration: "underline" },
+              }}
               onClick={() => {
                 window.open("/terms&condition", "_blank");
               }}
             >
-              Terms & Conditions
+              Terms of service
             </Typography>
             <Typography
               variant="h6"
-              sx={{ cursor: "pointer" }}
+              sx={{
+                cursor: "pointer",
+                "&:hover": { textDecoration: "underline" },
+              }}
               onClick={() => {
                 window.open("/privacy-policy", "_blank");
               }}
@@ -116,9 +123,7 @@ const navigate = useNavigate();
               variant="h6"
               sx={{ cursor: "pointer" }}
               onClick={() => {
-                redirectToMail(
-                  "hello@thecocoapp.com",
-                );
+                redirectToMail("hello@thecocoapp.com");
               }}
             >
               Contact us
@@ -130,14 +135,14 @@ const navigate = useNavigate();
           <Typography variant="h6" sx={style.handleBlockUnblock}>
             Copyright © 2024 Cocoapp Private Limited. All Rights Reserved
           </Typography>
-          <Typography variant="h6" sx={style.follow}>
+          {/* <Typography variant="h6" sx={style.follow}>
             Follow us on
           </Typography>
           <IconFlex>
             <RiInstagramFill style={{ color: "#00A9DC" }} />
             <FaLinkedinIn style={{ color: "#00A9DC" }} />
             <FaYoutube style={{ color: "#00A9DC" }} />
-          </IconFlex>
+          </IconFlex> */}
           <Typography variant="h6" sx={style.handleBlock}>
             Copyright © 2024 Cocoapp Private Limited. All Rights Reserved
           </Typography>

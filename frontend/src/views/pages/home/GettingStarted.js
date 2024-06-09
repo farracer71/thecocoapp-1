@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Container, Grid, Typography, Button, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import { Box, Container, Grid, Typography, Button, Accordion, AccordionSummary, AccordionDetails, Snackbar } from "@mui/material";
 import styled from "@emotion/styled";
 import { MdOutlineExpandMore } from "react-icons/md";
 
@@ -47,6 +47,15 @@ const BorderCss = styled("div")(({ theme }) => ({
   minHeight:"106px"
 }));
 function GettingStarted() {
+   const [open, setOpen] = useState(false);
+
+   const handleClick = () => {
+     setOpen(true);
+   };
+
+   const handleClose = (event, reason) => {
+     setOpen(false);
+   };
   const CardData = [
     {
       title: "Get in touch with us",
@@ -148,7 +157,14 @@ const handleExpansion = (key) => {
               );
             })}
             <Box mt={3}>
-              <Button variant="contained">Get started</Button>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  handleClick();
+                }}
+              >
+                Get started
+              </Button>
             </Box>
           </Grid>
           <Grid
@@ -206,13 +222,33 @@ const handleExpansion = (key) => {
               ))}
             </Box>
             <Box mt={3} sx={{ display: "flex", justifyContent: "center" }}>
-              <Button variant="contained" sx={{ width: "260px" }}>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  handleClick();
+                }}
+                sx={{ width: "260px" }}
+              >
                 Get started
               </Button>
             </Box>
           </Grid>
         </Grid>
       </Box>
+      <Snackbar
+        ContentProps={{
+          sx: {
+            background: "rgba(20, 23, 25, 1)",
+          },
+        }}
+        bodyStyle={{ minWidth: "288pxpx" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Cocoapp Launches in July!"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        // action={action}
+      />
     </Container>
   );
 }

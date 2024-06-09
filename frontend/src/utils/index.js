@@ -1,3 +1,3 @@
-export function redirectToMail(email, subject, body) {
+export function redirectToMail(email) {
   window.location.href = `mailto:${email}`;
 }

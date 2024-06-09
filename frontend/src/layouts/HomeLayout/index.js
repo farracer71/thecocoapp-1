@@ -16,15 +16,16 @@ const styles = {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
-    paddingTop: "63px",
+    paddingTop: "179px",
     backgroundPosition: "unset",
     backgroundSize: "cover",
     minHeight: "100vh",
-    "@media(max-width:600px)": {
-      paddingTop: "28px !important",
-    },
+
     "@media(max-width:960px)": {
-      paddingTop: "45px",
+      paddingTop: "140px",
+    },
+    "@media(max-width:600px)": {
+      paddingTop: "80px !important",
     },
     // backgroundColor:"#0D2124"
   },

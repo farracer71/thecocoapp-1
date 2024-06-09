@@ -114,11 +114,11 @@ function HeroSection() {
               },
             }}
           >
-            <img
+            {/* <img
               className="positionAbosolute EnergyIconPosition"
               src="images/energy-icon.svg"
               alt=""
-            />
+            /> */}
             <DeskTopTitle>
               Helping children to make smart money choices !
             </DeskTopTitle>

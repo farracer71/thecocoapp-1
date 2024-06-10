@@ -28,7 +28,7 @@ function errorHandler(err, req, res, next) {
 
 async function verifyToken(req, res, next) {
   // Extract the token from the request headers
-  const { token } = req.headers;
+  const token = req.headers.token;
 
   // If token is not provided in the headers
   if (!token) {

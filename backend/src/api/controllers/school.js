@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 const { schoolServices } = require('../service/schools');
 const { findAllSchool } = schoolServices;
 

@@ -34,3 +34,29 @@ definitions:
     example:
       name: "Rohit Pandit"
       email: "rohit@mailinator.com"
+
+  create_child_def:
+    required:
+      - childName
+      - schoolId
+      - dob
+      - standard
+      - gender
+    properties:
+      childName:
+        type: string
+        example: "John Doe"
+      schoolId:
+        type: string
+        example: "60c14a3cabc123def4567890"
+      dob:
+        type: string
+        format: date
+        example: "2010-01-01"
+      standard:
+        type: string
+        example: "5th Grade"
+      gender:
+        type: string
+        enum: ["Male", "Female", "Other"]
+        example: "Male"

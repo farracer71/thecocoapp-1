@@ -156,14 +156,26 @@ const themesOptions = [
           fullWidth: {
             borderRadius: "8px",
           },
+          "& .MuiOutlinedInput-inputMarginDense": {
+            padding: "8px 13px",
+          },
         },
       },
       MuiOutlinedInput: {
         styleOverrides: {
-          notchedOutline: { borderColor: "#0B1426" },
+          notchedOutline: { borderColor: "rgba(216, 216, 216, 1)" },
           root: {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "#0B1426",
+              borderColor: "rgba(216, 216, 216, 1)",
+            },
+            input: {
+              padding: "11px 13px",
+            },
+            adornedStart: {
+              paddingLeft: "0px",
+            },
+            adornedEnd: {
+              paddingRight: "0px",
             },
           },
         },
@@ -390,7 +402,7 @@ const themesOptions = [
           notchedOutline: { borderColor: "#0B1426" },
           root: {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "#0B1426",
+              borderColor: "rgba(216, 216, 216, 1)",
             },
           },
         },

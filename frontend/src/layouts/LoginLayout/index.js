@@ -1,90 +1,83 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Grid, Box, Typography } from "@mui/material";
+import { Grid, Box, Container } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
-import SettingsContext from "src/context/SettingsContext";
-const styles ={
+import TopBar from "./TopBar";
+import styled from "@emotion/styled";
+const styles = {
   content: {
-    minHeight: "fit-content",
-    maxWidth: "508px",
-    overflowY: "auto",
+    minHeight: "500px",
     borderRadius: "10px",
+    minWidth: "430px",
     padding: "28px",
     color: "#1A1919",
-    margin: "auto",
+    margin: "auto 0 auto 50px",
     background: "#FFF",
-    boxShadow: "3px 4px 9px 0px rgba(0, 0, 0, 0.25)",
-    marginBottom: "20px",
-    marginTop: "80px",
-    "&::-webkit-scrollbar": {
-      width: "5px",
-    },
-    "&::-webkit-scrollbar-track": {
-      margin: "40px 0 40px 0",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: "#FD9F49",
-      borderRadius: "20px !important",
-    },
+    border: "1px solid rgba(229, 229, 229, 1)",
     "@media(max-width:600px)": {
       padding: "20px",
     },
-  },
-  left: {
-    height: "100%",
-    "@media(max-width:959px)": {
-      display: "none",
+    "@media(max-width:900px)": {
+      margin: "auto 10px",
     },
-  },
-  mainScreenBack: {
-    overflow: "hidden",
   },
   logo: {
     cursor: "pointer",
-    maxWidth: "263px",
+    maxWidth: "155px",
   },
-  imageside: {
-    width: "-webkit-fill-available",
-    height: "100vh",
-    "@media (max-width: 950px)": {
-      display: "none !important",
+  boxMnage: {
+    margin: "auto 50px auto 50px",
+    "@media(max-width:900px)": {
+      display: "none",
     },
   },
-  firstscreen: {
-    overflowY: "auto",
-    height: "inherit",
-    display: "grid",
+  mainBox: {
+    height: "100vh",
+    alignItems: "center",
+    display: "flex",
+    scroll: "auto",
+    paddingTop: "62px",
+    "@media(max-width:900px)": {
+      display: "grid",
+    },
   },
 };
 
-const LoginLayout = ({ children }) => {
+const ImageGroup = styled("img")({
+  width: "100%",
+});
+const ManageLayout = styled(Box)({
+  background: "rgb(255 253 243)",
+  minHeight: "500px",
+  border: "1px solid #E5E5E5",
+  borderRadius: "10px",
+});
 
+const LoginLayout = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const themeSeeting = React.useContext(SettingsContext);
 
   return (
     <Box sx={styles.mainScreenBack}>
-      <Grid container style={{ height: "100vh" }}>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-          <Box>
-            <img
-              style={{ width: "-webkit-fill-available" }}
-              src="/images/Sideimage.png"
-              alt="Side_Image"
-            />
+      <TopBar />
+      <Container>
+        <Box sx={styles.mainBox}>
+          <Box sx={styles.boxMnage}>
+            <ManageLayout>
+              <ImageGroup alt="" src="images/loginBack.png" />
+            </ManageLayout>
           </Box>
-        </Grid>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-
           <Box sx={styles.content}>
-             <div onClick={() => navigate("/")}> 
-            <img style={styles.logo} src="images/Logo.png" alt=""/>
-          </div> 
+            <Box
+              sx={{ display: "flex", justifyContent: "center" }}
+              onClick={() => navigate("/")}
+            >
+              <img style={styles.logo} src="images/Logo.png" alt="" />
+            </Box>
             <Box>{children}</Box>
           </Box>
-        </Grid>
-      </Grid>
+        </Box>
+      </Container>
     </Box>
   );
 };

@@ -13,6 +13,7 @@ import Page from "src/component/Page";
 import ApiConfig from "src/config/APICongig";
 import axios from "axios"; 
 import { useNavigate } from "react-router-dom";
+import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 
 function Login(props) {
   const [isRememberMe, setIsRememberMe] = useState(false);
@@ -45,10 +46,13 @@ function Login(props) {
 
   return (
     <Page title="Login">
-      <Box sx={{ display: "grid", gap: "5px", textAlign: "center" }}>
-        <Typography variant="h1">Login</Typography>
-        <Typography variant="h5">
-          Welcome back! Login now to see<br/> where you left off
+      <Box sx={{ display: "grid", gap: "13px", textAlign: "center" }}>
+        <Typography variant="h1" color={"rgba(67, 69, 71, 1)"} mt={1}>
+          Login
+        </Typography>
+        <Typography variant="h4" color={"rgba(67, 69, 71, 1)"}>
+          Welcome back! Login now to see
+          <br /> where you left off
         </Typography>
         <Formik
           onSubmit={handleFormSubmit}
@@ -66,7 +70,7 @@ function Login(props) {
             values,
           }) => (
             <Form onSubmit={handleSubmit}>
-              <Grid>
+              <Grid sx={{ margin: "13px 0" }}>
                 <TextField
                   placeholder="Please enter an email address"
                   type="email"
@@ -79,6 +83,7 @@ function Login(props) {
                   error={Boolean(touched.email && errors.email)}
                   onBlur={handleBlur}
                   onChange={handleChange}
+                  SX={{ padding: "8px 13px" }}
                 />
                 <FormHelperText error>
                   {touched.email && errors.email}
@@ -86,28 +91,34 @@ function Login(props) {
               </Grid>
 
               <Grid>
-                <Box mt={2}>
+                <Box sx={{ marginTop: "26px" }}>
                   <Button
                     type="submit"
                     variant="contained"
                     disabled={isLoading}
                     fullWidth
-                    style={{ maxWidth: "370px" }}
                   >
                     Login
-                    {/* {isLoading && <ButtonCircularProgress />} */}
+                    {isLoading && <ButtonCircularProgress />}
                   </Button>
                 </Box>
                 <Box
                   sx={{
                     display: "grid",
                     justifyContent: "center",
-                    mt: 1,
+                    mt: "13px",
                   }}
                 >
-                  <Typography variant="body1" color="primary">
+                  <Typography variant="body1" color={"rgba(60, 60, 60, 1)"}>
                     Don’t have an account?
-                    <span onClick={() => {navigate("/sign-up");}}>&nbsp;Sign up</span>
+                    <span
+                      onClick={() => {
+                        navigate("/sign-up");
+                      }}
+                      style={{ color: "rgba(0, 186, 242, 1)", cursor:"pointer" }}
+                    >
+                      &nbsp;Sign up
+                    </span>
                   </Typography>
                 </Box>
               </Grid>

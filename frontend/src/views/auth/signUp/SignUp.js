@@ -14,6 +14,7 @@ import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ButtonCircularProgress from "src/component/ButtonCircularProgress";
+import toast from 'react-hot-toast';
 
 function SignUp(props) {
   const [isRememberMe, setIsRememberMe] = useState(true);
@@ -31,16 +32,17 @@ function SignUp(props) {
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
     try {
-      const res = await axios.post(ApiConfig.login, {
+      const res = await axios.post(ApiConfig.signupVerifiedEmail, {
         email: values.email,
-        password: values.password,
+        name: values.name,
       });
 
       if (res.status === 200) {
-        // Handle successful login
+        toast.success(res.data.message);
+        setIsLoading(false);
       }
     } catch (error) {
-      console.log("ERROR", error.response);
+      toast.error(error.response.data.message);
       setIsLoading(false);
     }
   };

@@ -146,14 +146,13 @@ exports.signupWithVerifiedEmail = async (req, res, next) => {
     try {
         const { email, name } = req.body;
 
-        const existingUser = await findNewUser({ email: email, otpVerification: true });
-        if (!existingUser) {
-            return res.status(400).send({ status: false, message: "Email not registerd or Email is not verified." });
-        }
-
         const isUser = await findUser({ email: email });
         if (isUser) {
             return res.status(400).send({ status: false, message: "User already exits in the system." });
+        }
+
+        if (isUser && isUser.otpVerification == false) {
+            return res.status(400).send({ status: false, message: "Email not registerd or Email is not verified." });
         }
 
         const user = await createUser({ email: email, name: name });

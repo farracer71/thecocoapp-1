@@ -11,35 +11,36 @@ import { Form, Formik } from "formik";
 import * as yup from "yup";
 import Page from "src/component/Page";
 import ApiConfig from "src/config/APICongig";
-import axios from "axios"; 
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ButtonCircularProgress from "src/component/ButtonCircularProgress";
+import toast from 'react-hot-toast';
 
 function Login(props) {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
- const navigate = useNavigate();
+  const navigate = useNavigate();
   const formInitialSchema = isRememberMe
     ? {
-        email: "",
-      }
+      email: "",
+    }
     : {
-        email: window.sessionStorage.getItem("email") || "",
-      };
+      email: window.sessionStorage.getItem("email") || "",
+    };
 
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
     try {
-      const res = await axios.post(ApiConfig.login, {
-        email: values.email,
-        password: values.password,
+      const res = await axios.post(ApiConfig.loginGenerateOtp, {
+        email: values.email
       });
 
       if (res.status === 200) {
-        // Handle successful login
+        toast.success(res.data.message);
+        setIsLoading(false);
       }
     } catch (error) {
-      console.log("ERROR", error.response);
+      toast.error(error.response.data.message);
       setIsLoading(false);
     }
   };
@@ -115,7 +116,7 @@ function Login(props) {
                       onClick={() => {
                         navigate("/sign-up");
                       }}
-                      style={{ color: "rgba(0, 186, 242, 1)", cursor:"pointer" }}
+                      style={{ color: "rgba(0, 186, 242, 1)", cursor: "pointer" }}
                     >
                       &nbsp;Sign up
                     </span>

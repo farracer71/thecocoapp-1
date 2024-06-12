@@ -29,6 +29,18 @@ export const routes = [
   },
   {
     exact: true,
+    path: "/add-child",
+    layout: LoginLayout,
+    component: lazy(() => import("src/views/auth/add-child/index")),
+  },
+  {
+    exact: true,
+    path: "/dashboard",
+    // layout: HomeLayout,
+    component: lazy(() => import("src/views/pages/dashboard/Dashboard")),
+  },
+  {
+    exact: true,
     path: "/privacy-policy",
     layout: HomeLayout,
     component: lazy(() => import("src/views/pages/license/privacyPolicy")),

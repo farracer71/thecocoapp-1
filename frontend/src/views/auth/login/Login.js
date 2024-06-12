@@ -32,19 +32,38 @@ function Login(props) {
     setIsLoading(true);
     try {
       const res = await axios.post(ApiConfig.loginGenerateOtp, {
-        email: values.email
+        email: values.email,
       });
-
       if (res.status === 200) {
-        toast.success(res.data.message);
-        setIsLoading(false);
+        generateOtp(values.email);
+       
       }
     } catch (error) {
       toast.error(error.response.data.message);
       setIsLoading(false);
     }
   };
+  const generateOtp = async (values) => {
+    try {
+      const res = await axios.post(ApiConfig.signupGenerateOtp, {
+        email: values,
+      });
 
+      if (res.status === 200) {
+       toast.success(res.data.message);
+       setIsLoading(false);
+       navigate("/verify", {
+         state: {
+           email: values.email,
+           type: "login",
+         },
+       });
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setIsLoading(false);
+    }
+  };
   return (
     <Page title="Login">
       <Box sx={{ display: "grid", gap: "13px", textAlign: "center" }}>
@@ -73,7 +92,7 @@ function Login(props) {
             <Form onSubmit={handleSubmit}>
               <Grid sx={{ margin: "13px 0" }}>
                 <TextField
-                  placeholder="Please enter an email address"
+                  placeholder="Email ID"
                   type="email"
                   variant="outlined"
                   fullWidth

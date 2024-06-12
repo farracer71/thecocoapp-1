@@ -72,7 +72,8 @@ const LoginLayout = ({ children }) => {
               sx={{ display: "flex", justifyContent: "center" }}
               onClick={() => navigate("/")}
             >
-              <img style={styles.logo} src="images/Logo.png" alt="" />
+              {location.pathname === "/add-child" ? "" :
+              <img style={styles.logo} src="images/Logo.png" alt="" />}
             </Box>
             <Box>{children}</Box>
           </Box>

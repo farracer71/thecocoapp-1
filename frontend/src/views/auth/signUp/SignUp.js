@@ -17,18 +17,12 @@ import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import toast from 'react-hot-toast';
 
 function SignUp(props) {
-  const [isRememberMe, setIsRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const formInitialSchema = isRememberMe
-    ? {
+  const formInitialSchema = {
         email: "",
         name:""
       }
-    : {
-        email: window.sessionStorage.getItem("email") || "",
-      };
-
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
     try {
@@ -38,15 +32,37 @@ function SignUp(props) {
       });
 
       if (res.status === 200) {
-        toast.success(res.data.message);
-        setIsLoading(false);
+     
+       generateOtp(values.email);
       }
     } catch (error) {
       toast.error(error.response.data.message);
       setIsLoading(false);
     }
   };
+  const generateOtp = async (values) => {
+   
+    try {
+      const res = await axios.post(ApiConfig.signupGenerateOtp, {
+        email: values,
+      });
 
+      if (res.status === 200) {
+        
+        toast.success(res.data.message);
+        setIsLoading(false);
+        navigate("/verify", {
+          state: {
+            email: values.email,
+            type: "signUp",
+          },
+        });
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setIsLoading(false);
+    }
+  };
   return (
     <Page title="Sign Up">
       <Box sx={{ display: "grid", gap: "13px", textAlign: "center" }}>
@@ -93,7 +109,7 @@ function SignUp(props) {
                   {touched.name && errors.name}
                 </FormHelperText>
                 <TextField
-                  placeholder="Please enter an email address"
+                  placeholder="Email ID"
                   type="email"
                   variant="outlined"
                   fullWidth

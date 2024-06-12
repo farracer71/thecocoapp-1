@@ -13,13 +13,12 @@ import * as yup from "yup";
 import Page from "src/component/Page";
 import ApiConfig from "src/config/APICongig";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import OTPInput from "otp-input-react";
 import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import { AuthContext } from "src/context/Auth";
 import moment from "moment";
-
-
+import toast from "react-hot-toast";
 
 const styles = {
   otpFormControl: {
@@ -41,6 +40,7 @@ const styles = {
 function Verify(props) {
   const [isRememberMe, setIsRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
   const auth = useContext(AuthContext);
   const [otp, setOTP] = useState("");
   const [otpError, setOTPError] = useState(false);
@@ -58,38 +58,49 @@ function Verify(props) {
 
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
+    let url =
+      location.state?.type === "login"
+        ? ApiConfig.loginVerifyOtp
+        : ApiConfig.signupVerifyOtp;
     try {
       const res = await axios.post(ApiConfig.login, {
         email: values.email,
-        password: values.password,
+        otp: values.otp,
       });
 
       if (res.status === 200) {
-        // Handle successful login
+        if (location?.state?.type === "singup") {
+          navigate("/add-child");
+          localStorage.setItem("token", res.data.token)
+        } else {
+          navigate("/dashboard");
+          localStorage.setItem("token", res.data.token);
+        }
       }
     } catch (error) {
       console.log("ERROR", error.response);
       setIsLoading(false);
     }
   };
-    const reSendOTPHandle = async (values) => {
-      try {
-        setIsLoading(true);
-        const res = await axios({
-          method: "PUT",
-          url: ApiConfig.resendOTP,
-          data: {
-            email: sessionStorage.getItem("email"),
-          },
-        });
-        if (res.data.responseCode === 200) {
-          //   "OTP resent successfully, Please check your email."
-          setIsLoading(false);
-          auth.setEndtime(moment().add(3, "m").unix());
-        } else {
-        }
-      } catch (error) {}
-    };
+  const reSendOTPHandle = async (values) => {
+    let url =
+      location.state?.type === "login"
+        ? ApiConfig.loginGenerateOtp
+        : ApiConfig.signupGenerateOtp;
+    try {
+      const res = await axios.post(url, {
+        email: location?.state?.email,
+      });
+
+      if (res.status === 200) {
+        toast.success(res.data.message);
+        setIsLoading(false);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setIsLoading(false);
+    }
+  };
   const errorHnadling = () => {
     console.log("otpError");
     if (otp.length < 6) {

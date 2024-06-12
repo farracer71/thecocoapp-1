@@ -183,8 +183,8 @@ export default function TopBar() {
                   <Button
                     variant="contained"
                     onClick={() => {
-                      // navigate("/login");
-                      handleClick({ vertical: "bottom", horizontal: "center" });
+                      navigate("/login");
+                      // handleClick({ vertical: "bottom", horizontal: "center" });
                     }}
                   >
                     Get Started

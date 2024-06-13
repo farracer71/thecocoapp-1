@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   deviceType: { type: String },
   deviceToken: { type: String },
   otp: { type: Number },
-  otpVerification: { type: Boolean },
+  otpVerification: { type: Boolean, default: false },
+  isCreatedWithOtpVerification: { type: Boolean, default: false },
   otpExpireTime: { type: Number },
   userType: { type: String, enum: [userTypeEnums.USER, userTypeEnums.ADMIN], default: userTypeEnums.USER},
 }, { timestamps: true });

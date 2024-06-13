@@ -91,7 +91,7 @@ exports.signupVerifyOtp = async (req, res, next) => {
     try {
         const { email, otp } = req.body;
 
-        const existingUser = await findNewUser({ email: email });
+        const existingUser = await findUser({ email: email });
         if (!existingUser) {
             return res.status(400).send({ status: false, message: "Email not registerd." });
         }
@@ -109,8 +109,10 @@ exports.signupVerifyOtp = async (req, res, next) => {
             return res.status(410).send({ status: false, message: "OTP has expired." });
         }
 
-        await updateNewUser({ _id: existingUser._id }, { otpVerification: true });
-        return res.status(200).send({ status: true, message: "OTP verified successfully.", email: email });
+        
+        const user = await updateUser({ _id: existingUser._id }, { otpVerification: true, isCreatedWithOtpVerification: true });
+        const token = await commonFunction.generateJWT({ email: email, id: user._id });
+        return res.status(200).send({ status: true, message: "OTP verified successfully.", user, token });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
     }
@@ -146,18 +148,24 @@ exports.signupWithVerifiedEmail = async (req, res, next) => {
     try {
         const { email, name } = req.body;
 
-        const isUser = await findUser({ email: email });
-        if (isUser) {
-            return res.status(400).send({ status: false, message: "User already exits in the system." });
+        const existingUser = await findUser({ email: email });
+        const otp = await commonFunction.generateOTP();
+        const otpExpireTime = new Date().getTime() + 180000;
+
+        if (existingUser) {
+            if (existingUser.otpVerification) {
+                return res.status(409).send({ status: false, message: "Email already exists" });
+            }
+
+            await commonFunction.sendSignupGenerateOTPMail(email, otp);
+            await updateUser({ _id: existingUser._id }, { otp, otpExpireTime });
+
+            return res.status(200).send({ status: true, message: "OTP sent successfully.", email: email });
         }
 
-        if (isUser && isUser.otpVerification == false) {
-            return res.status(400).send({ status: false, message: "Email not registerd or Email is not verified." });
-        }
-
-        const user = await createUser({ email: email, name: name });
-        const token = await commonFunction.generateJWT({ email: email, id: user._id });
-        return res.status(200).send({ status: true, message: "User Signup successfully.", user, token });
+        await commonFunction.sendSignupGenerateOTPMail(email, otp);
+        await createUser({ name, email, otp, otpExpireTime });
+        return res.status(200).send({ status: true, message: "OTP sent successfully.", email: email });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
     }

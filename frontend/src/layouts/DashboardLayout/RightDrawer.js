@@ -1,7 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useState, useEffect, useContext } from "react";
 import { matchPath } from "react-router-dom";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import PropTypes from "prop-types";
 import { Box, List, Avatar, Typography, } from "@mui/material";
 import { Dialog } from "@mui/material";

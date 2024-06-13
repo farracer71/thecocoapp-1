@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import HomeLayout from "src/layouts/HomeLayout";
 import LoginLayout from "./layouts/LoginLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 export const routes = [
   {
@@ -36,7 +37,7 @@ export const routes = [
   {
     exact: true,
     path: "/dashboard",
-    // layout: HomeLayout,
+    layout: DashboardLayout,
     component: lazy(() => import("src/views/pages/dashboard/Dashboard")),
   },
   {

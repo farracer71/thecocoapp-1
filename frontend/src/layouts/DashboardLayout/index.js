@@ -5,6 +5,7 @@ import TopBar from "./TopBar";
 import SettingsContext from "src/context/SettingsContext";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "src/context/User";
+import { Box } from "@mui/material";
 
 const styles = {
   root: {
@@ -104,7 +105,7 @@ const DashboardLayout = ({ children }) => {
   }, [location]);
 
   return (
-    <div sx={`${themeSeeting.settings.theme ===  "LIGHT"? styles.rootLight:  styles.root  }`}
+    <Box sx={`${themeSeeting.settings.theme ===  "LIGHT"? styles.rootLight:  styles.root  }`}
     >
       <TopBar
         onMobileNavOpen={() => setMobileNavOpen(true)}
@@ -124,13 +125,13 @@ const DashboardLayout = ({ children }) => {
         //     : `${styles.wrapper}` 
         // }
       >
-        <div sx={styles.contentContainer}>
-          <div sx={ styles.content } id="main-scroll">
+        <Box sx={styles.contentContainer}>
+          <Box sx={ styles.content } id="main-scroll">
             {children}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </div>
-    </div>
+    </Box>
   );
 };
 

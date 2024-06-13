@@ -1,11 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import {
-  Box,
-  Button,
-  FormControl,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Button, FormControl, Grid, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import Page from "src/component/Page";
@@ -16,6 +10,7 @@ import OTPInput from "otp-input-react";
 import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import { AuthContext } from "src/context/Auth";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 const styles = {
   otpFormControl: {
@@ -50,7 +45,7 @@ function Verify(props) {
         : ApiConfig.signupVerifyOtp;
     try {
       const res = await axios.post(url, {
-        email: location?.state?.email,
+        email: location?.state?.email.email,
         otp: values.otp,
       });
 
@@ -61,6 +56,8 @@ function Verify(props) {
           navigate("/dashboard");
         }
         localStorage.setItem("token", res.data.token);
+        toast.success(res.data.message);
+        setIsLoading(false);
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -69,18 +66,16 @@ function Verify(props) {
   };
 
   const reSendOTPHandle = async () => {
-    const url =
-      location.state?.type === "login"
-        ? ApiConfig.loginGenerateOtp
-        : ApiConfig.signupGenerateOtp;
+    const url = ApiConfig.loginGenerateOtp;
     try {
       const res = await axios.post(url, {
-        email: location?.state?.email,
+        email: location?.state?.email?.email,
       });
 
       if (res.status === 200) {
         toast.success(res.data.message);
         setIsLoading(false);
+        auth.setEndtime(moment().add(3, "m").unix());
       }
     } catch (error) {
       toast.error(error.response.data.message);
@@ -102,7 +97,10 @@ function Verify(props) {
             otp: "",
           }}
           validationSchema={yup.object().shape({
-            otp: yup.string().length(4, "OTP must be 4 digits").required("Please enter your OTP."),
+            otp: yup
+              .string()
+              .length(4, "OTP must be 4 digits")
+              .required("Please enter your OTP."),
           })}
           onSubmit={handleFormSubmit}
         >
@@ -147,25 +145,6 @@ function Verify(props) {
                     <Typography color="error">{errors.otp}</Typography>
                   )}
                 </Box>
-                {console.log("values: ", values)}
-                <Box>
-                  {auth.timeLeft?.minutes > 0 || auth.timeLeft?.seconds > 0 ? (
-                    <Typography
-                      variant="body1"
-                      style={{
-                        color: "#434547",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: "500",
-                        lineHeight: "24px",
-                        marginRight: "10px",
-                      }}
-                    >
-                      {auth.timeLeft?.minutes?.toString().padStart(2, "0")}:
-                      {auth.timeLeft?.seconds?.toString().padStart(2, "0")}
-                    </Typography>
-                  ) : null}
-                </Box>
               </Grid>
 
               <Grid>
@@ -181,28 +160,48 @@ function Verify(props) {
                     {isLoading && <ButtonCircularProgress />}
                   </Button>
                 </Box>
-                {auth.timeLeft?.minutes <= 0 && auth.timeLeft?.seconds <= 0 && (
-                  <Box
-                    sx={{
-                      display: "grid",
-                      justifyContent: "center",
-                      mt: "13px",
-                    }}
-                  >
-                    <Typography variant="body1" color={"rgba(60, 60, 60, 1)"}>
-                      Didn’t get OTP?
-                      <span
-                        style={{
-                          color: "rgba(0, 186, 242, 1)",
-                          cursor: "pointer",
-                        }}
-                        onClick={reSendOTPHandle}
-                      >
-                        &nbsp;Resend OTP
-                      </span>
+                <Box
+                  sx={{
+                    mt: "13px",
+                  }}
+                >
+                  {auth.timeLeft?.minutes > 0 || auth.timeLeft?.seconds > 0 ? (
+                    <Typography
+                      variant="h3"
+                      style={{
+                        color: "#434547",
+                        fontSize: "18px",
+                        fontStyle: "normal",
+                        fontWeight: "500",
+                        lineHeight: "24px",
+                      }}
+                    >
+                      {auth.timeLeft?.minutes?.toString().padStart(2, "0")}:
+                      {auth.timeLeft?.seconds?.toString().padStart(2, "0")}
                     </Typography>
-                  </Box>
-                )}
+                  ) : (
+                    <Box
+                      sx={{
+                        display: "grid",
+                        justifyContent: "center",
+                        mt: "13px",
+                      }}
+                    >
+                      <Typography variant="body1" color={"rgba(60, 60, 60, 1)"}>
+                        Didn’t get OTP?
+                        <span
+                          style={{
+                            color: "rgba(0, 186, 242, 1)",
+                            cursor: "pointer",
+                          }}
+                          onClick={reSendOTPHandle}
+                        >
+                          &nbsp;Resend OTP
+                        </span>
+                      </Typography>
+                    </Box>
+                  )}
+                </Box>
               </Grid>
             </Form>
           )}

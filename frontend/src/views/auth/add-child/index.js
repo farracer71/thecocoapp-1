@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Box,
   Button,
   FormHelperText,
   Grid,
+  InputLabel,
   MenuItem,
   Select,
   TextField,
@@ -23,6 +24,7 @@ import { GrAddCircle } from "react-icons/gr";
 function AddChild(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [childAdd, setChildAdd] = useState(false);
+  const [getData, setGetData] = useState([]);
   const navigate = useNavigate();
   const dateInputRef = useRef(null);
   const formInitialSchema = {
@@ -36,24 +38,43 @@ function AddChild(props) {
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
     try {
-      const res = await axios.post(ApiConfig.createChild, {
+      const res = await axios.post( ApiConfig.createChild,
+      {
         childName: values.name,
         schoolId: values.schoolId,
         dob: values.dob,
         standard: values.standard,
         gender: values.gender,
-      });
-// pass token as header
+      },
+      {
+        headers: {
+          token: localStorage.getItem("token"),
+        },});
       if (res.status === 200) {
         toast.success(res.data.message);
         setIsLoading(false);
+        navigate("/dashboard")
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      // toast.error(error.response.data.message);
       setIsLoading(false);
     }
   };
 
+  useEffect(()=>{
+getSchool();
+  },[])
+  const getSchool = async () => {
+    try {
+       const res = await axios.get(ApiConfig.getSchool);
+
+       if(res.status === 200){
+          setGetData(res.data.data)
+       }
+    } catch (error) {
+      // console.error(error.response.data.message)
+    }
+  };
   return (
     <Page title="Add Child">
       <Box sx={{ display: "grid", gap: "13px", textAlign: "center" }}>
@@ -101,7 +122,7 @@ function AddChild(props) {
           initialValues={formInitialSchema}
           validationSchema={yup.object().shape({
             name: yup.string().required("Please enter your full name."),
-            schoolId: yup.string().required("Please enter your School ID."),
+            schoolId: yup.string().required("Please select your School ."),
             dob: yup.string().required("Date of birth is required."),
             gender: yup.string().required("Please select a gender."),
             standard: yup.string().required("Please choose a standard."),
@@ -144,18 +165,30 @@ function AddChild(props) {
                     </FormHelperText>
                   </Box>
                   <Box sx={{ margin: "13px 0" }}>
-                    <TextField
-                      placeholder="School ID"
-                      variant="outlined"
-                      fullWidth
-                      size="small"
-                      inputProps={{ maxLength: 256 }}
+                    <Typography
+                      variant="h5"
+                      sx={{ textAlign: "start", marginBottom: "7px" }}
+                    >
+                      Select school
+                    </Typography>
+                    <Select
+                      labelId="demo-simple-select-helper-label"
+                      id="demo-simple-select-helper"
                       value={values.schoolId}
-                      name="schoolId"
-                      error={Boolean(touched.schoolId && errors.schoolId)}
-                      onBlur={handleBlur}
                       onChange={handleChange}
-                    />
+                      name="schoolId"
+                      fullWidth
+                      displayEmpty
+                      inputProps={{ "aria-label": "Without label" }}
+                    >
+                      {getData.map((value) => {
+                        return (
+                          <MenuItem value={value._id}>
+                            {value.schoolName}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
                     <FormHelperText
                       error={Boolean(touched.schoolId && errors.schoolId)}
                     >
@@ -190,10 +223,11 @@ function AddChild(props) {
                       onChange={handleChange}
                       name="gender"
                       fullWidth
-                      label="Select an option"
+                      displayEmpty
+                      inputProps={{ "aria-label": "Without label" }}
                     >
-                      <MenuItem value="boy">Boy</MenuItem>
-                      <MenuItem value="girl">Girl</MenuItem>
+                      <MenuItem value="Male">Boy</MenuItem>
+                      <MenuItem value="Female">Girl</MenuItem>
                     </Select>
                     <FormHelperText
                       error={Boolean(touched.gender && errors.gender)}
@@ -212,7 +246,8 @@ function AddChild(props) {
                       onChange={handleChange}
                       name="standard"
                       fullWidth
-                      label="Select an option"
+                      displayEmpty
+                      inputProps={{ "aria-label": "Without label" }}
                     >
                       {[1, 2, 3, 4, 5, 6].map((value) => (
                         <MenuItem key={value} value={value.toString()}>
@@ -227,7 +262,7 @@ function AddChild(props) {
                     </FormHelperText>
                   </Box>
 
-                  <Typography variant="h5" sx={{ textAlign: "start" }}>
+                  {/* <Typography variant="h5" sx={{ textAlign: "start" }}>
                     Add another child
                   </Typography>
                   <Box
@@ -251,7 +286,7 @@ function AddChild(props) {
                     <GrAddCircle
                       style={{ color: "#D8D8D8", fontSize: "22px" }}
                     />
-                  </Box>
+                  </Box> */}
                 </Grid>
               )}
               <Grid>

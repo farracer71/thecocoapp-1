@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation, matchPath, useNavigate } from "react-router-dom";
-import PerfectScrollbar from "react-perfect-scrollbar";
-// import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { MdExitToApp as ExitToAppIcon } from "react-icons/md";
 import PropTypes from "prop-types";
 import SettingsContext from "src/context/SettingsContext";
@@ -18,13 +16,13 @@ import {
   DialogContent,
   Slide,
 } from "@mui/material";
-import { AiFillDashboard, AiFillHome } from "react-icons/ai";
+import { AiFillDashboard } from "react-icons/ai";
 
 import { RiSettingsLine } from "react-icons/ri";
 import NavItem from "./NavItem";
 import { MdHistory } from "react-icons/md";
 import { ListItem, ListItemText, Collapse } from "@mui/material";
-import Logo from "src/component/Logo";
+
 function renderNavItems({ items, pathname, depth = 0, state, setSelectedTab }) {
   return (
     <List disablePadding>
@@ -494,7 +492,11 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
     <>
       <Box height="100%" display="flex" flexDirection="column">
         <Box sx={styles.logoBox}>
-          <Logo />
+          <img
+            src="images/logo.png"
+            alt="logo"
+            style={{ cursor: "pointer", width: "80px" }}
+          />
         </Box>
 
         <Box sx={styles.profileBox}>
@@ -519,7 +521,10 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                   : "name typographyColorDark"
               }
             >
-              Hi, {User?.profile?.user_info?.firstName ? User.profile?.user_info?.firstName : "******"}
+              Hi,{" "}
+              {User?.profile?.user_info?.firstName
+                ? User.profile?.user_info?.firstName
+                : "******"}
             </p>
             <p sx="emailId">
               {User?.profile?.email
@@ -535,184 +540,179 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
             </p>
           </Box>
         </Box>
-        <PerfectScrollbar options={{ suppressScrollX: true }}>
-          <Box pt={2} pb={2} sx={styles.mainsidebar}>
-            <Box sx="sideMenuBox">
-              {renderedSections.map((section, i) => (
-                <List
-                  key={`menu${i}`}
-                  subheader={
-                    <ListSubheader disableGutters disableSticky>
-                      {section.subheader}
-                    </ListSubheader>
-                  }
-                >
-                  {section.items.map((item, j) => {
-                    const hasItems = item.items && item.items.length > 0;
-                    const isItemOpen = isOpen[j] || false;
-                    return (
-                      <div key={`item${j}`}>
-                        <ListItem
-                          button
-                          sx={
-                            themeSeeting.settings.theme === "LIGHT"
-                              ? `${styles.lightListItem} ${
-                                  location.pathname === item.href
-                                    ? styles.lightSelectedListItem
-                                    : ""
-                                }`
-                              : `${styles.darkListItem} ${
-                                  location.pathname === item.href
-                                    ? styles.darkSelectedListItem
-                                    : ""
-                                }`
+
+        <Box pt={2} pb={2} sx={styles.mainsidebar}>
+          <Box sx="sideMenuBox">
+            {renderedSections.map((section, i) => (
+              <List
+                key={`menu${i}`}
+                subheader={
+                  <ListSubheader disableGutters disableSticky>
+                    {section.subheader}
+                  </ListSubheader>
+                }
+              >
+                {section.items.map((item, j) => {
+                  const hasItems = item.items && item.items.length > 0;
+                  const isItemOpen = isOpen[j] || false;
+                  return (
+                    <div key={`item${j}`}>
+                      <ListItem
+                        button
+                        sx={
+                          themeSeeting.settings.theme === "LIGHT"
+                            ? `${styles.lightListItem} ${
+                                location.pathname === item.href
+                                  ? styles.lightSelectedListItem
+                                  : ""
+                              }`
+                            : `${styles.darkListItem} ${
+                                location.pathname === item.href
+                                  ? styles.darkSelectedListItem
+                                  : ""
+                              }`
+                        }
+                        selected={location.pathname === item.href}
+                        onClick={() => {
+                          if (hasItems) {
+                            handleSublistToggle(j);
+                          } else if (item.clickable) {
+                            handleItemClick(item.href);
+                          } else {
                           }
-                          selected={location.pathname === item.href}
-                          onClick={() => {
-                            if (hasItems) {
-                              handleSublistToggle(j);
-                            } else if (item.clickable) {
-                              handleItemClick(item.href);
-                            } else {
-                            }
-                          }}
-                        >
-                          {item.icon}
-                          <ListItemText primary={item.title} />
-                        </ListItem>
-                        {hasItems && (
-                          <Collapse
-                            in={isItemOpen}
-                            timeout="auto"
-                            unmountOnExit
-                          >
-                            <List component="div" disablePadding>
-                              {item.items.map((subItem, k) => (
-                                <div key={`subItem${k}`}>
-                                  <ListItem
-                                    // sx={
-                                    //   location.pathname === item.href
-                                    //     ? styles.selectedListItem // Apply selected style class
-                                    //     : styles.default // Apply default style class
-                                    // }
+                        }}
+                      >
+                        {item.icon}
+                        <ListItemText primary={item.title} />
+                      </ListItem>
+                      {hasItems && (
+                        <Collapse in={isItemOpen} timeout="auto" unmountOnExit>
+                          <List component="div" disablePadding>
+                            {item.items.map((subItem, k) => (
+                              <div key={`subItem${k}`}>
+                                <ListItem
+                                  // sx={
+                                  //   location.pathname === item.href
+                                  //     ? styles.selectedListItem // Apply selected style class
+                                  //     : styles.default // Apply default style class
+                                  // }
 
-                                    button
-                                    // selected={location.pathname === subItem.href}
-                                    onClick={
-                                      subItem.clickable
-                                        ? () => handleItemClick(subItem.href)
-                                        : undefined
-                                    }
-                                    disabled={!subItem.clickable}
-                                  >
-                                    {subItem.icon}
-                                    <ListItemText primary={subItem.title} />
-                                  </ListItem>
-                                </div>
-                              ))}
-                            </List>
-                          </Collapse>
-                        )}
-                      </div>
-                    );
-                  })}
-                </List>
-              ))}
-            </Box>
+                                  button
+                                  // selected={location.pathname === subItem.href}
+                                  onClick={
+                                    subItem.clickable
+                                      ? () => handleItemClick(subItem.href)
+                                      : undefined
+                                  }
+                                  disabled={!subItem.clickable}
+                                >
+                                  {subItem.icon}
+                                  <ListItemText primary={subItem.title} />
+                                </ListItem>
+                              </div>
+                            ))}
+                          </List>
+                        </Collapse>
+                      )}
+                    </div>
+                  );
+                })}
+              </List>
+            ))}
           </Box>
+        </Box>
 
-          <Button
-            onClick={() => setIsLogout(true)}
+        <Button
+          onClick={() => setIsLogout(true)}
+          sx={
+            themeSeeting.settings.theme === "LIGHT"
+              ? "lightlogoutButton"
+              : "darklogoutButton"
+          }
+        >
+          <ExitToAppIcon
+            style={{
+              marginRight: "16px",
+            }}
+          />
+          &nbsp; Logout
+        </Button>
+
+        {isLogout && (
+          <Dialog
+            maxWidth="sm"
+            fullWidth
             sx={
               themeSeeting.settings.theme === "LIGHT"
-                ? "lightlogoutButton"
-                : "darklogoutButton"
+                ? styles.lightDailogOpen
+                : styles.darkDailogOpen
             }
+            open={isLogout}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={() => setIsLogout(false)}
           >
-            <ExitToAppIcon
+            <DialogContent>
+              <Box sx={styles.dialougTitle} align="center">
+                <p
+                  sx={
+                    themeSeeting.settings.theme === "LIGHT"
+                      ? "lightHeading"
+                      : "darkHeading"
+                  }
+                >
+                  Logout
+                </p>
+                <p
+                  sx={
+                    themeSeeting.settings.theme === "LIGHT"
+                      ? "lightSubHeading"
+                      : "darkSubHeading"
+                  }
+                >
+                  Are you sure you want to log out?
+                </p>
+              </Box>
+            </DialogContent>
+            <DialogActions
               style={{
-                marginRight: "16px",
+                display: "block",
               }}
-            />
-            &nbsp; Logout
-          </Button>
-
-          {isLogout && (
-            <Dialog
-              maxWidth="sm"
-              fullWidth
-              sx={
-                themeSeeting.settings.theme === "LIGHT"
-                  ? styles.lightDailogOpen
-                  : styles.darkDailogOpen
-              }
-              open={isLogout}
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={() => setIsLogout(false)}
             >
-              <DialogContent>
-                <Box sx={styles.dialougTitle} align="center">
-                  <p
-                    sx={
-                      themeSeeting.settings.theme === "LIGHT"
-                        ? "lightHeading"
-                        : "darkHeading"
-                    }
-                  >
-                    Logout
-                  </p>
-                  <p
-                    sx={
-                      themeSeeting.settings.theme === "LIGHT"
-                        ? "lightSubHeading"
-                        : "darkSubHeading"
-                    }
-                  >
-                    Are you sure you want to log out?
-                  </p>
-                </Box>
-              </DialogContent>
-              <DialogActions
+              <Box
+                mt={2}
                 style={{
-                  display: "block",
+                  textAlign: "center",
                 }}
               >
-                <Box
-                  mt={2}
-                  style={{
-                    textAlign: "center",
+                <button
+                  sx={
+                    themeSeeting.settings.theme === "LIGHT"
+                      ? "lightOutlinedButton"
+                      : "darkOutlinedButton"
+                  }
+                  onClick={() => setIsLogout(false)}
+                >
+                  Cancel
+                </button>
+                &nbsp; &nbsp;
+                <button
+                  sx={
+                    themeSeeting.settings.theme === "LIGHT"
+                      ? "lightFilledButton"
+                      : "darkFilledButton"
+                  }
+                  onClick={() => {
+                    window.localStorage.clear();
+                    navigate("/");
                   }}
                 >
-                  <button
-                    sx={
-                      themeSeeting.settings.theme === "LIGHT"
-                        ? "lightOutlinedButton"
-                        : "darkOutlinedButton"
-                    }
-                    onClick={() => setIsLogout(false)}
-                  >
-                    Cancel
-                  </button>
-                  &nbsp; &nbsp;
-                  <button
-                    sx={
-                      themeSeeting.settings.theme === "LIGHT"
-                        ? "lightFilledButton"
-                        : "darkFilledButton"
-                    }
-                    onClick={() => {
-                      window.localStorage.clear();
-                      navigate("/");
-                    }}
-                  >
-                    Logout
-                  </button>
-                </Box>
-              </DialogActions>
-            </Dialog>
-          )}
-        </PerfectScrollbar>
+                  Logout
+                </button>
+              </Box>
+            </DialogActions>
+          </Dialog>
+        )}
       </Box>
     </>
   );

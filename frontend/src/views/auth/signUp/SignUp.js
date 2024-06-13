@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Box,
   Button,
@@ -15,10 +15,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import toast from 'react-hot-toast';
+import { AuthContext } from "src/context/Auth";
+import moment from "moment";
 
 function SignUp(props) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+   const auth = useContext(AuthContext);
   const formInitialSchema = {
         email: "",
         name:""
@@ -32,36 +35,22 @@ function SignUp(props) {
       });
 
       if (res.status === 200) {
-     
-       generateOtp(values.email);
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
+      toast.success(res.data.message);
       setIsLoading(false);
-    }
-  };
-  const generateOtp = async (values) => {
-   
-    try {
-      const res = await axios.post(ApiConfig.signupGenerateOtp, {
-        email: values,
+      navigate("/verify", {
+        state: {
+          email: values,
+          type: "signUp",
+        },
       });
-
-      if (res.status === 200) {
-        toast.success(res.data.message);
-        setIsLoading(false);
-        navigate("/verify", {
-          state: {
-            email: values,
-            type: "signUp",
-          },
-        });
+      auth.setEndtime(moment().add(3, "m").unix());
       }
     } catch (error) {
       toast.error(error.response.data.message);
       setIsLoading(false);
     }
   };
+
   return (
     <Page title="Sign Up">
       <Box sx={{ display: "grid", gap: "13px", textAlign: "center" }}>

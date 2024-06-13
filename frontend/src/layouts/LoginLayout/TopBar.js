@@ -3,6 +3,7 @@ import { Box, Container, Typography } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import { styled } from "@mui/system";
 import { IoMdArrowBack } from "react-icons/io";
+import { usePreviousPathname } from "src/utils";
 
 const style = {
   flexBox: {
@@ -28,12 +29,19 @@ const Root = styled("div")(({ theme }) => ({
 export default function TopBar() {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const previousPathname = usePreviousPathname();
+ const navigateToPrevious = () => {
+   if (previousPathname) {
+     navigate(previousPathname);
+   } else {
+     navigate("/");
+   }
+ };
   return (
     <>
       <Root>
         <Container>
-        <Box sx={style.flexBox} onClick={()=>{ navigate("/");}}>
+        <Box sx={style.flexBox} onClick={()=>{ navigateToPrevious()}}>
           <IoMdArrowBack />
           <Typography>Back</Typography>
         </Box>

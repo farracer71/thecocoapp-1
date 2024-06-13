@@ -1,9 +1,9 @@
 
 //Live URL
-// const url = "https://";
+const url = "http://thecocoapp.com:8080/api/v1/";
 
 //Local URL
-const url = "http://localhost:8080/api/v1/";
+// const url = "http://localhost:3500/api/v1/";
 
 const ApiConfig = {
   loginGenerateOtp: `${url}auth/login/generate-otp`,
@@ -13,6 +13,7 @@ const ApiConfig = {
   signupVerifiedEmail: `${url}auth/signup-with-verfied-email`,
   signupVerifyOtp: `${url}auth/signup/verify-otp`,
 
-  createChild: `${url}/child/create`,
+  createChild: `${url}child/create`,
+  getSchool: `${url}school/get-all-schools`,
 };
 export default ApiConfig;

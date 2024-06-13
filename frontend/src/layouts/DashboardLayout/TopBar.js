@@ -4,6 +4,7 @@ import {
   AppBar,
   Box,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom";
 import SettingsContext from "src/context/SettingsContext";
@@ -18,7 +19,7 @@ const styles ={
   },
 
   logo: {
-    maxWidth: "130px",
+    maxWidth: "150px",
     // marginRight: theme.spacing(2),
     "@media(max-width:599px)": {
       maxWidth: "120px",
@@ -113,26 +114,7 @@ export function TopBarData() {
     }
   };
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
-  const notificationHandler = async () => {
-    const token = localStorage.getItem("token");
-    try {
-     
-    } catch (error) {
-     
-    }
-  };
-  const [count, setCount] = useState([]);
-  const [loader, setLoader] = useState(false);
+ 
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -141,8 +123,8 @@ export function TopBarData() {
   return (
     <>
       <img
-      alt=""
-        sx={styles.logo}
+        alt=""
+        style={styles.logo}
         src="/images/Logo.png"
         onClick={() => {
           navigate("/");
@@ -152,12 +134,9 @@ export function TopBarData() {
       <>
         <Box flexGrow={1} />
         <Box sx={styles.searchBox}>
-          <Box
-            sx={`${styles.customSelectBox}`}
-            onClick={() => setOpen(true)}
-          >
-            <p sx="contentTypo">Logout</p>
-            <img src="images/rightAown.svg" alt="#" />
+          <Box sx={`${styles.customSelectBox}`} onClick={() => setOpen(true)}>
+            <Typography variant="h4">Logout</Typography>
+            <img src="images/profile.png" alt="#" style={{width:"45px", height:"45px"}}/>
           </Box>
         </Box>
       </>

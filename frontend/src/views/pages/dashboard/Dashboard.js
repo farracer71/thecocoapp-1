@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import {
   Box,
+  Button,
   Container,
   Grid,
 } from "@mui/material";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 const style = {
   HandleMargin: {
@@ -30,7 +32,8 @@ const StyledImg = styled("img")(({ theme }) => ({
 }));
 
 function Dashboard() {
-  
+  const navigate = useNavigate();
+
   return (
     <Container maxWidth="lg">
       <Box>
@@ -43,10 +46,15 @@ function Dashboard() {
             >
               <StyledImg alt="heroSection" src="images/Module.png" />
             </Box>
+            <Box>
+              <Button variant="contained" onClick={() => {
+                localStorage.removeItem("token"); navigate("/");
+              }}>Logout</Button>
+            </Box>
           </Grid>
         </Grid>
       </Box>
-     
+
     </Container>
   );
 }

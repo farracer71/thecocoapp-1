@@ -36,7 +36,7 @@ function AddChild(props) {
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
     try {
-      const res = await axios.post(ApiConfig.loginGenerateOtp, {
+      const res = await axios.post(ApiConfig.createChild, {
         childName: values.name,
         schoolId: values.schoolId,
         dob: values.dob,

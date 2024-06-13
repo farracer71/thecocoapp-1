@@ -1,11 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Box,
   Button,
   FormControl,
-  FormHelperText,
   Grid,
-  TextField,
   Typography,
 } from "@mui/material";
 import { Form, Formik } from "formik";
@@ -17,7 +15,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import OTPInput from "otp-input-react";
 import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import { AuthContext } from "src/context/Auth";
-import moment from "moment";
 import toast from "react-hot-toast";
 
 const styles = {
@@ -37,53 +34,42 @@ const styles = {
     },
   },
 };
+
 function Verify(props) {
-  const [isRememberMe, setIsRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const auth = useContext(AuthContext);
-  const [otp, setOTP] = useState("");
-  const [otpError, setOTPError] = useState(false);
-  const email = window.sessionStorage.getItem("email");
-  const minute = auth.timeLeft?.minutes?.toString();
-  const second = auth.timeLeft?.seconds?.toString();
   const navigate = useNavigate();
-  const formInitialSchema = isRememberMe
-    ? {
-        email: "",
-      }
-    : {
-        email: window.sessionStorage.getItem("email") || "",
-      };
+  const email = window.sessionStorage.getItem("email");
 
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
-    let url =
-      location.state?.type === "login"
+    const url =
+      location?.state?.type === "login"
         ? ApiConfig.loginVerifyOtp
         : ApiConfig.signupVerifyOtp;
     try {
-      const res = await axios.post(ApiConfig.login, {
-        email: values.email,
+      const res = await axios.post(url, {
+        email: location?.state?.email,
         otp: values.otp,
       });
 
       if (res.status === 200) {
-        if (location?.state?.type === "singup") {
+        if (location?.state?.type === "signUp") {
           navigate("/add-child");
-          localStorage.setItem("token", res.data.token)
         } else {
           navigate("/dashboard");
-          localStorage.setItem("token", res.data.token);
         }
+        localStorage.setItem("token", res.data.token);
       }
     } catch (error) {
-      console.log("ERROR", error.response);
+      toast.error(error.response.data.message);
       setIsLoading(false);
     }
   };
-  const reSendOTPHandle = async (values) => {
-    let url =
+
+  const reSendOTPHandle = async () => {
+    const url =
       location.state?.type === "login"
         ? ApiConfig.loginGenerateOtp
         : ApiConfig.signupGenerateOtp;
@@ -101,14 +87,7 @@ function Verify(props) {
       setIsLoading(false);
     }
   };
-  const errorHnadling = () => {
-    console.log("otpError");
-    if (otp.length < 6) {
-      setOTPError(true);
-    } else {
-      setOTPError(false);
-    }
-  };
+
   return (
     <Page title="Verify">
       <Box sx={{ display: "grid", gap: "13px", textAlign: "center" }}>
@@ -119,11 +98,13 @@ function Verify(props) {
           You will get OTP via email
         </Typography>
         <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={formInitialSchema}
+          initialValues={{
+            otp: "",
+          }}
           validationSchema={yup.object().shape({
-            email: yup.string().required("Please enter your email address."),
+            otp: yup.string().length(4, "OTP must be 4 digits").required("Please enter your OTP."),
           })}
+          onSubmit={handleFormSubmit}
         >
           {({
             errors,
@@ -132,6 +113,7 @@ function Verify(props) {
             handleSubmit,
             touched,
             values,
+            setFieldValue,
           }) => (
             <Form onSubmit={handleSubmit}>
               <Grid sx={{ margin: "13px 0" }}>
@@ -142,32 +124,14 @@ function Verify(props) {
                     sx={styles.otpFormControl}
                   >
                     <OTPInput
-                      value={otp}
+                      value={values.otp}
                       inputVariant="standard"
                       autoComplete="off"
                       onChange={(otpValue) => {
-                        setOTP(otpValue);
-                        // Custom validation logic when input changes
-                        if (
-                          otpValue.length !== 4 ||
-                          !/^[0-9]+$/.test(otpValue)
-                        ) {
-                          // setOTPError(true);
-                        } else {
-                          setOTPError(false);
-                        }
+                        setFieldValue("otp", otpValue);
                       }}
                       name="otp"
                       id="inputID"
-                      error={otpError}
-                      onInput={() => {
-                        if (otp.length < 3) {
-                          setOTPError(false);
-                        }
-                      }}
-                      onBlur={() => {
-                        errorHnadling();
-                      }}
                       style={{
                         display: "flex",
                         justifyContent: "center",
@@ -179,33 +143,28 @@ function Verify(props) {
                       otpType="number"
                     />
                   </FormControl>
-                </Box>
-                <Box sty>
-                  <Typography error>
-                    {otpError && "All OTP field are required"}
-                  </Typography>
-                  {auth.timeLeft?.minutes > 0 || auth.timeLeft?.seconds > 0 ? (
-                    <>
-                      <Box>
-                        <Typography
-                          variant="body1"
-                          style={{
-                            color: "#434547",
-                            fontSize: "12px",
-                            fontStyle: "normal",
-                            fontWeight: "500",
-                            lineHeight: "24px",
-                            marginRight: "10px",
-                          }}
-                        >
-                          {minute.length > 1 ? minute : "0" + minute}:
-                          {second.length > 1 ? second : "0" + second}
-                        </Typography>
-                      </Box>
-                    </>
-                  ) : (
-                    <></>
+                  {touched.otp && errors.otp && (
+                    <Typography color="error">{errors.otp}</Typography>
                   )}
+                </Box>
+                {console.log("values: ", values)}
+                <Box>
+                  {auth.timeLeft?.minutes > 0 || auth.timeLeft?.seconds > 0 ? (
+                    <Typography
+                      variant="body1"
+                      style={{
+                        color: "#434547",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: "500",
+                        lineHeight: "24px",
+                        marginRight: "10px",
+                      }}
+                    >
+                      {auth.timeLeft?.minutes?.toString().padStart(2, "0")}:
+                      {auth.timeLeft?.seconds?.toString().padStart(2, "0")}
+                    </Typography>
+                  ) : null}
                 </Box>
               </Grid>
 
@@ -222,7 +181,7 @@ function Verify(props) {
                     {isLoading && <ButtonCircularProgress />}
                   </Button>
                 </Box>
-                {auth.timeLeft?.minutes > 0 && auth.timeLeft?.seconds < 0 && (
+                {auth.timeLeft?.minutes <= 0 && auth.timeLeft?.seconds <= 0 && (
                   <Box
                     sx={{
                       display: "grid",
@@ -231,18 +190,15 @@ function Verify(props) {
                     }}
                   >
                     <Typography variant="body1" color={"rgba(60, 60, 60, 1)"}>
-                      Didn’t got OTP?
+                      Didn’t get OTP?
                       <span
                         style={{
                           color: "rgba(0, 186, 242, 1)",
                           cursor: "pointer",
                         }}
-                        // fullWidth
-                        onClick={() => {
-                          reSendOTPHandle();
-                        }}
+                        onClick={reSendOTPHandle}
                       >
-                        &nbsp;Sign up
+                        &nbsp;Resend OTP
                       </span>
                     </Typography>
                   </Box>

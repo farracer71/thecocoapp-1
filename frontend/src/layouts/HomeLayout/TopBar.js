@@ -178,7 +178,9 @@ export default function TopBar() {
               </LinkButtonsDiv> */}
               </Box>
               <RegisterBox>
-                {logIn && <Button variant="contained">Dashboard</Button>}
+                {logIn && <Button variant="contained" onClick={() => {
+                      navigate("/dashboard");
+                    }}>Dashboard</Button>}
                 {!logIn && (
                   <Button
                     variant="contained"

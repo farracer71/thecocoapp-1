@@ -35,7 +35,14 @@ function Login(props) {
         email: values.email,
       });
       if (res.status === 200) {
-        generateOtp(values.email);
+        toast.success(res.data.message);
+        setIsLoading(false);
+        navigate("/verify", {
+          state: {
+            email: values.email,
+            type: "login",
+          },
+        });
        
       }
     } catch (error) {

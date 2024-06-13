@@ -48,12 +48,11 @@ function SignUp(props) {
       });
 
       if (res.status === 200) {
-        
         toast.success(res.data.message);
         setIsLoading(false);
         navigate("/verify", {
           state: {
-            email: values.email,
+            email: values,
             type: "signUp",
           },
         });

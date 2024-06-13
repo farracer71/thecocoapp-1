@@ -16,7 +16,7 @@ const generateOTPSchema = Joi.object({
 const verifyOTPSchema = Joi.object({
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
-        .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required to generate an OTP.' }),
+        .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required.' }),
     otp: Joi.number()
         .integer()
         .min(1000)
@@ -46,7 +46,7 @@ const signupWithVerifiedEmailSchema = Joi.object({
         }),
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
-        .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required to generate an OTP.' }),
+        .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required.' }),
 });
 
 // Example schema for validating user input

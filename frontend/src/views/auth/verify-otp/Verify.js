@@ -45,7 +45,7 @@ function Verify(props) {
         : ApiConfig.signupVerifyOtp;
     try {
       const res = await axios.post(url, {
-        email: location?.state?.email.email,
+        email: location?.state?.email.email || location?.state?.email,
         otp: values.otp,
       });
 

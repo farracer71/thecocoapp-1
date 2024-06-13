@@ -102,7 +102,7 @@ const navigate = useNavigate();
                 "&:hover": { textDecoration: "underline" },
               }}
               onClick={() => {
-                window.open("/terms&condition", "_blank");
+                navigate("/terms&condition");
               }}
             >
               Terms of service
@@ -114,7 +114,7 @@ const navigate = useNavigate();
                 "&:hover": { textDecoration: "underline" },
               }}
               onClick={() => {
-                window.open("/privacy-policy", "_blank");
+                navigate("/privacy-policy");
               }}
             >
               Privacy Policy

@@ -1,8 +1,9 @@
+const { default: mongoose } = require('mongoose');
 const { childServices } = require('../service/child');
-const { findAllChildren, createChild } = childServices;
+const { findAllChildren, insertChild, findChildCount } = childServices;
 
 const { schoolServices } = require('../service/schools');
-const { findSchool } = schoolServices;
+const { findSchool, findAllSchool } = schoolServices;
 
 /**
 * @swagger
@@ -58,7 +59,9 @@ exports.getAllChild = async (req, res, next) => {
 *       content:
 *         application/json:
 *           schema:
-*             $ref: '#/definitions/create_child_def'
+*             type: array
+*             items:
+*               $ref: '#/definitions/create_child_def'
 *     responses:
 *       '200':
 *         description: OK
@@ -69,14 +72,13 @@ exports.getAllChild = async (req, res, next) => {
 */
 exports.createChild = async (req, res, next) => {
     try {
-        const { childName, schoolId, dob, standard, gender } = req.body;
-        const school = await findSchool({ _id: schoolId });
-        if(!school){
-            return res.status(400).send({ status: false, message: "School not found."});
+        let childCount = await findChildCount({userId: req.userId});
+        req.body = req.body.map((ele) => ({ ...ele, userId: req.userId }));
+        childCount += req.body.length;
+        if(childCount > 3){
+            return res.status(400).send({ status: false, message: "One parent only three child add in this platfrom." });
         }
-
-        req.body.userId = req.userId;
-        const child = await createChild(req.body);
+        const child = await insertChild(req.body);
         return res.status(200).send({ status: true, message: "Create Child Successfully.", result: child });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });

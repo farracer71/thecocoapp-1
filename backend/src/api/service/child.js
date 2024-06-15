@@ -8,10 +8,20 @@ const childServices = {
         // Create a new child in the database using the child model
         return await childModel.create(insertObj);
     },
+    // Function to create a new child
+    insertChild: async (insertObj) => {
+        // Create a new child in the database using the child model
+        return await childModel.insertMany(insertObj);
+    },
     // Function to find a child by query
     findChild: async (query) => {
         // Find a child in the database based on the query
         return await childModel.findOne(query);
+    },
+    // Function to find a child by query
+    findChildCount: async (query) => {
+        // Find a child in the database based on the query
+        return await childModel.countDocuments(query);
     },
     // Function to find multiple children by query
     findAllChildren: async (query) => {

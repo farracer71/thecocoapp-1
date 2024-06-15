@@ -74,9 +74,9 @@ exports.createChild = async (req, res, next) => {
     try {
         let childCount = await findChildCount({userId: req.userId});
         req.body = req.body.map((ele) => ({ ...ele, userId: req.userId }));
-        childCount += req.body.length;
-        if(childCount > 3){
-            return res.status(400).send({ status: false, message: "One parent only three child add in this platfrom." });
+        let totalchildCount = childCount + req.body.length;
+        if(totalchildCount > 3){
+            return res.status(400).send({ status: false, message: "One parent only three child add in this platfrom. Your current "+childCount+" child save in platform & you add more " + req.body.length + " child." });
         }
         const child = await insertChild(req.body);
         return res.status(200).send({ status: true, message: "Create Child Successfully.", result: child });

@@ -1,0 +1,42 @@
+[
+    {
+        "standard_id": 1,
+        "name": "1st Standard"
+    },
+    {
+        "standard_id": 2,
+        "name": "2nd Standard"
+    },
+    {
+        "standard_id": 3,
+        "name": "3rd Standard"
+    },
+    {
+        "standard_id": 4,
+        "name": "4th Standard"
+    },
+    {
+        "standard_id": 5,
+        "name": "5th Standard"
+    },
+    {
+        "standard_id": 6,
+        "name": "6th Standard"
+    },
+    {
+        "standard_id": 7,
+        "name": "7th Standard"
+    },
+    {
+        "standard_id": 8,
+        "name": "8th Standard"
+    },
+    {
+        "standard_id": 9,
+        "name": "9th Standard"
+    },
+    {
+        "standard_id": 10,
+        "name": "10th Standard"
+    }
+]

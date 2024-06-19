@@ -1,0 +1,151 @@
+[
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 1,
+        "name": "Exploring Different Types of Currency",
+        "description": "In this lesson, we'll dive into the fascinating world of money! Money comes in different forms, like coins and bills. Imagine coins as little metal circles and bills as paper rectangles. These are what we use to buy things. But did you know that in the past, people used to trade things instead of using money? It's called bartering. For example, if you had apples and wanted oranges, you'd trade with someone who had oranges and wanted apples."
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 2,
+        "name": "Understanding the Value of Coins and Bills",
+        "description": "Let's learn about the value of money! Coins and bills come in different denominations, which means they're worth different amounts. For example, a 10-rupee note is worth more than a 5-rupee coin. You can buy more things with it! It's like comparing a small chocolate bar to a big chocolate bar. The big one is worth more because you get more chocolate!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 1,
+        "lesson_id": 3,
+        "name": "Learning About Bartering and Trade",
+        "description": "Today, we'll discover how people used to exchange goods before money was invented. It's like swapping toys with friends! Bartering is when you trade something you have for something you want. For example, if you have an extra pencil and need a sharpener, you can trade your pencil for a sharpener with a friend who has an extra one. It's a fun way to get what you need without using money!"
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 1,
+        "name": " Ancient Forms of Currency",
+        "description": "Hey there! Today, we're going back in time to explore how people used to trade before coins and bills. Imagine living in ancient times when instead of coins or paper money, people traded goods like grains, livestock, or even shells! Yup, shells! In some places, shells were used as money because they were rare and pretty. It's like swapping your toys with your friends for snacks or stickers!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 2,
+        "name": " The Evolution of Coins and Bills",
+        "description": "Get ready to learn about the journey of coins and bills! Long ago, people started using metal objects like beads and shells as money. But over time, they realized it was easier to use coins made from metals like gold, silver, and copper. Coins were smaller and easier to carry around. Later, paper money was invented because carrying lots of heavy coins was a bit of a hassle. It's like how you might switch from carrying heavy books to using a lightweight tablet!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 2,
+        "lesson_id": 3,
+        "name": " Famous Figures on Currency",
+        "description": "Ever wondered who's on your money? Let's find out! Many countries put famous people on their coins and bills. These people are often important leaders or figures from history. For example, in India, you'll find Mahatma Gandhi's picture on some currency notes. It's like having your favorite superhero on your school bag!"
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 3,
+        "lesson_id": 1,
+        "name": " Cash vs. Digital Currency",
+        "description": "Hey kiddo! Today, we're exploring the difference between using cash and digital money. Cash is what you hold in your hand—coins and paper money. Digital money, on the other hand, is all about using cards or apps to pay for things. It's like when you pay for your favorite game online using your mom's card or when you give your friend digital money for their birthday gift through an app!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 3,
+        "lesson_id": 2,
+        "name": " Gift Cards and Vouchers",
+        "description": "Guess what? Gift cards and vouchers are like magic tickets to get cool stuff! A gift card is like a special card that has money on it to spend in a particular store. And vouchers? They're like special coupons that give you discounts or freebies when you buy something. It's like having a secret code to unlock treasure in your favorite game!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 3,
+        "lesson_id": 3,
+        "name": " Money in Different Cultures",
+        "description": "Did you know that money can be different in different parts of the world? Yup, it's true! In some places, people use shells or beads as money, while in others, they use coins and bills just like we do. It's like how different superheroes have different powers—money in different cultures has its own unique features and history!"
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 4,
+        "lesson_id": 1,
+        "name": " Understanding the Concept of Worth",
+        "description": "Hey kids! Today, let's talk about how we understand the value of money. Imagine you have 100 rupees. You can buy a toy car or a big pack of crayons. But what if you save that money for later? Maybe you can buy something even cooler, like a video game! Understanding the worth of money means knowing how much things cost and deciding if something is worth spending your money on. It's like choosing between buying a new book or saving up for a fun day out with your friends!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 4,
+        "lesson_id": 2,
+        "name": " The Importance of Saving Money",
+        "description": "Hey there, little savers! Saving money is like collecting treasure in a piggy bank. It's super important because it helps you reach your goals. Let's say you want a new bicycle. By saving a little money each week, you can eventually buy that shiny bike! Plus, saving money teaches you to be responsible with your finances. It's like planting seeds in a garden—you watch your money grow over time!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 4,
+        "lesson_id": 3,
+        "name": " Money's Role in Everyday Life",
+        "description": "Money is everywhere, right? It's not just for buying toys or snacks. Money helps us do everyday things, like buying groceries or paying for school. Imagine if you didn't have money—you couldn't buy your favorite snacks or get new school supplies! Understanding money's role in everyday life means knowing how it helps us get the things we need and want. It's like knowing how your favorite game helps you relax after a long day at school!"
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 5,
+        "lesson_id": 1,
+        "name": " The Process of Making Coins",
+        "description": "Hey kids! Ever wondered how those shiny coins are made? Well, it's quite a fascinating process! First, metal is melted and poured into molds to create coin shapes. Then, these coins are cooled down and stamped with designs and values. It's like making cookies with cookie cutters—just imagine the coins are the yummy cookies, and the molds are the cookie cutters!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 5,
+        "lesson_id": 2,
+        "name": " Printing Paper Money",
+        "description": "Hey there, money detectives! Let's uncover the secrets of printing paper money. First, special paper is used, which is made from cotton and linen. Then, it's passed through printing presses where ink is applied to create designs and security features. Finally, each note is cut into the right size. It's like designing your own superhero costume—each step is important to make sure it looks cool and stays safe!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 5,
+        "lesson_id": 3,
+        "name": " Security Features on Currency",
+        "description": "Hey young detectives! Ever noticed the cool features on your money that keep it safe? Well, those are called security features! Some money has holograms, special inks, or hidden watermarks to prevent counterfeiting. It's like having secret codes in your favorite spy game—these features protect your money from bad guys trying to make fake copies!"
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 6,
+        "lesson_id": 1,
+        "name": " Exploring Currency from Different Countries",
+        "description": "Hey explorers! Let's take a trip around the world and discover different types of money used in different countries. Did you know that each country has its own currency with unique designs and values? For example, in Japan, they use yen, and in the United States, they use dollars. It's like collecting stickers from different places—you get to see all the cool and colorful currencies from around the globe!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 6,
+        "lesson_id": 2,
+        "name": " Exchange Rates and Currency Conversion",
+        "description": "Hey math whizzes! Ever wondered how you can buy things from other countries? That's where exchange rates and currency conversion come in! Exchange rates tell us how much one country's currency is worth compared to another's. So, if you want to buy something from Japan with Indian rupees, you'll need to convert your money into yen. It's like trading your favorite toys with friends—except you're trading money from different countries!"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 6,
+        "lesson_id": 3,
+        "name": " Cultural Perspectives on Money",
+        "description": "Hey culture enthusiasts! Money isn't just about buying things—it also reflects the values and beliefs of different cultures. In some cultures, people believe in saving money for the future, while in others, they prefer spending it on experiences with family and friends. Understanding these cultural perspectives helps us appreciate the diversity in how people view and use money. It's like learning about different superheroes—each culture has its own unique approach to handling money!"
+    }
+]

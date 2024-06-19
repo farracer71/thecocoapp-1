@@ -1,5 +1,10 @@
 [
     {
+        "standard_id": 1,
+        "module_id": 1,
+        "name": "Introduction to Maths"
+    },
+    {
         "standard_id": 4,
         "module_id": 1,
         "name": "Introduction to Money"

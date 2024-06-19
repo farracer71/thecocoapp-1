@@ -45,19 +45,19 @@ const importInitialStandards = async () => {
 
 const importInitialModules = async () => {
     try {
-        const standardsList = await Standards.find();
-        const updatedModules = initialModules.map((element) => {
-            const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
-            if (standard) {
-                return {
-                    ...element,
-                    standard_id: standard._id // Use ObjectId directly
-                };
-            }
-        });
-
         const count = await Modules.countDocuments();
         if (count === 0) {
+            const standardsList = await Standards.find();
+            const updatedModules = initialModules.map((element) => {
+                const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
+                if (standard) {
+                    return {
+                        ...element,
+                        standard_id: standard._id // Use ObjectId directly
+                    };
+                }
+            });
+            
             await Modules.insertMany(updatedModules);
             console.log('Initial Modules data imported successfully.');
         } else {
@@ -70,26 +70,24 @@ const importInitialModules = async () => {
 
 const importInitialLevels = async () => {
     try {
-        const modulesList = await Modules.find();
-        const standardsList = await Standards.find();
-        const updatedLevels = initialLevels.map((element) => {
-            const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
-            console.log("standard: ",standard);
-            if(standard){
-                const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
-                console.log("modules: ",modules);
-                if (modules) {
-                    return {
-                        ...element,
-                        module_id: modules._id,
-                        standard_id: modules.standard_id // Use ObjectId directly
-                    };
-                }
-            }
-        });
-
         const count = await Levels.countDocuments();
         if (count === 0) {
+            const modulesList = await Modules.find();
+            const standardsList = await Standards.find();
+            const updatedLevels = initialLevels.map((element) => {
+                const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
+                if(standard){
+                    const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
+                    if (modules) {
+                        return {
+                            ...element,
+                            module_id: modules._id,
+                            standard_id: modules.standard_id // Use ObjectId directly
+                        };
+                    }
+                }
+            });
+
             await Levels.insertMany(updatedLevels);
             console.log('Initial Levels data imported successfully.');
         } else {

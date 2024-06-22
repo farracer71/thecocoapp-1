@@ -8,7 +8,8 @@ const childSchema = new mongoose.Schema({
   childName: { type: String, required: true },
   dob: { type: Date, required: true },
   standard: { type: String, required: true },
-  gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true }
+  gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
+  activeStatus: { type: Boolean, required: true, default: false },
 }, { timestamps: true });
 
 // Create the child model

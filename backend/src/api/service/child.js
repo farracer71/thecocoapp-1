@@ -32,6 +32,10 @@ const childServices = {
     updateChild: async (query, updateObj) => {
         return await childModel.findOneAndUpdate(query, updateObj, { new: true, upsert: true });
     },
+    // Function to update a child based on query
+    updateManyChild: async (query, updateObj) => {
+        return await childModel.updateMany(query, updateObj, { new: true, upsert: true });
+    },
 }
 
 // Export the child services

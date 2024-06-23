@@ -20,17 +20,30 @@ const style = {
   BoxStyle: {
     padding: "34px",
     border: "2px solid rgba(216, 216, 216, 1)",
-    borderRadius:"16px"
+    borderRadius: "16px",
   },
   GapBox: {
     display: "flex",
-    gap: "10px",
+    gap: "5px",
     alignItems: "center",
   },
-  GridBox:{
-    display:"grid",
-    gap:"25px"
-  }
+  GridBox: {
+    display: "grid",
+    gap: "25px",
+  },
+  profileBox: {
+    display: "flex",
+    gap: "8px",
+  },
+  userBox: {
+    width: "-webkit-fill-available",
+    display: "grid",
+    justifyContent: "center",
+    padding: "20px",
+    borderRadius: "10px",
+    marginTop: "15px",
+    border: "1px solid rgba(224, 220, 220, 1)",
+  },
 };
 
 // const TitleWrapper = styled('img')(({ theme }) => ({
@@ -47,6 +60,7 @@ const TaddyImg = styled("img")(({ theme }) => ({
 const ProfileImg = styled("img")(({ theme }) => ({
   width: "40px",
   height: "40px",
+  margin:"0 12px"
 }));
 const CoinImg = styled("img")(({ theme }) => ({
   width: "24px",
@@ -54,6 +68,10 @@ const CoinImg = styled("img")(({ theme }) => ({
 }));
 const AddImg = styled("img")(({ theme }) => ({
   width: "100%",
+  maxHeight: "400px",
+  "@media(max-width:900px)": {
+    maxHeight: "300px",
+  },
 }));
 function Dashboard() {
   const navigate = useNavigate();
@@ -63,9 +81,15 @@ function Dashboard() {
       <Container maxWidth="lg">
         <Box>
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={7}>
               <Box>
-                <StyledImg alt="heroSection" src="images/Module.png" onClick={()=>{navigate("/leason");}}/>
+                <StyledImg
+                  alt="heroSection"
+                  src="images/Module.png"
+                  onClick={() => {
+                    navigate("/leason");
+                  }}
+                />
               </Box>
               <Box>
                 <Button
@@ -79,7 +103,7 @@ function Dashboard() {
                 </Button>
               </Box>
             </Grid>
-            <Grid item xs={6} sx={{ display: { xs: "none", sm: "block" } }}>
+            <Grid item xs={5} sx={{ display: { xs: "none", sm: "block" } }}>
               <Box sx={style.GridBox}>
                 <Box sx={style.BoxStyle}>
                   <Box
@@ -98,23 +122,32 @@ function Dashboard() {
                 </Box>
                 <Box sx={style.BoxStyle}>
                   <Typography variant="h4">Switch Profile</Typography>
-                  <Box
-                    sx={{
-                      background: "rgba(229, 229, 229, 1)",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      padding: "10px",
-                      borderRadius: "10px",
-                      marginTop: "15px",
-                    }}
-                  >
-                    <Box sx={style.GapBox}>
+                  <Box sx={style.profileBox}>
+                    <Box
+                      style={{
+                        background: "rgba(255, 255, 255, 1)",
+                      }}
+                      sx={style.userBox}
+                    >
                       <ProfileImg alt="" src="images/profile.png" />
-                      <Typography variant="body1">Dhurv</Typography>
+
+                      <Box sx={style.GapBox}>
+                        <Typography variant="body1">200</Typography>
+                        <CoinImg alt="" src="images/Coin.png" />
+                      </Box>
                     </Box>
-                    <Box sx={style.GapBox}>
-                      <Typography variant="body1">200</Typography>
-                      <CoinImg alt="" src="images/Coin.png" />
+                    <Box
+                      style={{
+                        background: "rgba(241, 245, 249, 1)",
+                      }}
+                      sx={style.userBox}
+                    >
+                      <ProfileImg alt="" src="images/profile.png" />
+
+                      <Box sx={style.GapBox}>
+                        <Typography variant="body1">200</Typography>
+                        <CoinImg alt="" src="images/Coin.png" />
+                      </Box>
                     </Box>
                   </Box>
                 </Box>

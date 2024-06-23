@@ -38,7 +38,15 @@ export const routes = [
     exact: true,
     path: "/dashboard",
     layout: DashboardLayout,
+    guard: true,
     component: lazy(() => import("src/views/pages/dashboard/Dashboard")),
+  },
+  {
+    exact: true,
+    path: "/leason",
+    // layout: DashboardLayout,
+    guard: true,
+    component: lazy(() => import("src/views/pages/dashboard/Leason")),
   },
   {
     exact: true,

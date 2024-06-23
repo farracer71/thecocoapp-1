@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
+import Page from "src/component/Page";
 
 const style = {
   HandleMargin: {
@@ -58,72 +59,74 @@ function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    <Container maxWidth="lg">
-      <Box>
-        <Grid container spacing={4}>
-          <Grid item xs={12} sm={6}>
-            <Box>
-              <StyledImg alt="heroSection" src="images/Module.png" />
-            </Box>
-            <Box>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  navigate("/");
-                }}
-              >
-                Logout
-              </Button>
-            </Box>
-          </Grid>
-          <Grid item xs={6} sx={{ display: { xs: "none", sm: "block" } }}>
-            <Box sx={style.GridBox}>
-              <Box sx={style.BoxStyle}>
-                <Box
-                  sx={{ display: "flex", gap: "10px", alignItems: "center" }}
-                >
-                  <TaddyImg alt="" src="images/TaddyIcon.png" />
-                  <Box>
-                    <Typography variant="h3" fontWeight={"700"} mb={1}>
-                      Hello Dhruv!
-                    </Typography>
-                    <Typography variant="h4">
-                      Happy learning! Complete one level daily to top !
-                    </Typography>
-                  </Box>
-                </Box>
+    <Page title="Dashboard">
+      <Container maxWidth="lg">
+        <Box>
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={6}>
+              <Box>
+                <StyledImg alt="heroSection" src="images/Module.png" onClick={()=>{navigate("/leason");}}/>
               </Box>
-              <Box sx={style.BoxStyle}>
-                <Typography variant="h4">Switch Profile</Typography>
-                <Box
-                  sx={{
-                    background: "rgba(229, 229, 229, 1)",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    padding: "10px",
-                    borderRadius: "10px",
-                    marginTop: "15px",
+              <Box>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    navigate("/");
                   }}
                 >
-                  <Box sx={style.GapBox}>
-                    <ProfileImg alt="" src="images/profile.png" />
-                    <Typography variant="body1">Dhurv</Typography>
-                  </Box>
-                  <Box sx={style.GapBox}>
-                    <Typography variant="body1">200</Typography>
-                    <CoinImg alt="" src="images/Coin.png" />
+                  Logout
+                </Button>
+              </Box>
+            </Grid>
+            <Grid item xs={6} sx={{ display: { xs: "none", sm: "block" } }}>
+              <Box sx={style.GridBox}>
+                <Box sx={style.BoxStyle}>
+                  <Box
+                    sx={{ display: "flex", gap: "10px", alignItems: "center" }}
+                  >
+                    <TaddyImg alt="" src="images/TaddyIcon.png" />
+                    <Box>
+                      <Typography variant="h3" fontWeight={"700"} mb={1}>
+                        Hello Dhruv!
+                      </Typography>
+                      <Typography variant="h4">
+                        Happy learning! Complete one level daily to top !
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
+                <Box sx={style.BoxStyle}>
+                  <Typography variant="h4">Switch Profile</Typography>
+                  <Box
+                    sx={{
+                      background: "rgba(229, 229, 229, 1)",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "10px",
+                      borderRadius: "10px",
+                      marginTop: "15px",
+                    }}
+                  >
+                    <Box sx={style.GapBox}>
+                      <ProfileImg alt="" src="images/profile.png" />
+                      <Typography variant="body1">Dhurv</Typography>
+                    </Box>
+                    <Box sx={style.GapBox}>
+                      <Typography variant="body1">200</Typography>
+                      <CoinImg alt="" src="images/Coin.png" />
+                    </Box>
+                  </Box>
+                </Box>
+                <Box sx={style.BoxStyle}>
+                  <AddImg alt="" src="images/add.png" />
+                </Box>
               </Box>
-              <Box sx={style.BoxStyle}>
-                <AddImg alt="" src="images/add.png" />
-              </Box>
-            </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Box>
-    </Container>
+        </Box>
+      </Container>
+    </Page>
   );
 }
 

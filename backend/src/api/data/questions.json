@@ -3,8 +3,242 @@
         "standard_id": 4,
         "module_id": 1,
         "level_id": 1,
-        "lesson_id": 1,
-        "name": "Exploring Different Types of Currency",
-        "description": "In this lesson, we'll dive into the fascinating world of money! Money comes in different forms, like coins and bills. Imagine coins as little metal circles and bills as paper rectangles. These are what we use to buy things. But did you know that in the past, people used to trade things instead of using money? It's called bartering. For example, if you had apples and wanted oranges, you'd trade with someone who had oranges and wanted apples."
+        "question_id": 1,
+        "name": "You have a toy car, and your friend has a puzzle. You both want to exchange. What is this called?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Buying"},
+            { "option_id": 2, "name": "B", "value": "Selling"},
+            { "option_id": 3, "name": "C", "value": "Bartering"}
+        ],
+        "right_answer": "C",
+        "desc": "Bartering. This is when people exchange goods without using money."
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 1,
+        "question_id": 2,
+        "name": "What are coins and bills used for?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Playing games"},
+            { "option_id": 2, "name": "B", "value": "Buying things"}
+        ],
+        "right_answer": "B",
+        "desc": "Coins and bills are used to purchase items."
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 1,
+        "question_id": 3,
+        "name": "What did people do before using money?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "They used cards"},
+            { "option_id": 2, "name": "B", "value": "They traded goods"}
+        ],
+        "right_answer": "B",
+        "desc": "Before money, people exchanged items they had for items they needed."
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 2,
+        "question_id": 1,
+        "name": "What did people use as money in ancient times?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Shells and grains"},
+            { "option_id": 2, "name": "B", "value": "Coins"}
+        ],
+        "right_answer": "A",
+        "desc": "These were some of the things people traded."
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 2,
+        "question_id": 2,
+        "name": "Why were shells valuable in ancient times?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "They were shiny"},
+            { "option_id": 2, "name": "B", "value": "They were rare and pretty"}
+        ],
+        "right_answer": "B",
+        "desc": "This made them valuable for trading."
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 2,
+        "question_id": 3,
+        "name": "How is trading toys with friends similar to ancient trading?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Both involve giving away things"},
+            { "option_id": 2, "name": "B", "value": "Both involve exchanging goods for something you want"}
+        ],
+        "right_answer": "B",
+        "desc": ""
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 3,
+        "question_id": 1,
+        "name": "How do you pay for things with cash?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Using a card"},
+            { "option_id": 2, "name": "B", "value": "Using coins and paper money"}
+        ],
+        "right_answer": "B",
+        "desc": ""
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 3,
+        "question_id": 2,
+        "name": "Which is an example of digital money?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Coins"},
+            { "option_id": 2, "name": "B", "value": "Paying with a card or app"}
+        ],
+        "right_answer": "B",
+        "desc": ""
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 3,
+        "question_id": 3,
+        "name": "How is paying for a game online similar to using digital money?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Both involve using a card or app"},
+            { "option_id": 2, "name": "B", "value": "Both involve using coins"}
+        ],
+        "right_answer": "A",
+        "desc": ""
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 4,
+        "question_id": 1,
+        "name": "You have 50 rupees. You can buy:",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "A small toy"},
+            { "option_id": 2, "name": "B", "value": "A book"},
+            { "option_id": 3, "name": "C", "value": "Both"}
+        ],
+        "right_answer": "C",
+        "desc": "Depending on the prices, you might be able to buy both."
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 4,
+        "question_id": 2,
+        "name": "Why is it important to understand the worth of money?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "To buy everything you want"},
+            { "option_id": 2, "name": "B", "value": "To make smart choices about spending"}
+        ],
+        "right_answer": "B",
+        "desc": ""
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 4,
+        "question_id": 3,
+        "name": "How is choosing between buying a toy or saving for a video game similar to understanding the worth of money?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Both involve deciding what's more important"},
+            { "option_id": 2, "name": "B", "value": "Both involve spending money"}
+        ],
+        "right_answer": "A",
+        "desc": ""
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 5,
+        "question_id": 1,
+        "name": "How are coins made?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "By magic"},
+            { "option_id": 2, "name": "B", "value": "By melting metal and pouring it into molds"}
+        ],
+        "right_answer": "B",
+        "desc": ""
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 5,
+        "question_id": 2,
+        "name": "What is used to create coin shapes?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Cookie cutters"},
+            { "option_id": 2, "name": "B", "value": "Molds"}
+        ],
+        "right_answer": "B",
+        "desc": ""
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 5,
+        "question_id": 3,
+        "name": "How is making coins like making cookies?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Both involve melting metal"},
+            { "option_id": 2, "name": "B", "value": "Both use molds to create shapes"}
+        ],
+        "right_answer": "B",
+        "desc": ""
+    },
+    
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 6,
+        "question_id": 1,
+        "name": "You're planning a trip to Japan. You want to buy some cool toys with your Indian rupees. What do you need to do?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Use your Indian rupees directly"},
+            { "option_id": 2, "name": "B", "value": "Convert your Indian rupees into Japanese yen"},
+            { "option_id": 3, "name": "C", "value": "Use dollars instead"}
+        ],
+        "right_answer": "B",
+        "desc": "In Japan, they use yen."
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 6,
+        "question_id": 2,
+        "name": "Your friend from the United States sends you a gift card. What currency would the gift card likely be in?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Yen"},
+            { "option_id": 2, "name": "B", "value": "Dollars"}
+        ],
+        "right_answer": "B",
+        "desc": "In the United States, they use dollars."
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 6,
+        "question_id": 3,
+        "name": "You're collecting coins from different countries. Which currency would you expect to find in Australia?",
+        "options": [
+            { "option_id": 1, "name": "A", "value": "Euro"},
+            { "option_id": 2, "name": "B", "value": "Dollar"}
+        ],
+        "right_answer": "B",
+        "desc": "In Australia, they use the Australian dollar."
     }
 ]

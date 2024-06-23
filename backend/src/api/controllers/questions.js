@@ -21,7 +21,7 @@ const { completedLevelsService } = require('../service/completedlevels');
 const { findAllCompletedLevels } = completedLevelsService;
 
 const { completedQuestionsService } = require('../service/completedquestions');
-const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestion } = completedQuestionsService;
+const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestion, updateCompletedQuestion } = completedQuestionsService;
 
 
 
@@ -70,8 +70,8 @@ const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestio
 
 exports.attemptQuestions = async (req, res, next) => {
     try {
-        const { question_id, module_id, level_id, answer } = req.body;
-        let correctAnswerStatus = false, points = 0;
+        const { question_id, module_id, level_id, answer, question_no } = req.body;
+        let correctAnswerStatus = false, points = 0, nextScreen = "", nextQuestionId = null, nextQuestionNo = null, totalPoints = 0;
 
         const question = await findQuestion({ _id: question_id, module_id, level_id })
 
@@ -80,12 +80,9 @@ exports.attemptQuestions = async (req, res, next) => {
         }
 
         const isCompletedQuesitons = await findCompletedQuestion({question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id });
-        if(isCompletedQuesitons){
-            points = correctAnswerStatus ? 50 : 0;
-            await createCompletedQuestion({
-                question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id,
-                points, correstAnswer: correctAnswerStatus
-            });
+        if(isCompletedQuesitons && isCompletedQuesitons.correstAnswer == false){
+            points = correctAnswerStatus ? 25 : 0;
+            await updateCompletedQuestion({ _id: isCompletedQuesitons._id }, {points, correstAnswer: correctAnswerStatus});
         }else{
             points = correctAnswerStatus ? 50 : 0;
             await createCompletedQuestion({
@@ -93,14 +90,71 @@ exports.attemptQuestions = async (req, res, next) => {
                 points, correstAnswer: correctAnswerStatus
             });
         }
+        
+        const listCompletedQuesitons = await findAllCompletedQuestions({module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id});
+        let listQuuestions = await findAllQuestions({ module_id, level_id });
+        listQuuestions = listQuuestions.map((question) => {
+            const completeQuestion = listCompletedQuesitons.find((completedQuestion) => completedQuestion.question_id.toString() == question._id.toString());
+            return { _id: question._id, question_id: question.question_id, attemp: completeQuestion ? true : false, correct: completeQuestion ? completeQuestion.correstAnswer : false, points: completeQuestion ? completeQuestion.points : 0 }
+        });
+        totalPoints = listQuuestions.reduce((totalPoints, question) => totalPoints + question.points, 0);
+        
+        if(question_no == 3){
+            const question1 = listQuuestions.find((question) => question.question_id == 1);
+            if(correctAnswerStatus){
+                if(question1.attemp && question1.correct){
+                    const question2 = listQuuestions.find((question) => question.question_id == 2);
+                    if(question2.attemp && question2.correct){
+                        nextScreen = "SCORE_BOARD";
+                        totalPoints += points;
+                    }else{
+                        nextQuestionId = question2._id;
+                        nextQuestionNo = 2;
+                        nextScreen = `Q 2`;
+                    }
+                }else{
+                    nextScreen = `Q 1`;
+                    nextQuestionId = question1._id;
+                    nextQuestionNo = 1;
+                }
+            }else{
+                if(question1.attemp && question1.correct){
+                    const question2 = listQuuestions.find((question) => question.question_id == 2);
+                    if(question2.attemp && question2.correct){
+                        nextScreen = "SCORE_BOARD";
+                        totalPoints += points;
+                    }else{
+                        nextQuestionId = question2._id;
+                        nextQuestionNo = 2;
+                        nextScreen = `Q 2`;
+                    }
+                }else{
+                    nextQuestionId = question1._id;
+                    nextQuestionNo = 1;
+                    nextScreen = `Q 1`;
+                }
+            }
+        }else{
+            let question_num = Number(question_no) + 1;
+            const question = listQuuestions.find((question) => question.question_id == question_num);
+            nextQuestionId = question._id;
+            nextQuestionNo = question_num;
+            nextScreen = `Q ${question_num}`;
+        }
+
         return res.status(200).send({
             status: true,
-            message: "Get Child Data Successfully.",
+            message: "Attemplt Questions Successfully.",
             result: {
                 correctAnswerStatus,
                 right_answer: question.right_answer,
                 desc: question.desc,
+                nextQuestionId,
+                nextQuestionNo,
+                totalPoints,
+                nextScreen
             },
+            listQuuestions,
             body: req.body,
             question
         });

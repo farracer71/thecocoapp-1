@@ -63,11 +63,15 @@ definitions:
 
   attempt_question_def:
     required:
+      - question_no
       - question_id
       - module_id
       - level_id
       - answer
     properties:
+      question_no:
+        type: string
+        example: "1"
       question_id:
         type: string
         example: "6677c9dc1546d9e05d40067d"

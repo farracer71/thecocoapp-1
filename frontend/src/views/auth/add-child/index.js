@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
   FormHelperText,
   Grid,
-  InputLabel,
   MenuItem,
   Select,
   TextField,
@@ -101,7 +100,7 @@ function AddChild(props) {
             children: yup.array().of(
               yup.object().shape({
                 name: yup.string().required("Please enter your full name."),
-                schoolId: yup.string().required("Please select your School."),
+                schoolId: yup.string(),
                 dob: yup.string().required("Date of birth is required."),
                 gender: yup.string().required("Please select a gender."),
                 standard: yup.string().required("Please choose a standard."),

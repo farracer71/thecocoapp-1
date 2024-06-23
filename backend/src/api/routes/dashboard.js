@@ -15,5 +15,8 @@ const router = express.Router();
 // Define a route handler for GET requests to the '/get-all-modules' endpoint
 router.get('/get-all-modules', verifyToken, controller.getAllModules);
 
+// Define a route handler for GET requests to the '/get-all-modules' endpoint
+router.get('/get-lessons/:level_id/:module_id', verifyToken, controller.getLessons);
+
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;

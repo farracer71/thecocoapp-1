@@ -1,4 +1,4 @@
-const { default: mongoose } = require('mongoose');
+
 const { childServices } = require('../service/child');
 const { findAllChildren, insertChild, findChildCount, findChild } = childServices;
 
@@ -9,7 +9,7 @@ const { lessonServices } = require('../service/lessons');
 const { findAllLessons } = lessonServices;
 
 const { standardServices } = require('../service/standards');
-const { aggregateStandards } = standardServices;
+const { aggregateStandards, findStandard } = standardServices;
 
 const { completedModulesService } = require('../service/completedmodules');
 const { findAllCompletedModules } = completedModulesService;
@@ -142,6 +142,57 @@ exports.getAllModules = async (req, res, next) => {
                 ...result[0],
                 modules: processedModules
             }
+        });
+    } catch (error) {
+        return res.status(500).send({ status: false, message: error.message });
+    }
+};
+
+/**
+* @swagger
+* /dashboard/get-lessons/{level_id}/{module_id}:
+*   get:
+*     summary: Get lessons
+*     tags:
+*       - Dashboard
+*     description: Get lessons
+*     produces:
+*       - application/json'
+*     parameters:
+*       - in: header
+*         name: token
+*         description: JWT token obtained after user authentication
+*         required: true
+*         type: string
+*       - in: path
+*         name: level_id
+*         description: Level Doc Id
+*         required: true
+*         type: string
+*       - in: path
+*         name: module_id
+*         description: Module Doc Id
+*         required: true
+*         type: string
+*     responses:
+*       '200':  
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*/
+exports.getLessons = async (req, res, next) => {
+    try {
+        const { level_id, module_id } = req.params;
+        const child = await findChild({ _id: req.user.currentChildActive });
+        const standard = await findStandard({ standard_id: child.standard })
+        const lessonsLists = await findAllLessons({ standard_id: standard._id, level_id: level_id, module_id: module_id });
+
+        return res.status(200).send({
+            status: true,
+            message: "Get Leesons Data Successfully.",
+            result: lessonsLists
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });

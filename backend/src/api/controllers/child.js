@@ -123,3 +123,70 @@ exports.createChild = async (req, res, next) => {
         return res.status(500).send({ status: false, message: error.message });
     }
 }
+
+
+
+/**
+* @swagger
+* /child/switch-to-active-child:
+*   post:
+*     summary: Switch to active Child Token
+*     tags:
+*       - Child
+*     description: Switch to active Child Token
+*     produces:
+*       - application/json
+*     parameters:
+*       - in: header
+*         name: token
+*         description: JWT token obtained after user authentication
+*         required: true
+*         type: string
+*       - in: query
+*         name: childId
+*         description: chile id
+*         required: true
+*         type: string
+*     responses:
+*       '200':
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*/
+exports.switchToActiveChild = async (req, res, next) => {
+    try {
+        const { childId } = req.query;
+        // Fetch current child list for the user
+        let listUsersChild = await findAllChildren({ userId: req.userId });
+
+        const isChild = listUsersChild.find(child => child._id == childId);
+        if (!isChild) {
+            return res.status(404).send({
+                status: false,
+                message: `Child not found.`
+            });
+        }
+
+        const updatedInactiveChilds = listUsersChild
+            .filter(child => child._id != childId)
+            .map(child => child._id);
+
+        await Promise.all([
+            updateManyChild({ _id: isChild._id }, { activeStatus: true }),
+            updateManyChild({ _id: { $in: updatedInactiveChilds } }, { activeStatus: false }),
+            updateUser({ _id: req.userId }, { currentChildActive: isChild._id })
+        ]);
+
+        // Respond with success message
+        return res.status(200).send({
+            status: true,
+            message: "Children switched successfully."
+        });
+    } catch (error) {
+        // Handle any errors during the process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+};
+

@@ -13,7 +13,7 @@ const controller = require('../controllers/dashboard');
 const router = express.Router();
 
 // Define a route handler for GET requests to the '/get-all-modules' endpoint
-router.get('/get-all-modules', controller.getAllModules);
+router.get('/get-all-modules', verifyToken, controller.getAllModules);
 
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;

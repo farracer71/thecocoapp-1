@@ -60,3 +60,23 @@ definitions:
         type: string
         enum: ["Male", "Female", "Other"]
         example: "Male"
+
+  attempt_question_def:
+    required:
+      - question_id
+      - module_id
+      - level_id
+      - answer
+    properties:
+      question_id:
+        type: string
+        example: "6677c9dc1546d9e05d40067d"
+      module_id:
+        type: string
+        example: "66725dd92c6eb7d76dc15e24"
+      level_id:
+        type: string
+        example: "66725e4db1155eea7be085c3"
+      answer:
+        type: string
+        example: "B"

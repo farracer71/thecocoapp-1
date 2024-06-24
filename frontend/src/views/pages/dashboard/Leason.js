@@ -46,7 +46,6 @@ const MainBox = styled(Box)(({ theme }) => ({
   padding: "60px 0px 0 0px",
   height: "100vh",
   overflow: "auto",
-  display: "grid",
   alignItems: "end",
   justifyContent: "space-between",
   alignContent: "space-between",

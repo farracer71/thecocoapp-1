@@ -2,31 +2,24 @@ const mongoose = require('mongoose'); // Import mongoose
 require("dotenv").config()
 
 const School = require('../model/School');
+const Standards = require('../model/Standards');
+const Modules = require('../model/Modules');
+const Levels = require('../model/Levels');
+const Lessons = require('../model/Lessons');
+const Questions = require('../model/Questions');
+
+let initialSchools = require('../data/schools');
+let initialStandards = require('../data/standards');
+let initialModules = require('../data/modules.json');
+let initialLevels = require('../data/levels.json');
+let initialLessons = require('../data/lessons.json');
+let initialQuestions = require('../data/questions.json');
+
 // MongoDB connection URI
 const mongoURI = process.env.mongodb_url;
 
 const importInitialSchoolData = async () => {
     try {
-        let initialSchools = [
-            {
-                "schoolId": 1,
-                "email": "school1@example.com",
-                "schoolName": "School One",
-                "address": "123 First St, Townsville",
-                "phoneNumber": 1234567890,
-                "PrincipalName": "John Doe",
-                "logo": "https://i.pinimg.com/736x/48/a3/54/48a354314bb3517dabc705eb3ee8b968.jpg"
-            },
-            {
-                "schoolId": 2,
-                "email": "school2@example.com",
-                "schoolName": "School Two",
-                "address": "456 Second St, Townsville",
-                "phoneNumber": 2345678901,
-                "PrincipalName": "Jane Doe",
-                "logo": "https://i.pinimg.com/736x/48/a3/54/48a354314bb3517dabc705eb3ee8b968.jpg"
-            }
-        ];
         const count = await School.countDocuments();
         if (count === 0) {
             await School.insertMany(initialSchools);
@@ -39,11 +32,155 @@ const importInitialSchoolData = async () => {
     }
 };
 
+const importInitialStandards = async () => {
+    try {
+        const count = await Standards.countDocuments();
+        if (count === 0) {
+            await Standards.insertMany(initialStandards);
+            console.log('Initial Standards data imported successfully.');
+        } else {
+            console.log('Standards collection is not empty, skipping initial data import.');
+        }
+    } catch (error) {
+        console.error('Error importing initial school data:', error);
+    }
+};
+
+const importInitialModules = async () => {
+    try {
+        const count = await Modules.countDocuments();
+        if (count === 0) {
+            const standardsList = await Standards.find();
+            const updatedModules = initialModules.map((element) => {
+                const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
+                if (standard) {
+                    return {
+                        ...element,
+                        standard_id: standard._id // Use ObjectId directly
+                    };
+                }
+            });
+            
+            await Modules.insertMany(updatedModules);
+            console.log('Initial Modules data imported successfully.');
+        } else {
+            console.log('Modules collection is not empty, skipping initial data import.');
+        }
+    } catch (error) {
+        console.error('Error importing initial school data:', error);
+    }
+};
+
+const importInitialLevels = async () => {
+    try {
+        const count = await Levels.countDocuments();
+        if (count === 0) {
+            const modulesList = await Modules.find();
+            const standardsList = await Standards.find();
+            const updatedLevels = initialLevels.map((element) => {
+                const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
+                if(standard){
+                    const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
+                    if (modules) {
+                        return {
+                            ...element,
+                            module_id: modules._id,
+                            standard_id: modules.standard_id // Use ObjectId directly
+                        };
+                    }
+                }
+            });
+
+            await Levels.insertMany(updatedLevels);
+            console.log('Initial Levels data imported successfully.');
+        } else {
+            console.log('Levels collection is not empty, skipping initial data import.');
+        }
+    } catch (error) {
+        console.error('Error importing initial school data:', error);
+    }
+};
+
+const importInitialLessons = async () => {
+    try {
+        const count = await Lessons.countDocuments();
+        if (count === 0) {
+            const modulesList = await Modules.find();
+            const standardsList = await Standards.find();
+            const levelsList = await Levels.find();
+            const updatedLevels = initialLessons.map((element) => {
+                const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
+                if(standard){
+                    const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
+                    if (modules) {
+                        const levels = levelsList.find((levels) => levels.level_id == element.level_id && levels.standard_id.toString() == standard._id.toString() && levels.module_id.toString() == modules._id.toString());
+                        if (levels) {
+                            return {
+                                ...element,
+                                level_id: levels._id,
+                                module_id: levels.module_id,
+                                standard_id: levels.standard_id // Use ObjectId directly
+                            };
+                        }
+                    }
+                }
+            });
+
+            await Lessons.insertMany(updatedLevels);
+            console.log('Initial Lessons data imported successfully.');
+        } else {
+            console.log('Lessons collection is not empty, skipping initial data import.');
+        }
+    } catch (error) {
+        console.error('Error importing initial school data:', error);
+    }
+};
+
+const importInitialQuestions = async () => {
+    try {
+        const count = await Questions.countDocuments();
+        if (count === 0) {
+            const modulesList = await Modules.find();
+            const standardsList = await Standards.find();
+            const levelsList = await Levels.find();
+            const updatedLevels = initialQuestions.map((element) => {
+                const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
+                if(standard){
+                    const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
+                    if (modules) {
+                        const levels = levelsList.find((levels) => levels.level_id == element.level_id && levels.standard_id.toString() == standard._id.toString() && levels.module_id.toString() == modules._id.toString());
+                        if (levels) {
+                            return {
+                                ...element,
+                                level_id: levels._id,
+                                module_id: levels.module_id,
+                                standard_id: levels.standard_id // Use ObjectId directly
+                            };
+                        }
+                    }
+                }
+            });
+
+            await Questions.insertMany(updatedLevels);
+            console.log('Initial Questions data imported successfully.');
+        } else {
+            console.log('Questions collection is not empty, skipping initial data import.');
+        }
+    } catch (error) {
+        console.error('Error importing initial school data:', error);
+    }
+};
+
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(async () => {
         console.log('MongoDB connected successfully');
         await importInitialSchoolData();
+        await importInitialStandards();
+        await importInitialModules();
+        await importInitialLevels();
+        await importInitialLessons();
+        await importInitialQuestions();
     })
     .catch((error) => {
         console.error('MongoDB connection error:', error);

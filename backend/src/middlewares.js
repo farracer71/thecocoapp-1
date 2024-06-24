@@ -63,6 +63,7 @@ async function verifyToken(req, res, next) {
 
       // Attach the user ID to the request object for future use
       req.userId = result.id;
+      req.user = isUser;
       next();
     }
   });

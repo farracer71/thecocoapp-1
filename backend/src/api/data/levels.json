@@ -1,0 +1,38 @@
+[
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 1,
+        "name": "What is Money?"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 2,
+        "name": "History of Money"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 3,
+        "name": "Different Types of Money"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 4,
+        "name": "The Value of Money"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 5,
+        "name": "How Money is Made"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "level_id": 6,
+        "name": "Money Around the World"
+    }
+]

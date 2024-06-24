@@ -21,9 +21,12 @@ import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import toast from "react-hot-toast";
 import { GrAddCircle } from "react-icons/gr";
 
+import { parse, isBefore, subYears, format } from 'date-fns';
+
 function AddChild(props) {
   const [isLoading, setIsLoading] = useState(false);
-  const [getData, setGetData] = useState([]);
+  const [schoolData, setSchoolData] = useState([]);
+  const [schoolIds, setSchoolIds] = useState([]);
   const [selectedChild, setSelectedChild] = useState(1);
   const navigate = useNavigate();
 
@@ -41,16 +44,16 @@ function AddChild(props) {
 
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
-    let children = values.children.map((child) => ({
-            childName: child.name,
-            schoolId: child.schoolId,
-            dob: child.dob,
-            standard: child.standard,
-            gender: child.gender,
-          }));
+    let requestBody = values.children.map((child) => ({
+      childName: child.name,
+      schoolId: schoolData.find((ele) => ele.schoolId == child.schoolId)?._id,
+      dob: child.dob,
+      standard: child.standard,
+      gender: child.gender,
+    }));
     try {
       const res = await axios.post(
-        ApiConfig.createChild,children,
+        ApiConfig.createChild, requestBody,
         {
           headers: {
             token: localStorage.getItem("token"),
@@ -75,9 +78,9 @@ function AddChild(props) {
   const getSchool = async () => {
     try {
       const res = await axios.get(ApiConfig.getSchool);
-
       if (res.status === 200) {
-        setGetData(res.data.data);
+        setSchoolData(res.data.data);
+        setSchoolIds(res.data.data.map((ele) => ele?.schoolId));
       }
     } catch (error) {
       // console.error(error.response.data.message)
@@ -93,6 +96,7 @@ function AddChild(props) {
         <Typography variant="h4" color={"rgba(67, 69, 71, 1)"}>
           This helps us show modules that are tailored for your child
         </Typography>
+        {console.log("schoolIds: ", schoolIds)}
         <Formik
           onSubmit={handleFormSubmit}
           initialValues={formInitialSchema}
@@ -110,7 +114,7 @@ function AddChild(props) {
         >
           {({
             errors,
-            handleBlur,
+            handleBlur, 
             handleChange,
             handleSubmit,
             touched,
@@ -139,7 +143,7 @@ function AddChild(props) {
                             name={`children.${index}.name`}
                             error={Boolean(
                               touched.children?.[index]?.name &&
-                                errors.children?.[index]?.name
+                              errors.children?.[index]?.name
                             )}
                             onBlur={handleBlur}
                             onChange={handleChange}
@@ -147,7 +151,7 @@ function AddChild(props) {
                           <FormHelperText
                             error={Boolean(
                               touched.children?.[index]?.name &&
-                                errors.children?.[index]?.name
+                              errors.children?.[index]?.name
                             )}
                           >
                             {touched.children?.[index]?.name &&
@@ -155,13 +159,21 @@ function AddChild(props) {
                           </FormHelperText>
                         </Box>
                         <Box sx={{ margin: "13px 0" }}>
-                          <Typography
-                            variant="h5"
-                            sx={{ textAlign: "start", marginBottom: "7px" }}
-                          >
-                            Select school
-                          </Typography>
-                          <Select
+                          <TextField
+                            placeholder="Enter School Id"
+                            variant="outlined"
+                            fullWidth
+                            inputProps={{ maxLength: 256 }}
+                            value={child.schoolId}
+                            name={`children.${index}.schoolId`}
+                            error={Boolean(
+                              touched.children?.[index]?.schoolId &&
+                              errors.children?.[index]?.schoolId
+                            )}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                          />
+                          {/* <Select
                             labelId="demo-simple-select-helper-label"
                             id="demo-simple-select-helper"
                             value={child.schoolId}
@@ -176,11 +188,11 @@ function AddChild(props) {
                                 {value.schoolName}
                               </MenuItem>
                             ))}
-                          </Select>
+                          </Select> */}
                           <FormHelperText
                             error={Boolean(
                               touched.children?.[index]?.schoolId &&
-                                errors.children?.[index]?.schoolId
+                              errors.children?.[index]?.schoolId
                             )}
                           >
                             {touched.children?.[index]?.schoolId &&
@@ -189,7 +201,7 @@ function AddChild(props) {
                         </Box>
                         <Box sx={{ margin: "13px 0" }}>
                           <TextField
-                            placeholder="DD/MM/YYYY"
+                            type="date"
                             variant="outlined"
                             fullWidth
                             size="small"
@@ -198,7 +210,7 @@ function AddChild(props) {
                             name={`children.${index}.dob`}
                             error={Boolean(
                               touched.children?.[index]?.dob &&
-                                errors.children?.[index]?.dob
+                              errors.children?.[index]?.dob
                             )}
                             onBlur={handleBlur}
                             onChange={handleChange}
@@ -206,7 +218,7 @@ function AddChild(props) {
                           <FormHelperText
                             error={Boolean(
                               touched.children?.[index]?.dob &&
-                                errors.children?.[index]?.dob
+                              errors.children?.[index]?.dob
                             )}
                           >
                             {touched.children?.[index]?.dob &&
@@ -227,13 +239,14 @@ function AddChild(props) {
                             displayEmpty
                             inputProps={{ "aria-label": "Without label" }}
                           >
+                            <MenuItem value="" disabled>Choose one</MenuItem>
                             <MenuItem value="Male">Boy</MenuItem>
                             <MenuItem value="Female">Girl</MenuItem>
                           </Select>
                           <FormHelperText
                             error={Boolean(
                               touched.children?.[index]?.gender &&
-                                errors.children?.[index]?.gender
+                              errors.children?.[index]?.gender
                             )}
                           >
                             {touched.children?.[index]?.gender &&
@@ -254,6 +267,7 @@ function AddChild(props) {
                             displayEmpty
                             inputProps={{ "aria-label": "Without label" }}
                           >
+                            <MenuItem value="" disabled>Choose one</MenuItem>
                             {[1, 2, 3, 4, 5, 6].map((value) => (
                               <MenuItem key={value} value={value.toString()}>
                                 {value}
@@ -263,14 +277,14 @@ function AddChild(props) {
                           <FormHelperText
                             error={Boolean(
                               touched.children?.[index]?.standard &&
-                                errors.children?.[index]?.standard
+                              errors.children?.[index]?.standard
                             )}
                           >
                             {touched.children?.[index]?.standard &&
                               errors.children?.[index]?.standard}
                           </FormHelperText>
                         </Box>
-                        {selectedChild === 1  ? (
+                        {selectedChild === 1 ? (
                           <Box
                             sx={{
                               padding: "11px 13px",
@@ -320,9 +334,11 @@ function AddChild(props) {
                               cursor: "pointer",
                               marginTop: "10px",
                             }}
-                            onClick={() => {remove(index);
-                              setSelectedChild(1)}}
-                            
+                            onClick={() => {
+                              remove(index);
+                              setSelectedChild(1)
+                            }}
+
                           >
                             <Box
                               sx={{
@@ -337,10 +353,10 @@ function AddChild(props) {
                               <Typography variant="body2">
                                 Remove child
                               </Typography>
-                             
+
                             </Box> <LuMinusCircle
-                                style={{ color: "#D8D8D8", fontSize: "22px" }}
-                              />
+                              style={{ color: "#D8D8D8", fontSize: "22px" }}
+                            />
                           </Box>
                         )}
                       </Grid>

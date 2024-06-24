@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   deviceType: { type: String },
   deviceToken: { type: String },
   otp: { type: Number },
+  currentChildActive: { type: mongoose.Schema.Types.ObjectId, ref: 'child' },
   otpVerification: { type: Boolean, default: false },
   isCreatedWithOtpVerification: { type: Boolean, default: false },
   otpExpireTime: { type: Number },

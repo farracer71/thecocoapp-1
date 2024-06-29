@@ -15,3 +15,12 @@ export function usePreviousPathname (){
 
   return previousLocation.current.pathname;
 };
+
+export function handleSpeak(text) {
+  if ("speechSynthesis" in window) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    window.speechSynthesis.speak(utterance);
+  } else {
+    alert("Sorry, your browser does not support text-to-speech.");
+  }
+};

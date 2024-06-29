@@ -21,8 +21,6 @@ import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import toast from "react-hot-toast";
 import { GrAddCircle } from "react-icons/gr";
 
-import { parse, isBefore, subYears, format } from 'date-fns';
-
 function AddChild(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [schoolData, setSchoolData] = useState([]);

@@ -6,6 +6,7 @@ import { GoShareAndroid } from "react-icons/go";
 import { IoChevronBackCircle } from "react-icons/io5";
 import { IoChevronForwardCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { handleSpeak } from "src/utils";
 
 
 const style = {
@@ -25,7 +26,7 @@ const style = {
     height: "-webkit-fill-available",
     alignItems: "end",
     display: "grid",
-    justifyContent: "end",
+    justifyContent: "start",
   },
   CombineBox: {
     display: "grid",
@@ -106,11 +107,23 @@ function Leason(props) {
             <Box sx={style.CombineBox}>
               <Box sx={style.gridBox}>
                 <Box sx={style.flexBox}>
-                  <IoMdClose color="rgba(0, 0, 0, 1)" onClick={()=>{navigate("/dashboard")}} cursor={"pointer"}/>
+                  <IoMdClose
+                    color="rgba(0, 0, 0, 1)"
+                    onClick={() => {
+                      navigate("/dashboard");
+                    }}
+                    cursor={"pointer"}
+                  />
                   <Box
                     sx={{ display: "flex", gap: "16px", alignItems: "center" }}
                   >
-                    <IoVolumeMediumOutline color="rgba(0, 0, 0, 1)" />
+                    <IoVolumeMediumOutline
+                      cursor={"pointer"}
+                      color="rgba(0, 0, 0, 1)"
+                      onClick={() => {
+                        handleSpeak("What is Money?");
+                      }}
+                    />
                     <GoShareAndroid color="rgba(0, 0, 0, 1)" />
                   </Box>
                 </Box>
@@ -123,7 +136,17 @@ function Leason(props) {
                 </Box>
               </Box>
               <Box sx={style.logoBox}>
-                <SchoolLogo alt="#" src="images/schoolLogo.png" />
+                <Box
+                  sx={{ display: "flex", alignItems: "start", gap: "15px" }}
+                >
+                  <SchoolLogo alt="#" src="images/schoolLogo.png" />
+                  <Box>
+                    <Typography variant="body2">
+                      Pravara Public School
+                    </Typography>
+                    <Typography variant="body2">Pravaranagar</Typography>
+                  </Box>
+                </Box>
               </Box>
             </Box>
           </Grid>
@@ -145,8 +168,7 @@ function Leason(props) {
       >
         <Container>
           <Grid container>
-            <Grid item xs={8} sx={{alignItems: "center",
-    display: "grid"}}>
+            <Grid item xs={8} sx={{ alignItems: "center", display: "grid" }}>
               <Box
                 sx={{
                   width: "100%",
@@ -165,7 +187,7 @@ function Leason(props) {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={4} >
+            <Grid item xs={4}>
               <Box sx={style.buttonHandle}>
                 <IoChevronBackCircle
                   onClick={decreaseProgress}

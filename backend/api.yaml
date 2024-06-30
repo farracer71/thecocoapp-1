@@ -68,6 +68,7 @@ definitions:
       - module_id
       - level_id
       - answer
+      - demo
     properties:
       question_no:
         type: string
@@ -84,3 +85,6 @@ definitions:
       answer:
         type: string
         example: "B"
+      demo:
+        type: boolean
+        example: true

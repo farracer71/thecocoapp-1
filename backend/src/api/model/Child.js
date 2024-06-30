@@ -10,6 +10,7 @@ const childSchema = new mongoose.Schema({
   standard: { type: String, required: true },
   gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
   activeStatus: { type: Boolean, required: true, default: false },
+  totalPoints: { type: Number, default: 0 }
 }, { timestamps: true });
 
 // Create the child model

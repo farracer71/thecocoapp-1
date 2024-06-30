@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
   isCreatedWithOtpVerification: { type: Boolean, default: false },
   otpExpireTime: { type: Number },
   userType: { type: String, enum: [userTypeEnums.USER, userTypeEnums.ADMIN], default: userTypeEnums.USER},
+  totalPoints: { type: Number, default: 0 }
 }, { timestamps: true });
 
 // Create the User model

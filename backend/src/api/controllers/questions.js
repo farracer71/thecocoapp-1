@@ -67,37 +67,38 @@ const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestio
 *       '409':
 *         description: Conflict, the question has already been attempted.
 */
-
 exports.attemptQuestions = async (req, res, next) => {
     try {
-        const { question_id, module_id, level_id, answer, question_no } = req.body;
+        const { question_id, module_id, level_id, answer, question_no, demo } = req.body;
         let correctAnswerStatus = false, points = 0, nextScreen = "", nextQuestionId = null, nextQuestionNo = null, totalPoints = 0;
 
-        const question = await findQuestion({ _id: question_id, module_id, level_id })
+        if(!demo){
+            const question = await findQuestion({ _id: question_id, module_id, level_id })
 
-        if(question.right_answer == answer){
-            correctAnswerStatus = true;
-        }
-
-        const isCompletedQuesitons = await findCompletedQuestion({question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id });
-        if(isCompletedQuesitons && isCompletedQuesitons.correstAnswer == false){
-            points = correctAnswerStatus ? 25 : 0;
-            await updateCompletedQuestion({ _id: isCompletedQuesitons._id }, {points, correstAnswer: correctAnswerStatus});
-        }else{
-            points = correctAnswerStatus ? 50 : 0;
-            await createCompletedQuestion({
-                question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id,
-                points, correstAnswer: correctAnswerStatus
+            if(question.right_answer == answer){
+                correctAnswerStatus = true;
+            }
+    
+            const isCompletedQuesitons = await findCompletedQuestion({question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id });
+            if(isCompletedQuesitons && isCompletedQuesitons.correstAnswer == false){
+                points = correctAnswerStatus ? 25 : 0;
+                await updateCompletedQuestion({ _id: isCompletedQuesitons._id }, {points, correstAnswer: correctAnswerStatus});
+            }else{
+                points = correctAnswerStatus ? 50 : 0;
+                await createCompletedQuestion({
+                    question_id, module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id,
+                    points, correstAnswer: correctAnswerStatus
+                });
+            }
+            
+            const listCompletedQuesitons = await findAllCompletedQuestions({module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id});
+            let listQuuestions = await findAllQuestions({ module_id, level_id });
+            listQuuestions = listQuuestions.map((question) => {
+                const completeQuestion = listCompletedQuesitons.find((completedQuestion) => completedQuestion.question_id.toString() == question._id.toString());
+                return { _id: question._id, question_id: question.question_id, attemp: completeQuestion ? true : false, correct: completeQuestion ? completeQuestion.correstAnswer : false, points: completeQuestion ? completeQuestion.points : 0 }
             });
+            totalPoints = listQuuestions.reduce((totalPoints, question) => totalPoints + question.points, 0);
         }
-        
-        const listCompletedQuesitons = await findAllCompletedQuestions({module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user.id, user_id: req.user._id});
-        let listQuuestions = await findAllQuestions({ module_id, level_id });
-        listQuuestions = listQuuestions.map((question) => {
-            const completeQuestion = listCompletedQuesitons.find((completedQuestion) => completedQuestion.question_id.toString() == question._id.toString());
-            return { _id: question._id, question_id: question.question_id, attemp: completeQuestion ? true : false, correct: completeQuestion ? completeQuestion.correstAnswer : false, points: completeQuestion ? completeQuestion.points : 0 }
-        });
-        totalPoints = listQuuestions.reduce((totalPoints, question) => totalPoints + question.points, 0);
         
         if(question_no == 3){
             const question1 = listQuuestions.find((question) => question.question_id == 1);
@@ -153,10 +154,7 @@ exports.attemptQuestions = async (req, res, next) => {
                 nextQuestionNo,
                 totalPoints,
                 nextScreen
-            },
-            listQuuestions,
-            body: req.body,
-            question
+            }
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });

@@ -197,10 +197,13 @@ function Leason(props) {
                 />
 
                 <IoChevronForwardCircle
-                  onClick={increaseProgress}
+                  onClick={()=>{increaseProgress(); if(progress === max){
+                      navigate("/take-quiz");
+                  }}}
                   disabled={progress >= max}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
+                  
                 />
               </Box>
             </Grid>

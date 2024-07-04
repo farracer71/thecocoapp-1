@@ -117,8 +117,8 @@ const levels = [
     __v: 0,
     createdAt: "2024-06-24T17:04:40.371Z",
     updatedAt: "2024-06-24T17:04:40.371Z",
-    complete_status: false,
-    current_status: true,
+    complete_status: true,
+    current_status: false,
   },
   {
     _id: "6679a728f2eac92152686fb6",
@@ -130,7 +130,7 @@ const levels = [
     createdAt: "2024-06-24T17:04:40.371Z",
     updatedAt: "2024-06-24T17:04:40.371Z",
     complete_status: false,
-    current_status: false,
+    current_status: true,
   },
   {
     _id: "6679a728f2eac92152686fb7",
@@ -219,9 +219,25 @@ const levels = [
          justifyContent={justifyContent}
          sx={style.GridManrgin}
        >
-        {level.current_status && <Box sx={style.customBorder} onClick={()=>{navigate("/leason");}}> <Typography sx={style.textCss} >START</Typography> </Box> }
+         {level.current_status && (
+           <Box
+             sx={style.customBorder}
+             onClick={() => {
+               navigate("/leason");
+             }}
+           >
+             {" "}
+             <Typography sx={style.textCss}>START</Typography>{" "}
+           </Box>
+         )}
          <LockImg
-           src={level.current_status ? "images/play.png" : "images/lock.png"}
+           src={
+             level.current_status
+               ? "images/play.png"
+               : level.complete_status
+               ? "images/preview.png"
+               : "images/lock.png"
+           }
            alt=""
          />
        </Grid>

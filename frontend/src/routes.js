@@ -50,6 +50,20 @@ export const routes = [
   },
   {
     exact: true,
+    path: "/take-quiz",
+    // layout: DashboardLayout,
+    // guard: true,
+    component: lazy(() => import("src/views/pages/dashboard/TakeQuiz")),
+  },
+  {
+    exact: true,
+    path: "/questions",
+    // layout: DashboardLayout,
+    // guard: true,
+    component: lazy(() => import("src/views/pages/dashboard/QuetionsScreen")),
+  },
+  {
+    exact: true,
     path: "/privacy-policy",
     layout: HomeLayout,
     component: lazy(() => import("src/views/pages/license/privacyPolicy")),

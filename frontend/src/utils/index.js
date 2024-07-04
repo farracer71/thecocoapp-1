@@ -24,3 +24,18 @@ export function handleSpeak(text) {
     alert("Sorry, your browser does not support text-to-speech.");
   }
 };
+
+// Function to generate labels A, B, C, ...
+export function  generateLabels(length){
+  const labels = [];
+  for (let i = 0; i < length; i++) {
+    let label = '';
+    let number = i;
+    do {
+      label = String.fromCharCode((number % 26) + 65) + label;
+      number = Math.floor(number / 26) - 1;
+    } while (number >= 0);
+    labels.push(label);
+  }
+  return labels;
+};

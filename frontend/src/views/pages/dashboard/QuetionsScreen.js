@@ -225,6 +225,10 @@ function QuetionsScreen() {
                   variant="contained"
                   onClick={() => {
                     nextProgress();
+                    setCorrectAns("");
+                    if(progress === max){
+                      navigate("/dashboard")
+                    }
                   }}
                 >
                   Continue

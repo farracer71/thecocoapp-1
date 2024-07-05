@@ -107,8 +107,8 @@ exports.getAllModules = async (req, res, next) => {
                     complete_status: !!completedLevelsList.find(element =>
                         element.level_id.toString() === level._id.toString() &&
                         element.module_id.toString() === module._id.toString() &&
-                        element.child_id.toString() === req.user.currentChildActive &&
-                        element.user_id.toString() === req.user._id
+                        element.child_id.toString() === req.user.currentChildActive.toString() &&
+                        element.user_id.toString() === req.user._id.toString()
                     )
                 }))
         }));
@@ -269,6 +269,8 @@ exports.getQuestions = async (req, res, next) => {
                 }
             }
         }
+
+        questionsLists = questionsLists.map((element) => ({...element._doc, right_answer: undefined, desc: undefined}))
 
         return res.status(200).send({
             status: true,

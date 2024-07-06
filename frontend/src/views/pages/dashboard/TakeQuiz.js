@@ -6,7 +6,7 @@ import {
   Grid,
   styled,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const style = {
   flexBox: {
@@ -60,7 +60,7 @@ const TakeImg = styled("img")(({ theme }) => ({
 }));
 function TakeQuiz() {
   const navigate = useNavigate();
- 
+  const location = useLocation();
   return (
     <MainBox>
       <Container maxWidth="lg">
@@ -78,7 +78,12 @@ function TakeQuiz() {
             <Grid item xs={12}>
               <Box sx={style.buttonHandle}>
                 <Button variant="contained" onClick={()=>{
-                  navigate("/questions");
+                  navigate("/questions", {
+                    state: {
+                      module_id: location?.state?.level_id,
+                      level_id: location?.state?.module_id,
+                    },
+                  });
                 }}>Take Quiz</Button>
               </Box>
             </Grid>

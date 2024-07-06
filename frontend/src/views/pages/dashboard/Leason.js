@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Container, Grid, LinearProgress, Typography, styled } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { IoVolumeMediumOutline } from "react-icons/io5";
 import { GoShareAndroid } from "react-icons/go";
 import { IoChevronBackCircle } from "react-icons/io5";
 import { IoChevronForwardCircle } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
 import { handleSpeak } from "src/utils";
+import { useLocation, useNavigate } from "react-router-dom";
+import ApiConfig from "src/config/APICongig";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 
 const style = {
@@ -81,9 +84,34 @@ function Leason(props) {
   let min = 1;
   let max = 3;
   const [progress, setProgress] = useState(1);
-
+  const location = useLocation();
+  const [leasonData, setLeasonData] = useState([]);
+  
+  useEffect(()=>{
+    getleasonData();
+  },[])
+  const getleasonData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios({
+        method: "GET",
+        url: `${ApiConfig.getLeason}/${location?.state?.level_id}/${location?.state?.module_id}`,
+        headers: { token: token },
+        // params:{
+        //   level_id: location?.state?.level_id,
+        //   module_id: location?.state?.module_id
+        // }
+      });
+      if (res.status === 200) {
+        setLeasonData(res.data.result)
+      }
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
   const increaseProgress = () => {
      setProgress((prev) => (prev < max ? prev + 1 : max));
+    handleSpeak("  ")
    };
 
   const decreaseProgress = () => {
@@ -121,17 +149,16 @@ function Leason(props) {
                       cursor={"pointer"}
                       color="rgba(0, 0, 0, 1)"
                       onClick={() => {
-                        handleSpeak("What is Money?");
+                        handleSpeak(leasonData[progress-1]?.name + ". " + leasonData[progress-1]?.description);
                       }}
                     />
                     <GoShareAndroid color="rgba(0, 0, 0, 1)" />
                   </Box>
                 </Box>
                 <Box sx={{}}>
-                  <Typography variant="h1">What is Money?</Typography>
+                  <Typography variant="h1">{leasonData[progress-1]?.name || "--"}</Typography>
                   <Typography variant="h4" sx={{ marginTop: "14px" }}>
-                    Money is a special tool we use to buy things we need and
-                    want. It's like magic rupees that let us trade easily!
+                    {leasonData[progress-1]?.description || "--"}
                   </Typography>
                 </Box>
               </Box>
@@ -198,7 +225,12 @@ function Leason(props) {
 
                 <IoChevronForwardCircle
                   onClick={()=>{increaseProgress(); if(progress === max){
-                      navigate("/take-quiz");
+                    navigate("/take-quiz", {
+                      state: {
+                        module_id: location?.state?.level_id,
+                        level_id: location?.state?.module_id,
+                      },
+                    });
                   }}}
                   disabled={progress >= max}
                   color="rgba(255, 255, 255, 1)"

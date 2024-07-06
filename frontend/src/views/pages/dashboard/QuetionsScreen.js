@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, Container, Grid, LinearProgress, styled, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { generateLabels } from "src/utils";
 import { IoMdClose } from "react-icons/io";
+import ApiConfig from "src/config/APICongig";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const style = {
   flexBox: {
@@ -83,6 +86,8 @@ function QuetionsScreen() {
     };
   const[activeindex, setActiveIndex] =useState("");
   const [correctAns, setCorrectAns] = useState("");
+  const location = useLocation();
+  const [quetionsData, setQuetionsData] = useState([]);
   const calculateProgressValue = () => (((progress - min) / (max - min)) * 100) || 1;
   const labels = generateLabels(10);
 
@@ -91,6 +96,29 @@ function QuetionsScreen() {
     "Spend it all on treats ",
     "Buy a movie ticket and some snacks ",
   ];
+
+  useEffect(() => {
+    getQuetionsData();
+  }, [])
+  const getQuetionsData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios({
+        method: "GET",
+        url: `${ApiConfig.getQuestions}/${location?.state?.level_id}/${location?.state?.module_id}`,
+        headers: { token: token },
+        // params:{
+        //   level_id: location?.state?.level_id,
+        //   module_id: location?.state?.module_id
+        // }
+      });
+      if (res.status === 200) {
+        setQuetionsData(res.data.result.quesitons)
+      }
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
   return (
     <MainBox>
       <Container maxWidth="lg">
@@ -126,13 +154,11 @@ function QuetionsScreen() {
               <Box sx={style.CombineBox}>
                 <Box sx={{ marginBottom: "20px" }}>
                   <Typography variant="h3">
-                    It's Friday night, and you have 200 rupees. You'd love to
-                    see the new movie with your friends (150 rupees) and also
-                    want some popcorn and a drink (50 rupees).
+                    {quetionsData[progress - 1]?.name || "--"}
                   </Typography>
                 </Box>
 
-                {items.map((values, index) => (
+                {quetionsData[progress - 1]?.options.map((values, index) => (
                   <Box
                     sx={{
                       display: "flex",
@@ -153,7 +179,7 @@ function QuetionsScreen() {
                     }}
                   >
                     <Typography variant="h4">{labels[index]}.</Typography>
-                    <Typography variant="h4">{values}</Typography>
+                    <Typography variant="h4">{values.value}</Typography>
                   </Box>
                 ))}
               </Box>

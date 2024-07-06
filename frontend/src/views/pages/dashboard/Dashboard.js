@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import Page from "src/component/Page";
+import ApiConfig from "src/config/APICongig";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const style = {
   HandleMargin: {
@@ -26,6 +29,7 @@ const style = {
     display: "flex",
     gap: "5px",
     alignItems: "center",
+    justifyContent:"start"
   },
   GridBox: {
     display: "grid",
@@ -38,7 +42,7 @@ const style = {
   userBox: {
     width: "-webkit-fill-available",
     display: "grid",
-    justifyContent: "center",
+    justifyContent: "start",
     padding: "20px",
     borderRadius: "10px",
     marginTop: "15px",
@@ -86,8 +90,8 @@ const TaddyImg = styled("img")(({ theme }) => ({
   height: "auto",
 }));
 const ProfileImg = styled("img")(({ theme }) => ({
-  width: "40px",
-  height: "40px",
+  width: "70px",
+  height: "70px",
   margin:"0 12px"
 }));
 const CoinImg = styled("img")(({ theme }) => ({
@@ -107,87 +111,108 @@ const LockImg = styled("img")(({ theme }) => ({
 }));
 function Dashboard() {
   const navigate = useNavigate();
-const levels = [
-  {
-    _id: "6679a728f2eac92152686fb5",
-    standard_id: "6679a728f2eac92152686fa5",
-    module_id: "6679a728f2eac92152686fb0",
-    level_id: 1,
-    name: "What is Money?",
-    __v: 0,
-    createdAt: "2024-06-24T17:04:40.371Z",
-    updatedAt: "2024-06-24T17:04:40.371Z",
-    complete_status: true,
-    current_status: false,
-  },
-  {
-    _id: "6679a728f2eac92152686fb6",
-    standard_id: "6679a728f2eac92152686fa5",
-    module_id: "6679a728f2eac92152686fb0",
-    level_id: 2,
-    name: "History of Money",
-    __v: 0,
-    createdAt: "2024-06-24T17:04:40.371Z",
-    updatedAt: "2024-06-24T17:04:40.371Z",
-    complete_status: false,
-    current_status: true,
-  },
-  {
-    _id: "6679a728f2eac92152686fb7",
-    standard_id: "6679a728f2eac92152686fa5",
-    module_id: "6679a728f2eac92152686fb0",
-    level_id: 3,
-    name: "Different Types of Money",
-    __v: 0,
-    createdAt: "2024-06-24T17:04:40.371Z",
-    updatedAt: "2024-06-24T17:04:40.371Z",
-    complete_status: false,
-    current_status: false,
-  },
-  {
-    _id: "6679a728f2eac92152686fb8",
-    standard_id: "6679a728f2eac92152686fa5",
-    module_id: "6679a728f2eac92152686fb0",
-    level_id: 4,
-    name: "The Value of Money",
-    __v: 0,
-    createdAt: "2024-06-24T17:04:40.371Z",
-    updatedAt: "2024-06-24T17:04:40.371Z",
-    complete_status: false,
-    current_status: false,
-  },
-  {
-    _id: "6679a728f2eac92152686fb9",
-    standard_id: "6679a728f2eac92152686fa5",
-    module_id: "6679a728f2eac92152686fb0",
-    level_id: 5,
-    name: "How Money is Made",
-    __v: 0,
-    createdAt: "2024-06-24T17:04:40.371Z",
-    updatedAt: "2024-06-24T17:04:40.371Z",
-    complete_status: false,
-    current_status: false,
-  },
-  {
-    _id: "6679a728f2eac92152686fba",
-    standard_id: "6679a728f2eac92152686fa5",
-    module_id: "6679a728f2eac92152686fb0",
-    level_id: 6,
-    name: "Money Around the World",
-    __v: 0,
-    createdAt: "2024-06-24T17:04:40.371Z",
-    updatedAt: "2024-06-24T17:04:40.371Z",
-    complete_status: false,
-    current_status: false,
-  },
-];
+  const [childData, setChildData] = useState([]);
+  const [levelData, setLevelData] = useState([]);
+  const levels = [
+    {
+      _id: "6679a728f2eac92152686fb5",
+      standard_id: "6679a728f2eac92152686fa5",
+      module_id: "6679a728f2eac92152686fb0",
+      level_id: 1,
+      name: "What is Money?",
+      __v: 0,
+      createdAt: "2024-06-24T17:04:40.371Z",
+      updatedAt: "2024-06-24T17:04:40.371Z",
+      complete_status: true,
+      current_status: false,
+    },
+    {
+      _id: "6679a728f2eac92152686fb6",
+      standard_id: "6679a728f2eac92152686fa5",
+      module_id: "6679a728f2eac92152686fb0",
+      level_id: 2,
+      name: "History of Money",
+      __v: 0,
+      createdAt: "2024-06-24T17:04:40.371Z",
+      updatedAt: "2024-06-24T17:04:40.371Z",
+      complete_status: false,
+      current_status: true,
+    },
+    {
+      _id: "6679a728f2eac92152686fb7",
+      standard_id: "6679a728f2eac92152686fa5",
+      module_id: "6679a728f2eac92152686fb0",
+      level_id: 3,
+      name: "Different Types of Money",
+      __v: 0,
+      createdAt: "2024-06-24T17:04:40.371Z",
+      updatedAt: "2024-06-24T17:04:40.371Z",
+      complete_status: false,
+      current_status: false,
+    },
+    {
+      _id: "6679a728f2eac92152686fb8",
+      standard_id: "6679a728f2eac92152686fa5",
+      module_id: "6679a728f2eac92152686fb0",
+      level_id: 4,
+      name: "The Value of Money",
+      __v: 0,
+      createdAt: "2024-06-24T17:04:40.371Z",
+      updatedAt: "2024-06-24T17:04:40.371Z",
+      complete_status: false,
+      current_status: false,
+    },
+    {
+      _id: "6679a728f2eac92152686fb9",
+      standard_id: "6679a728f2eac92152686fa5",
+      module_id: "6679a728f2eac92152686fb0",
+      level_id: 5,
+      name: "How Money is Made",
+      __v: 0,
+      createdAt: "2024-06-24T17:04:40.371Z",
+      updatedAt: "2024-06-24T17:04:40.371Z",
+      complete_status: false,
+      current_status: false,
+    },
+    {
+      _id: "6679a728f2eac92152686fba",
+      standard_id: "6679a728f2eac92152686fa5",
+      module_id: "6679a728f2eac92152686fb0",
+      level_id: 6,
+      name: "Money Around the World",
+      __v: 0,
+      createdAt: "2024-06-24T17:04:40.371Z",
+      updatedAt: "2024-06-24T17:04:40.371Z",
+      complete_status: false,
+      current_status: false,
+    },
+  ];
 
+useEffect(()=>{
+  getChildData();
+},[])
 
+  const getChildData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios({
+        method: "GET",
+        url: ApiConfig.getAllChild,
+        headers: { token: token },
+      });
+      if (res.status === 200) {
+        setChildData(res.data.data);
+        getAllModuleData();
+      } 
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
 
  const renderBoxes = () => {
-   return levels.map((level, index) => {
+   return levelData.map((level, index) => {
      const isCenterBox = index % 3 === 0;
-     const isSixItems = levels.length === 6;
+     const isSixItems = levelData.length === 6;
      const isFirstBox = index === 0;
      let justifyContent = "center";
 
@@ -198,7 +223,7 @@ const levels = [
      } else if (index === 2) {
        // Odd index: right side, align to the start
        justifyContent = "flex-start";
-     } else if (levels.length === 6 && index % 3 === 0) {
+     } else if (levelData.length === 6 && index % 3 === 0) {
        // Center every third box when there are exactly six items
        justifyContent = "center";
      } else if (index % 2 === 0) {
@@ -223,7 +248,12 @@ const levels = [
            <Box
              sx={style.customBorder}
              onClick={() => {
-               navigate("/leason");
+               navigate("/leason", {
+                 state: {
+                   module_id: level.module_id,
+                   level_id: level._id,
+                 },
+               });
              }}
            >
              {" "}
@@ -244,6 +274,43 @@ const levels = [
      );
    });
  };
+
+  const switchChild = async (id) => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios({
+        method: "POST",
+        url: ApiConfig.switchChild,
+        headers: { token: token },
+        params:{
+          childId :id
+        }
+      });
+      if (res.status === 200) {
+        getChildData()
+      }
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
+
+  const getAllModuleData = async () => {
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios({
+        method: "GET",
+        url: ApiConfig.allModules,
+        headers: { token: token },
+      });
+      if (res.status === 200) {
+        setLevelData(res?.data?.result?.modules[0]?.levels || [])
+      }
+    } catch (error) {
+      console.log(error, "error");
+      setLevelData([]);
+      toast.error("Modules not found.");
+    }
+  };
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">
@@ -305,34 +372,26 @@ const levels = [
                 </Box>
                 <Box sx={style.BoxStyle}>
                   <Typography variant="h4">Switch Profile</Typography>
-                  <Box sx={style.profileBox}>
-                    <Box
-                      style={{
-                        background: "rgba(255, 255, 255, 1)",
-                      }}
-                      sx={style.userBox}
-                    >
-                      <ProfileImg alt="" src="images/profile.png" />
-
-                      <Box sx={style.GapBox}>
-                        <Typography variant="body1">200</Typography>
-                        <CoinImg alt="" src="images/Coin.png" />
+                  {childData.map((values, items)=>{
+                    return(
+                      <Box sx={style.profileBox} onClick={() => { switchChild(values._id)}}>
+                      <Box
+                          style={values.activeStatus ?{
+                            background: "rgba(241, 245, 249, 1)",cursor:"pointer"
+                          } : { background: "rgba(255, 255, 255, 1)", cursor: "pointer" }}
+                        sx={style.userBox}
+                      >
+                        <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
+                          <ProfileImg alt="" src={values.gender = "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg"} />
+                            <Box > <Typography variant="body1">{values.childName}</Typography>
+                        <Box sx={style.GapBox}>
+                            <Typography variant="body1">{values.totalPoints}</Typography>
+                          <CoinImg alt="" src="images/Coin.png" />
+                              </Box></Box></Box>
                       </Box>
-                    </Box>
-                    <Box
-                      style={{
-                        background: "rgba(241, 245, 249, 1)",
-                      }}
-                      sx={style.userBox}
-                    >
-                      <ProfileImg alt="" src="images/profile.png" />
-
-                      <Box sx={style.GapBox}>
-                        <Typography variant="body1">200</Typography>
-                        <CoinImg alt="" src="images/Coin.png" />
-                      </Box>
-                    </Box>
-                  </Box>
+                  </Box>)
+                  })}
+                 
                 </Box>
                 <Box sx={style.BoxStyle}>
                   <AddImg alt="" src="images/add.png" />

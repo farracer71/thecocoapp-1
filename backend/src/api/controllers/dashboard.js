@@ -24,6 +24,8 @@ const { completedQuestionsService } = require('../service/completedquestions');
 const { findAllCompletedQuestions } = completedQuestionsService;
 
 
+const { updateCurrentStatus } = require('../helper/utils')
+
 
 /**
 * @swagger
@@ -113,32 +115,8 @@ exports.getAllModules = async (req, res, next) => {
                 }))
         }));
 
-        let previousModuleComplete = true; // Assume first module starts with previousModuleComplete as true
-
-        processedModules.forEach(module => {
-          // Update current_status for module
-          module.current_status = module.complete_status ? false : true;
-      
-          // Update current_status for levels within the module
-          if (module.levels && module.levels.length > 0) {
-            let previousLevelComplete = true; // Assume first level in each module starts with previousLevelComplete as true
-            module.levels.forEach(level => {
-              level.current_status = level.complete_status ? false : true;
-
-              if (level.level_id > 1) {
-                level.current_status = previousLevelComplete;
-              }
-
-              previousLevelComplete = module.complete_status;
-            });
-          }
-      
-          // Update current_status for modules with module_id > 1 based on previous module's complete_status
-          if (module.module_id > 1) {
-            module.current_status = previousModuleComplete;
-          }
-      
-          previousModuleComplete = module.complete_status;
+        processedModules.forEach(element => {
+            updateCurrentStatus(element.levels);
         });
 
         return res.status(200).send({

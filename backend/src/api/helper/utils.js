@@ -14,6 +14,16 @@ exports.generateJWT = async (payload) => {
     return await jwt.sign(payload, process.env.jwtsecret, { expiresIn: "24h" })
 }
 
+exports.updateCurrentStatus = (array) => {
+    for (let i = 0; i < array.length; i++) {
+      if (i === 0) {
+        array[i].current_status = !array[i].complete_status;
+      } else {
+        array[i].current_status = array[i - 1].complete_status;
+      }
+    }
+}
+
 
 exports.generateOTP = () => {
     return otpGenerator.generate(4, {

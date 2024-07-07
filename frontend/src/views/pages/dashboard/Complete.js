@@ -105,7 +105,7 @@ function Complete() {
                                             bottom: "20px",
                                         },
                                     }}>
-                                        <Typography color={"rgba(255, 255, 255, 1)"} variant="h4">Level 1</Typography>
+                                        <Typography color={"rgba(255, 255, 255, 1)"} variant="h4">{location?.state?.levelNo || "--"}</Typography>
                                         <Typography variant="h1" color={"rgba(255, 255, 255, 1)"}>COMPLETE</Typography>
                                     </Box>
                                 </Box>
@@ -123,7 +123,7 @@ function Complete() {
                                             <Typography variant="h4" color={"rgba(254, 141, 67, 1)"} fontWeight={"800"}>Reward</Typography>
                                             <Box sx={{ display: "flex", alignItems: "center", gap: "5px", justifyContent: "center" }}>
                                                 <img src="images/Coin.png" alt=""
-                                                    style={{ width: "32px", height: "32px" }} /><Typography color={"rgba(254, 141, 67, 1)"} variant="h1">40</Typography>
+                                                    style={{ width: "32px", height: "32px" }} /><Typography color={"rgba(254, 141, 67, 1)"} variant="h1">{location?.state?.totalPoints || "--"}</Typography>
                                             </Box></Box>
                                         <Box>
                                             <Button onClick={() => { navigate("/dashboard") }} variant="contained">Yay, OK!</Button>

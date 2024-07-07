@@ -82,11 +82,11 @@ const CustomLinearProgress = styled(LinearProgress)(({ progressColor }) => ({
 function Leason(props) {
   const navigate = useNavigate();
   let min = 1;
-  let max = 3;
+ 
   const [progress, setProgress] = useState(1);
   const location = useLocation();
   const [leasonData, setLeasonData] = useState([]);
-  
+  const [max, setMax] = useState(leasonData.length);
   useEffect(()=>{
     getleasonData();
   },[])
@@ -104,6 +104,7 @@ function Leason(props) {
       });
       if (res.status === 200) {
         setLeasonData(res.data.result)
+        setMax(res.data.result.length)
       }
     } catch (error) {
       console.log(error, "error");
@@ -224,13 +225,20 @@ function Leason(props) {
                 />
 
                 <IoChevronForwardCircle
-                  onClick={()=>{increaseProgress(); if(progress === max){
+                  onClick={()=>{
+                    if (max == 0){
+
+                    }else{
+                    increaseProgress(); 
+                    if(progress === max){
                     navigate("/take-quiz", {
                       state: {
                         module_id: location?.state?.level_id,
                         level_id: location?.state?.module_id,
                       },
                     });
+                    }
+                   
                   }}}
                   disabled={progress >= max}
                   color="rgba(255, 255, 255, 1)"

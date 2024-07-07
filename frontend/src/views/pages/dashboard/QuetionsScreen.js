@@ -280,7 +280,12 @@ function QuetionsScreen() {
                     setActiveIndex("");  
                     setCorrectAns("");
                     if (correctAnsData.nextScreen === "SCORE_BOARD"){
-                      navigate("/complete")
+                      navigate("/complete",
+                        {state:{
+                          totalPoints: correctAnsData.totalPoints,
+                          levelNo: correctAnsData.levelNo 
+                        }}
+                      )
                     }else{
                       nextProgress();
                     }}

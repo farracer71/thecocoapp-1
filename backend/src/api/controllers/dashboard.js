@@ -94,6 +94,8 @@ exports.getAllModules = async (req, res, next) => {
         const completedModulesList = await findAllCompletedModules();
         const completedLevelsList = await findAllCompletedLevels();
 
+        let currentChapterName = "";
+
         // Process modules to include complete_status for modules and levels
         let processedModules = result[0].modules.map(module => ({
             ...module,
@@ -117,6 +119,7 @@ exports.getAllModules = async (req, res, next) => {
 
         processedModules.forEach(element => {
             updateCurrentStatus(element.levels);
+            currentChapterName = element.levels.find((level) => level.current_status === true).name;
         });
 
         return res.status(200).send({
@@ -124,7 +127,9 @@ exports.getAllModules = async (req, res, next) => {
             message: "Get Child Data Successfully.",
             result: {
                 ...result[0],
-                modules: processedModules
+                modules: processedModules,
+                userName: req.user.name,
+                currentChapterName
             }
         });
     } catch (error) {
@@ -173,10 +178,43 @@ exports.getLessons = async (req, res, next) => {
         const standard = await findStandard({ standard_id: child.standard })
         const lessonsLists = await findAllLessons({ standard_id: standard._id, level_id: level_id, module_id: module_id });
 
+        const listCompletedQuesitons = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id });
+        let listQuuestions = await findAllQuestions({ module_id, level_id });
+        listQuuestions = listQuuestions.map((question) => {
+            const completeQuestion = listCompletedQuesitons.find((completedQuestion) => completedQuestion.question_id.toString() == question._id.toString());
+            return { _id: question._id, question_id: question.question_id, attemp: completeQuestion ? true : false, correct: completeQuestion ? completeQuestion.correstAnswer : false, points: completeQuestion ? completeQuestion.points : 0 }
+        });
+
+        const question1 = listQuuestions.find((question) => question.question_id == 1);
+            if (question1.attemp && question1.correct) {
+                const question2 = listQuuestions.find((question) => question.question_id == 2);
+                if (question2.attemp && question2.correct) {
+                    const question3 = listQuuestions.find((question) => question.question_id == 3);
+                    if (question3.attemp && question3.correct) {
+                        nextScreen = "SCORE_BOARD";
+                    } else {
+                        nextQuestionId = question3._id;
+                        nextQuestionNo = 3;
+                        nextScreen = `Q 3`;
+                    }
+                } else {
+                    nextQuestionId = question2._id;
+                    nextQuestionNo = 2;
+                    nextScreen = `Q 2`;
+                }
+            } else {
+                nextScreen = `Q 1`;
+                nextQuestionId = question1._id;
+                nextQuestionNo = 1;
+            }
+
         return res.status(200).send({
             status: true,
             message: "Get Leesons Data Successfully.",
-            result: lessonsLists
+            result: lessonsLists,
+            nextQuestionId,
+            nextQuestionNo,
+            nextScreen
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });

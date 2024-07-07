@@ -94,6 +94,8 @@ exports.getAllModules = async (req, res, next) => {
         const completedModulesList = await findAllCompletedModules();
         const completedLevelsList = await findAllCompletedLevels();
 
+        let currentChapterName = "";
+
         // Process modules to include complete_status for modules and levels
         let processedModules = result[0].modules.map(module => ({
             ...module,
@@ -117,6 +119,7 @@ exports.getAllModules = async (req, res, next) => {
 
         processedModules.forEach(element => {
             updateCurrentStatus(element.levels);
+            currentChapterName = element.levels.find((level) => level.current_status === true).name;
         });
 
         return res.status(200).send({
@@ -124,7 +127,9 @@ exports.getAllModules = async (req, res, next) => {
             message: "Get Child Data Successfully.",
             result: {
                 ...result[0],
-                modules: processedModules
+                modules: processedModules,
+                userName: req.user.name,
+                currentChapterName
             }
         });
     } catch (error) {

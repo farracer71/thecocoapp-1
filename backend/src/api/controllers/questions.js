@@ -175,9 +175,11 @@ exports.attemptQuestions = async (req, res, next) => {
 
         let listAllQuestions = await findAllCompletedQuestions({ module_id, level_id, child_id: req.user.currentChildActive, user_id: req.user._id });
         totalPoints = listAllQuestions.reduce((totalPoints, question) => totalPoints + question.points, 0);
-
+        
         if(nextScreen == "SCORE_BOARD" && demo == false){
-            await updateChild({ _id: req.user.currentChildActive }, { $inc: { totalPoints: totalPoints } });
+            let listChildAllQuestions = await findAllCompletedQuestions({ child_id: req.user.currentChildActive });
+            let totalPointsChild = listChildAllQuestions.reduce((totalPoints, question) => totalPoints + question.points, 0);
+            await updateChild({ _id: req.user.currentChildActive }, { $set: { totalPoints: totalPointsChild } });
             await updateCompletedLevel({ module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id },
                 { $set: { module_id: module_id, level_id: level_id, child_id: req.user.currentChildActive, user_id: req.user._id, completedStatus: true } });
         }

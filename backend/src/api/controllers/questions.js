@@ -68,7 +68,7 @@ const { findAllCompletedQuestions, findCompletedQuestion, createCompletedQuestio
 */
 exports.attemptQuestions = async (req, res, next) => {
     try {
-        const { question_id, module_id, level_id, answer, question_no } = req.body;
+        const { question_id, module_id, level_id, answer, question_no, demo } = req.body;
         let correctAnswerStatus = false, points = 0, nextScreen = "", nextQuestionId = null, nextQuestionNo = null, totalPoints = 0;
 
         const question = await findQuestion({ _id: question_id, module_id, level_id });

@@ -2,7 +2,7 @@
 const express = require('express');
 
 const { validateRequest } = require("../../middlewares")
-const { userSchema, generateOTPSchema, verifyOTPSchema, signupWithVerifiedEmailSchema } = require("../helper/validationSchema")
+const { loginPinSchema, generateOTPSchema, verifyOTPSchema, signupWithVerifiedEmailSchema, signupWithVerifiedEmailPinSchema } = require("../helper/validationSchema")
 
 // Import middleware for token verification
 const { verifyToken } = require("../../middlewares");
@@ -23,12 +23,17 @@ router.post('/signup/verify-otp', validateRequest(verifyOTPSchema), controller.s
 // Define a route handler for POST requests to the '/signup-with-verfied-email' endpoint
 router.post('/signup-with-verfied-email', validateRequest(signupWithVerifiedEmailSchema), controller.signupWithVerifiedEmail);
 
+// Define a route handler for POST requests to the '/signup-with-verfied-email-pin' endpoint
+router.post('/signup-with-verfied-email-pin', validateRequest(signupWithVerifiedEmailPinSchema), controller.signupWithVerifiedEmailPin);
 
 // Define a route handler for POST requests to the '/login/generate-otp' endpoint
 router.post('/login/generate-otp', validateRequest(generateOTPSchema), controller.loginGenerateOtp);
 
 // Define a route handler for POST requests to the '/login/verify-otp' endpoint
 router.post('/login/verify-otp', validateRequest(verifyOTPSchema), controller.loginVerifyOtp);
+
+// Define a route handler for POST requests to the '/login/email-with-pin' endpoint
+router.post('/login/email-with-pin', validateRequest(loginPinSchema), controller.loginEmailPin);
 
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;

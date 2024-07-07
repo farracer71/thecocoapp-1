@@ -31,6 +31,14 @@ const verifyOTPSchema = Joi.object({
         })
 });
 
+// Example schema for validating login pin input
+const loginPinSchema = Joi.object({
+    email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
+        .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required.' }),
+    pin: Joi.string()
+});
+
 // Example schema for validating verify otp input
 const signupWithVerifiedEmailSchema = Joi.object({
     name: Joi.string()
@@ -47,6 +55,25 @@ const signupWithVerifiedEmailSchema = Joi.object({
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
         .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required.' }),
+});
+
+// Example schema for validating verify otp input
+const signupWithVerifiedEmailPinSchema = Joi.object({
+    name: Joi.string()
+        .min(1)
+        .max(100)
+        .required()
+        .messages({
+            'string.base': 'Name must be a string.',
+            'string.empty': 'Name cannot be empty.',
+            'string.min': 'Name must be at least 1 character long.',
+            'string.max': 'Name cannot exceed 100 characters.',
+            'any.required': 'Name is required.'
+        }),
+    email: Joi.string()
+        .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
+        .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required.' }),
+    pin: Joi.string()
 });
 
 // Example schema for validating user input
@@ -80,5 +107,7 @@ module.exports = {
     userSchema,
     generateOTPSchema,
     verifyOTPSchema,
-    signupWithVerifiedEmailSchema
+    signupWithVerifiedEmailSchema,
+    signupWithVerifiedEmailPinSchema,
+    loginPinSchema
 };

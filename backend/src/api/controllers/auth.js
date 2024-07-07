@@ -9,6 +9,8 @@ const { findNewUser, createNewUser, updateNewUser } = newUserServices;
 const commonFunction = require("../helper/utils");
 const userTypeEnums = require("../enums/userType");
 
+const bcrypt = require("bcrypt");
+
 /**
 * @swagger
 * /auth/signup/generate-otp:
@@ -110,8 +112,9 @@ exports.signupVerifyOtp = async (req, res, next) => {
         }
 
         
-        const user = await updateUser({ _id: existingUser._id }, { otpVerification: true, isCreatedWithOtpVerification: true });
+        let user = await updateUser({ _id: existingUser._id }, { otpVerification: true, isCreatedWithOtpVerification: true });
         const token = await commonFunction.generateJWT({ email: email, id: user._id });
+        user.pin = undefined;
         return res.status(200).send({ status: true, message: "OTP verified successfully.", user, token });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
@@ -165,6 +168,61 @@ exports.signupWithVerifiedEmail = async (req, res, next) => {
 
         await commonFunction.sendSignupGenerateOTPMail(email, otp);
         await createUser({ name, email, otp, otpExpireTime });
+        return res.status(200).send({ status: true, message: "OTP sent successfully.", email: email });
+    } catch (error) {
+        return res.status(500).send({ status: false, message: error.message });
+    }
+}
+
+/**
+* @swagger
+* /auth/signup-with-verfied-email-pin:
+*   post:
+*     summary: Sign up with verified email - pin
+*     tags:
+*       - User Authentication With Pin
+*     description: Endpoint for user signup using a verified email. The user must provide an email and OTP for verification.
+*     produces:
+*       - application/json
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/definitions/user_signup_pin_def'
+*     responses:
+*       '200':
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*       '410':
+*         description: Gone
+*/
+exports.signupWithVerifiedEmailPin = async (req, res, next) => {
+    try {
+        let { email, name, pin } = req.body;
+
+        const existingUser = await findUser({ email: email });
+        const otp = await commonFunction.generateOTP();
+        const otpExpireTime = new Date().getTime() + 180000;
+
+        pin = await bcrypt.hash(pin, 10);
+
+        if (existingUser) {
+            if (existingUser.otpVerification) {
+                return res.status(409).send({ status: false, message: "Email already exists" });
+            }
+
+            await commonFunction.sendSignupGenerateOTPMail(email, otp);
+            await updateUser({ _id: existingUser._id }, { otp, otpExpireTime });
+
+            return res.status(200).send({ status: true, message: "OTP sent successfully.", email: email });
+        }
+
+        await commonFunction.sendSignupGenerateOTPMail(email, otp);
+        await createUser({ name, email, otp, otpExpireTime, pin });
         return res.status(200).send({ status: true, message: "OTP sent successfully.", email: email });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
@@ -261,6 +319,55 @@ exports.loginVerifyOtp = async (req, res, next) => {
         const user = await updateUser({ _id: existingUser._id }, { otpVerification: true });
         const token = await commonFunction.generateJWT({ email: email, id: user._id });
         return res.status(200).send({ status: true, message: "User Login successfully.", user, token });
+    } catch (error) {
+        return res.status(500).send({ status: false, message: error.message });
+    }
+}
+
+
+/**
+* @swagger
+* /auth/login/email-with-pin:
+*   post:
+*     summary: login email with pin
+*     tags:
+*       - User Authentication With Pin
+*     description: login email and pin
+*     produces:
+*       - application/json
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/definitions/user_login_email_pin_def'
+*     responses:
+*       '200':
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*       '410':
+*         description: Gone
+*/
+exports.loginEmailPin = async (req, res, next) => {
+    try {
+        const { email, pin } = req.body;
+
+        const existingUser = await findUser({ email: email });
+        if (!existingUser) {
+            return res.status(400).send({ status: false, message: "Email not registerd." });
+        }
+
+        const pinStatus = await bcrypt.compare(pin, existingUser.pin)
+        if (!pinStatus) {
+            return res.status(400).send({ status: false, message: "Pin not matched." });
+        }
+
+        const token = await commonFunction.generateJWT({ email: email, id: existingUser._id });
+        existingUser.pin = undefined;
+        return res.status(200).send({ status: true, message: "User Login successfully.", user: existingUser, token });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
     }

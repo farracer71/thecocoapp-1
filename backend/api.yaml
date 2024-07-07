@@ -22,6 +22,19 @@ definitions:
       email: "rohit@mailinator.com"
       otp: 5053
 
+  user_login_email_pin_def:
+    required:
+      - email
+      - pin
+    properties:
+      email:
+        type: string
+      pin:
+        type: string
+    example:
+      email: "rohit@mailinator.com"
+      pin: "5053"
+
   user_signup_def:
     required:
       - name
@@ -34,6 +47,23 @@ definitions:
     example:
       name: "Rohit Pandit"
       email: "rohit@mailinator.com"
+
+  user_signup_pin_def:
+    required:
+      - name
+      - email
+      - pin
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      pin:
+        type: string
+    example:
+      name: "Rohit Pandit"
+      email: "rohit@mailinator.com"
+      pin: "5053"
 
   create_child_def:
     required:

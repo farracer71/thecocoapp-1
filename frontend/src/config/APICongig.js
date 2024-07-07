@@ -19,8 +19,13 @@ const ApiConfig = {
   //child
   getAllChild: `${url}child/get-all-childs`,
   switchChild: `${url}child/switch-to-active-child`,
+  //modules
   allModules : `${url}dashboard/get-all-modules`,
+  //leason
   getLeason: `${url}dashboard/get-lessons`,
+  //questions
   getQuestions: `${url}dashboard/get-questions`,
+  attemptQuestions: `${url}questions/attempt-questions`,
+  
 };
 export default ApiConfig;

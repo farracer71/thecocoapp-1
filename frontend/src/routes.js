@@ -57,6 +57,13 @@ export const routes = [
   },
   {
     exact: true,
+    path: "/complete",
+    // layout: DashboardLayout,
+    guard: true,
+    component: lazy(() => import("src/views/pages/dashboard/Complete")),
+  },
+  {
+    exact: true,
     path: "/questions",
     // layout: DashboardLayout,
     guard: true,

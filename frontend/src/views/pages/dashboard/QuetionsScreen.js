@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Container, Grid, LinearProgress, styled, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, LinearProgress, Snackbar, styled, Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { generateLabels } from "src/utils";
 import { IoMdClose } from "react-icons/io";
@@ -79,24 +79,24 @@ const CustomLinearProgress = styled(LinearProgress)(({ progressColor }) => ({
 function QuetionsScreen() {
   const navigate = useNavigate();
     let min = 1;
-    let max = 3;
     const [progress, setProgress] = useState(1);
     const nextProgress = () => {
-      setProgress((prev) => (prev < max ? prev + 1 : min)); // Increment or reset to minimum
+      setProgress(correctAnsData.nextQuestionNo); // Increment or reset to minimum
     };
   const[activeindex, setActiveIndex] =useState("");
   const [correctAns, setCorrectAns] = useState("");
+  const handleClose = (event, reason) => {
+
+    setOpen(false);
+  };
+  const [open, setOpen] = useState(false);
+  const [correctAnsData, setCorrectAnsData] = useState({});
   const location = useLocation();
   const [quetionsData, setQuetionsData] = useState([]);
   const calculateProgressValue = () => (((progress - min) / (max - min)) * 100) || 1;
   const labels = generateLabels(10);
-
-  const items = [
-    "Spend it all on the movie ",
-    "Spend it all on treats ",
-    "Buy a movie ticket and some snacks ",
-  ];
-
+  console.log(quetionsData, "quetionsData");
+  const [max, setMax] = useState(quetionsData.length);
   useEffect(() => {
     getQuetionsData();
   }, [])
@@ -114,6 +114,33 @@ function QuetionsScreen() {
       });
       if (res.status === 200) {
         setQuetionsData(res.data.result.quesitons)
+        setMax(res.data.result.quesitons.length)
+      }
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
+
+  const AnsQuetion = async (props) => {
+    const { question_id, answer }=props
+    const token = localStorage.getItem("token");
+    try {
+      const res = await axios({
+        method: "POST",
+        url: `${ApiConfig.attemptQuestions}`,
+        headers: { token: token },
+        data:{
+          "question_no": progress,
+          "question_id": question_id,
+          "module_id": location?.state?.module_id,
+          "level_id": location?.state?.level_id,
+          "answer": answer,
+          "demo": false
+        }
+      });
+      if (res.status === 200) {
+        setCorrectAns(res.data.result.correctAnswerStatus);
+        setCorrectAnsData(res.data.result)
       }
     } catch (error) {
       console.log(error, "error");
@@ -171,11 +198,8 @@ function QuetionsScreen() {
                     }}
                     onClick={() => {
                       setActiveIndex(index);
-                      if (index === 0) {
-                        setCorrectAns(true);
-                      } else {
-                        setCorrectAns(false);
-                      }
+                      AnsQuetion({ question_id: quetionsData[progress - 1]?._id, answer: labels[index] })
+                     
                     }}
                   >
                     <Typography variant="h4">{labels[index]}.</Typography>
@@ -190,9 +214,9 @@ function QuetionsScreen() {
       <InnerBox
         style={
           correctAns === true
-            ? { background: "#D7FFB8", marginTop: "55px" }
+            ? { background: "#D7FFB8", marginTop: "55px", border:"none" }
             : correctAns === false
-            ? { background: "#FFCFCF", marginTop: "65px" }
+            ? { background: "#FFCFCF", marginTop: "65px", border:"none" }
             : { background: "#ffff" }
         }
       >
@@ -228,11 +252,10 @@ function QuetionsScreen() {
                         marginBottom={"8px"}
                         marginTop={"12px"}
                       >
-                        Correct Answer: C
+                          Correct Answer: {correctAnsData.right_answer || "--"}
                       </Typography>
                       <Typography variant="h4" color={"#FF4B4B"}>
-                        Spending all your money on one thing leaves no room for
-                        the other.
+                          {correctAnsData.desc || "--"}
                       </Typography>
                     </Box>
                   </Box>
@@ -249,12 +272,18 @@ function QuetionsScreen() {
                       : { background: "#FE8A36" }
                   }
                   variant="contained"
-                  onClick={() => {
-                    nextProgress();
+                  onClick={() => { 
+                  
+                    if(activeindex === ""){
+                      setOpen(true)
+                    }else{
+                    setActiveIndex("");  
                     setCorrectAns("");
-                    if(progress === max){
-                      navigate("/dashboard")
-                    }
+                    if (correctAnsData.nextScreen === "SCORE_BOARD"){
+                      navigate("/complete")
+                    }else{
+                      nextProgress();
+                    }}
                   }}
                 >
                   Continue
@@ -264,6 +293,20 @@ function QuetionsScreen() {
           </Grid>
         </Container>
       </InnerBox>
+      <Snackbar
+        ContentProps={{
+          sx: {
+            background: "rgba(20, 23, 25, 1)",
+          },
+        }}
+        sx={{ width: "-webkit-fill-available !important", marginBottom:"140px" }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Select an option before checking !"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      // action={action}
+      />
     </MainBox>
   );
 }

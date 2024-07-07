@@ -261,6 +261,16 @@ useEffect(()=>{
            </Box>
          )}
          <LockImg
+         onClick={()=>{
+          if (level.complete_status){
+            navigate("/leason", {
+              state: {
+                module_id: level.module_id,
+                level_id: level._id,
+              },
+            });
+          }
+         }}
            src={
              level.current_status
                ? "images/play.png"
@@ -269,6 +279,7 @@ useEffect(()=>{
                : "images/lock.png"
            }
            alt=""
+           style={level.complete_status?{cursor:"pointer"}:{}}
          />
        </Grid>
      );
@@ -311,6 +322,15 @@ useEffect(()=>{
       toast.error("Modules not found.");
     }
   };
+
+  useEffect(()=>{
+    
+      childData.map((values, items) => {
+        if (values.activeStatus){
+          localStorage.setItem("childName", values.childName);
+        }
+      })
+  }, [childData])
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">

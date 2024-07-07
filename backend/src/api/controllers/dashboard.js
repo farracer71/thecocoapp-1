@@ -185,36 +185,10 @@ exports.getLessons = async (req, res, next) => {
             return { _id: question._id, question_id: question.question_id, attemp: completeQuestion ? true : false, correct: completeQuestion ? completeQuestion.correstAnswer : false, points: completeQuestion ? completeQuestion.points : 0 }
         });
 
-        const question1 = listQuuestions.find((question) => question.question_id == 1);
-            if (question1.attemp && question1.correct) {
-                const question2 = listQuuestions.find((question) => question.question_id == 2);
-                if (question2.attemp && question2.correct) {
-                    const question3 = listQuuestions.find((question) => question.question_id == 3);
-                    if (question3.attemp && question3.correct) {
-                        nextScreen = "SCORE_BOARD";
-                    } else {
-                        nextQuestionId = question3._id;
-                        nextQuestionNo = 3;
-                        nextScreen = `Q 3`;
-                    }
-                } else {
-                    nextQuestionId = question2._id;
-                    nextQuestionNo = 2;
-                    nextScreen = `Q 2`;
-                }
-            } else {
-                nextScreen = `Q 1`;
-                nextQuestionId = question1._id;
-                nextQuestionNo = 1;
-            }
-
         return res.status(200).send({
             status: true,
             message: "Get Leesons Data Successfully.",
             result: lessonsLists,
-            nextQuestionId,
-            nextQuestionNo,
-            nextScreen
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });

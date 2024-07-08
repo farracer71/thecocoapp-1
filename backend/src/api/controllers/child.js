@@ -1,6 +1,6 @@
 const { default: mongoose } = require('mongoose');
 const { childServices } = require('../service/child');
-const { findAllChildren, insertChild, findChildCount, updateManyChild } = childServices;
+const { findAllChildren, insertChild, findChildCount, updateManyChild, findChild, updateChild } = childServices;
 
 const { schoolServices } = require('../service/schools');
 const { findSchool, findAllSchool } = schoolServices;
@@ -92,9 +92,9 @@ exports.createChild = async (req, res, next) => {
         // Check total child count before insertion
         const totalChildCount = listUsersChild.length + childList.length;
         if (totalChildCount > 3) {
-            return res.status(400).send({ 
-                status: false, 
-                message: `Maximum limit exceeded. You can only add up to 3 children. You already have ${listUsersChild.length} children on the platform.` 
+            return res.status(400).send({
+                status: false,
+                message: `Maximum limit exceeded. You can only add up to 3 children. You already have ${listUsersChild.length} children on the platform.`
             });
         }
 
@@ -102,21 +102,80 @@ exports.createChild = async (req, res, next) => {
         childList[childList.length - 1].activeStatus = true;
 
         // Insert child records
-        const insertedChildren = await insertChild(childList);        
+        const insertedChildren = await insertChild(childList);
 
         // Update user's currentChildActive field to the last inserted child's ID
         await updateUser({ _id: req.userId }, { $set: { currentChildActive: insertedChildren[insertedChildren.length - 1]._id } });
 
-        if(listUsersChild.length > 0){
+        if (listUsersChild.length > 0) {
             let listUsersChildIds = listUsersChild.map(child => child._id);
             await updateManyChild({ _id: { $in: listUsersChildIds } }, { $set: { activeStatus: false } });
         }
 
         // Respond with success message and inserted child records
-        return res.status(200).send({ 
-            status: true, 
-            message: "Children created successfully.", 
-            result: insertedChildren 
+        return res.status(200).send({
+            status: true,
+            message: "Children created successfully.",
+            result: insertedChildren
+        });
+    } catch (error) {
+        // Handle any errors during the process
+        return res.status(500).send({ status: false, message: error.message });
+    }
+}
+
+/**
+* @swagger
+* /child/update-child:
+*   put:
+*     summary: Update child using token
+*     tags:
+*       - Child
+*     description: Update child using token
+*     produces:
+*       - application/json
+*     parameters:
+*       - in: header
+*         name: token
+*         description: JWT token obtained after user authentication.
+*         required: true
+*         schema:
+*           type: string
+*       - in: query
+*         name: childId
+*         description: Child Doc Id
+*         type: string
+*         required: true
+*         schema:
+*           type: string
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/definitions/create_child_def'
+*     responses:
+*       '200':
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*/
+exports.updateChildAPI = async (req, res, next) => {
+    try {
+        // Fetch current child for the user
+        let isChild = await findChild({ userId: req.userId, _id: req.query.childId });
+        if(!isChild){
+            return res.status(400).send({ status: false, message: "Child not found." });   
+        }
+
+        const childResult = await updateChild({ _id: isChild._id  }, { $set: req.body })
+        // Respond with success message and inserted child records
+        return res.status(200).send({
+            status: true,
+            message: "Children updated successfully.",
+            result: childResult
         });
     } catch (error) {
         // Handle any errors during the process

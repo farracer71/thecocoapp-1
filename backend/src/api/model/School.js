@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 
 // Define the school schema
 const schoolSchema = new mongoose.Schema({
-  schoolId: { type: Number, unique: true },
+  schoolId: { type: Number, unique: true, default: 0 },
   email: { type: String, required: true, unique: true },
-  schoolName: { type: String },
-  address: { type: String },
-  phoneNumber: { type: Number },
-  PrincipalName: { type: String },
-  logo: { type: String },
+  schoolName: { type: String, default: '' },
+  address: { type: String, default: '' },
+  phoneNumber: { type: Number, default: 0 },
+  PrincipalName: { type: String, default: '' },
+  logo: { type: String, default: '' },
 }, { timestamps: true });
 
 // Create the school model

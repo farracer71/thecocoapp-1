@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 
 // Define the standards schema
 const standardsSchema = new mongoose.Schema({
-    standard_id: { type: Number, required: true },
-    name: { type: String, required: true },
+    standard_id: { type: Number, required: true, default: 0 },
+    name: { type: String, required: true, default: '' },
 }, { timestamps: true });
 
 // Create the standards model
-const standards = mongoose.model('standards', standardsSchema);
+const Standards = mongoose.model('standards', standardsSchema);
 
 // Export standards model
-module.exports = standards;
+module.exports = Standards;

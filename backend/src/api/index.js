@@ -9,6 +9,7 @@ router.use('/school', require('./routes/school'));
 router.use('/child', require('./routes/child'));
 router.use('/dashboard', require('./routes/dashboard'));
 router.use('/questions', require('./routes/questions'));
+router.use('/user', require('./routes/user'));
 
 // Export the router instance to make it available for use in other parts of the application
 module.exports = router;

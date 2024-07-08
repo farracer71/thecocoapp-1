@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Page from "../../../component/Page";
 import SettingsContext from "src/context/SettingsContext";
 import HeroSection from "./HeroSection";
@@ -90,6 +90,9 @@ function Home() {
   const toggleTheme = () => {
     saveSettings({ theme: settings.theme === "LIGHT" ? "DARK" : "LIGHT" });
   };
+  useEffect(() => {
+    localStorage.removeItem("emailReset")
+  }, [])
   return (
     <Page title="Home">
       <section>

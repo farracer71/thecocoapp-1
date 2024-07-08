@@ -30,6 +30,18 @@ export const routes = [
   },
   {
     exact: true,
+    path: "/reset-pin",
+    layout: LoginLayout,
+    component: lazy(() => import("src/views/auth/resetPin/ResetPin")),
+  },
+  {
+    exact: true,
+    path: "/reset-pin-set",
+    layout: LoginLayout,
+    component: lazy(() => import("src/views/auth/resetPin/ResetPassword")),
+  },
+  {
+    exact: true,
     path: "/add-child",
     layout: LoginLayout,
     component: lazy(() => import("src/views/auth/add-child/index")),

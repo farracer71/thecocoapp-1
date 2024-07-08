@@ -19,7 +19,6 @@ import toast from 'react-hot-toast';
 import { AuthContext } from "src/context/Auth";
 import moment from "moment";
 import OTPInput from "otp-input-react";
-
 const styles = {
   otpFormControl: {
     "& input": {
@@ -45,7 +44,7 @@ function SignUp(props) {
   const formInitialSchema = {
         email: "",
         name:"",
-        otp:"",
+        pin:"",
         Cotp:""
       }
   const handleFormSubmit = async (values) => {
@@ -54,6 +53,7 @@ function SignUp(props) {
       const res = await axios.post(ApiConfig.signupVerifiedEmail, {
         email: values.email,
         name: values.name,
+        pin: values.pin
       });
 
       if (res.status === 200) {
@@ -93,6 +93,18 @@ function SignUp(props) {
           validationSchema={yup.object().shape({
             email: yup.string().required("Please enter your email address."),
             name: yup.string().required("Please enter your full name"),
+            pin: yup
+              .string()
+              .length(4, "OTP must be 4 digits")
+              .required("Please enter your OTP."),
+            Cotp: yup
+              .string()
+              .length(4, "OTP must be 4 digits")
+              .required("Please enter your OTP.")
+               .oneOf(
+                 [yup.ref("pin"), null],
+                 "Pin should match."
+               ),
           })}
         >
           {({
@@ -147,17 +159,17 @@ function SignUp(props) {
                   </Typography>
                   <FormControl
                     fullWidth
-                    error={Boolean(touched.otp && errors.otp)}
+                    error={Boolean(touched.pin && errors.pin)}
                     sx={styles.otpFormControl}
                   >
                     <OTPInput
-                      value={values.otp}
+                      value={values.pin}
                       inputVariant="standard"
                       autoComplete="off"
                       onChange={(otpValue) => {
-                        setFieldValue("otp", otpValue);
+                        setFieldValue("pin", otpValue);
                       }}
-                      name="otp"
+                      name="pin"
                       id="inputID"
                       style={{
                         display: "flex",
@@ -165,13 +177,12 @@ function SignUp(props) {
                         width: "100%",
                         gap: "15px",
                       }}
-                      autoFocus
                       OTPLength={4}
                       otpType="number"
                     />
                   </FormControl>
-                  {touched.otp && errors.otp && (
-                    <Typography color="error">{errors.otp}</Typography>
+                  {touched.pin && errors.pin && (
+                    <FormHelperText error>{errors.pin}</FormHelperText>
                   )}
                 </Box>
               </Grid>
@@ -206,12 +217,12 @@ function SignUp(props) {
                     />
                   </FormControl>
                   {touched.Cotp && errors.Cotp && (
-                    <Typography color="error">{errors.Cotp}</Typography>
+                    <FormHelperText error>{errors.Cotp}</FormHelperText>
                   )}
                 </Box>
               </Grid>
               <Grid>
-                <Box sx={{ marginTop: "13px" }}>
+                <Box sx={{ marginTop: "18px" }}>
                   <Button
                     type="submit"
                     variant="contained"
@@ -221,6 +232,7 @@ function SignUp(props) {
                     Signup
                     {isLoading && <ButtonCircularProgress />}
                   </Button>
+                 
                 </Box>
                 <Box
                   sx={{

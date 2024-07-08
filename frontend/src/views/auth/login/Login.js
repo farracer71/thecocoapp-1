@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -19,6 +19,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from "src/context/Auth";
 import moment from "moment";
 import OTPInput from "otp-input-react";
+
 
 
 const styles = {
@@ -48,7 +49,7 @@ function Login(props) {
   //   ? 
     {
       email: "",
-      otp:""
+      pin:""
     }
     // : {
     //   email: window.sessionStorage.getItem("email") || "",
@@ -59,17 +60,13 @@ function Login(props) {
     try {
       const res = await axios.post(ApiConfig.loginGenerateOtp, {
         email: values.email,
+        pin: values.pin,
       });
       if (res.status === 200) {
         toast.success(res.data.message);
         setIsLoading(false);
-        navigate("/verify", {
-          state: {
-            email: values.email,
-            type: "login",
-          },
-        });
-       auth.setEndTime(moment().add(3, "m").unix());
+        navigate("/dashboard");
+        localStorage.setItem("token", res.data.token);
       }
     } catch (error) {
       toast.error(
@@ -79,7 +76,9 @@ function Login(props) {
       setIsLoading(false);
     }
   };
-
+useEffect(()=>{
+  localStorage.removeItem("emailReset")
+},[])
   return (
     <Page title="Login">
       <Box sx={{ display: "grid", gap: "13px", textAlign: "center" }}>
@@ -95,7 +94,7 @@ function Login(props) {
           initialValues={formInitialSchema}
           validationSchema={yup.object().shape({
             email: yup.string().required("Please enter your email address."),
-            otp: yup
+            pin: yup
               .string()
               .length(4, "OTP must be 4 digits")
               .required("Please enter your OTP."),
@@ -137,17 +136,17 @@ function Login(props) {
                   </Typography>
                   <FormControl
                     fullWidth
-                    error={Boolean(touched.otp && errors.otp)}
+                    error={Boolean(touched.pin && errors.pin)}
                     sx={styles.otpFormControl}
                   >
                     <OTPInput
-                      value={values.otp}
+                      value={values.pin}
                       inputVariant="standard"
                       autoComplete="off"
                       onChange={(otpValue) => {
-                        setFieldValue("otp", otpValue);
+                        setFieldValue("pin", otpValue);
                       }}
-                      name="otp"
+                      name="pin"
                       id="inputID"
                       style={{
                         display: "flex",
@@ -155,18 +154,17 @@ function Login(props) {
                         width: "100%",
                         gap: "15px",
                       }}
-                      autoFocus
                       OTPLength={4}
                       otpType="number"
                     />
                   </FormControl>
-                  {touched.otp && errors.otp && (
-                    <Typography color="error">{errors.otp}</Typography>
+                  {touched.pin && errors.pin && (
+                    <FormHelperText error>{errors.pin}</FormHelperText>
                   )}
                 </Box>
               </Grid>
               <Grid sx={{ margin: "13px 0", textAlign:"start" }}>
-                <Typography variant="body1" color={"rgba(67, 69, 71, 1)"} sx={{ cursor: "pointer" }}>
+                <Typography variant="body1" color={"rgba(67, 69, 71, 1)"} sx={{ cursor: "pointer" }} onClick={() => { navigate("/reset-pin")}}>
                   Reset pin?
                 </Typography>
               </Grid>

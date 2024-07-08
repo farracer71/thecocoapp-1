@@ -20,6 +20,7 @@ import { LuMinusCircle } from "react-icons/lu";
 import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import toast from "react-hot-toast";
 import { GrAddCircle } from "react-icons/gr";
+import { AiOutlineDoubleRight } from "react-icons/ai";
 
 function AddChild(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -373,6 +374,10 @@ function AddChild(props) {
                     Continue
                     {isLoading && <ButtonCircularProgress />}
                   </Button>
+                  <Box sx={{ display: "flex", justifyContent: "center",marginTop:"18px", cursor:"pointer",
+                    alignItems: "center", gap: "8px" }} onClick={()=>{navigate("/dashboard")}}>
+                      <Typography variant="body1" color={"rgba(0, 186, 242, 1)"}>Skip</Typography>
+                      <AiOutlineDoubleRight style={{ color: "rgba(0, 186, 242, 1)" }} /></Box> 
                 </Box>
                 <Box
                   sx={{

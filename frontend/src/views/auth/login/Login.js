@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import {
   Box,
   Button,
+  FormControl,
   FormHelperText,
   Grid,
   TextField,
@@ -17,7 +18,26 @@ import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import toast from 'react-hot-toast';
 import { AuthContext } from "src/context/Auth";
 import moment from "moment";
+import OTPInput from "otp-input-react";
 
+
+const styles = {
+  otpFormControl: {
+    "& input": {
+      color: "#0B1426",
+      width: "48px !important",
+      height: "48px !important",
+      marginRight: "10px !important",
+      border: "1px solid #D8D8D8",
+      borderRadius: "8px",
+      "@media(max-width:460px)": {
+        width: "45px !important",
+        height: "45px !important",
+        marginRight: "7px !important",
+      },
+    },
+  },
+};
 function Login(props) {
   // const [isRememberMe, setIsRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -28,6 +48,7 @@ function Login(props) {
   //   ? 
     {
       email: "",
+      otp:""
     }
     // : {
     //   email: window.sessionStorage.getItem("email") || "",
@@ -74,6 +95,10 @@ function Login(props) {
           initialValues={formInitialSchema}
           validationSchema={yup.object().shape({
             email: yup.string().required("Please enter your email address."),
+            otp: yup
+              .string()
+              .length(4, "OTP must be 4 digits")
+              .required("Please enter your OTP."),
           })}
         >
           {({
@@ -83,6 +108,7 @@ function Login(props) {
             handleSubmit,
             touched,
             values,
+            setFieldValue
           }) => (
             <Form onSubmit={handleSubmit}>
               <Grid sx={{ margin: "13px 0" }}>
@@ -104,7 +130,46 @@ function Login(props) {
                   {touched.email && errors.email}
                 </FormHelperText>
               </Grid>
-
+              <Grid sx={{ margin: "13px 0", textAlign: "start" }}>
+                <Box >
+                  <Typography variant="body1" color={"rgba(67, 69, 71, 1)"} sx={{marginBottom:"13px"}}>
+                    Enter 4-digit pin
+                  </Typography>
+                  <FormControl
+                    fullWidth
+                    error={Boolean(touched.otp && errors.otp)}
+                    sx={styles.otpFormControl}
+                  >
+                    <OTPInput
+                      value={values.otp}
+                      inputVariant="standard"
+                      autoComplete="off"
+                      onChange={(otpValue) => {
+                        setFieldValue("otp", otpValue);
+                      }}
+                      name="otp"
+                      id="inputID"
+                      style={{
+                        display: "flex",
+                        justifyContent: "start",
+                        width: "100%",
+                        gap: "15px",
+                      }}
+                      autoFocus
+                      OTPLength={4}
+                      otpType="number"
+                    />
+                  </FormControl>
+                  {touched.otp && errors.otp && (
+                    <Typography color="error">{errors.otp}</Typography>
+                  )}
+                </Box>
+              </Grid>
+              <Grid sx={{ margin: "13px 0", textAlign:"start" }}>
+                <Typography variant="body1" color={"rgba(67, 69, 71, 1)"} sx={{ cursor: "pointer" }}>
+                  Reset pin?
+                </Typography>
+              </Grid>
               <Grid>
                 <Box sx={{ marginTop: "26px" }}>
                   <Button

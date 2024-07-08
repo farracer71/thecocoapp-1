@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import {
   Box,
   Button,
+  FormControl,
   FormHelperText,
   Grid,
   TextField,
@@ -17,6 +18,25 @@ import ButtonCircularProgress from "src/component/ButtonCircularProgress";
 import toast from 'react-hot-toast';
 import { AuthContext } from "src/context/Auth";
 import moment from "moment";
+import OTPInput from "otp-input-react";
+
+const styles = {
+  otpFormControl: {
+    "& input": {
+      color: "#0B1426",
+      width: "48px !important",
+      height: "48px !important",
+      marginRight: "10px !important",
+      border: "1px solid #D8D8D8",
+      borderRadius: "8px",
+      "@media(max-width:460px)": {
+        width: "45px !important",
+        height: "45px !important",
+        marginRight: "7px !important",
+      },
+    },
+  },
+};
 
 function SignUp(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +44,9 @@ function SignUp(props) {
    const auth = useContext(AuthContext);
   const formInitialSchema = {
         email: "",
-        name:""
+        name:"",
+        otp:"",
+        Cotp:""
       }
   const handleFormSubmit = async (values) => {
     setIsLoading(true);
@@ -80,6 +102,7 @@ function SignUp(props) {
             handleSubmit,
             touched,
             values,
+            setFieldValue
           }) => (
             <Form onSubmit={handleSubmit}>
               <Grid sx={{ margin: "13px 0" }}>
@@ -117,7 +140,76 @@ function SignUp(props) {
                   {touched.email && errors.email}
                 </FormHelperText>
               </Grid>
-
+              <Grid sx={{ margin: "13px 0", textAlign: "start" }}>
+                <Box >
+                  <Typography variant="body1" color={"rgba(67, 69, 71, 1)"} sx={{ marginBottom: "13px" }}>
+                    Enter 4-digit pin
+                  </Typography>
+                  <FormControl
+                    fullWidth
+                    error={Boolean(touched.otp && errors.otp)}
+                    sx={styles.otpFormControl}
+                  >
+                    <OTPInput
+                      value={values.otp}
+                      inputVariant="standard"
+                      autoComplete="off"
+                      onChange={(otpValue) => {
+                        setFieldValue("otp", otpValue);
+                      }}
+                      name="otp"
+                      id="inputID"
+                      style={{
+                        display: "flex",
+                        justifyContent: "start",
+                        width: "100%",
+                        gap: "15px",
+                      }}
+                      autoFocus
+                      OTPLength={4}
+                      otpType="number"
+                    />
+                  </FormControl>
+                  {touched.otp && errors.otp && (
+                    <Typography color="error">{errors.otp}</Typography>
+                  )}
+                </Box>
+              </Grid>
+              <Grid sx={{ margin: "13px 0", textAlign: "start" }}>
+                <Box >
+                  <Typography variant="body1" color={"rgba(67, 69, 71, 1)"} sx={{ marginBottom: "13px" }}>
+                    Confirm 4-digit pin
+                  </Typography>
+                  <FormControl
+                    fullWidth
+                    error={Boolean(touched.Cotp && errors.Cotp)}
+                    sx={styles.otpFormControl}
+                  >
+                    <OTPInput
+                      value={values.Cotp}
+                      inputVariant="standard"
+                      autoComplete="off"
+                      onChange={(otpValue) => {
+                        setFieldValue("Cotp", otpValue);
+                      }}
+                      name="Cotp"
+                      id="inputID"
+                      style={{
+                        display: "flex",
+                        justifyContent: "start",
+                        width: "100%",
+                        gap: "15px",
+                      }}
+                      autoFocus
+                      OTPLength={4}
+                      otpType="number"
+                    />
+                  </FormControl>
+                  {touched.Cotp && errors.Cotp && (
+                    <Typography color="error">{errors.Cotp}</Typography>
+                  )}
+                </Box>
+              </Grid>
               <Grid>
                 <Box sx={{ marginTop: "13px" }}>
                   <Button

@@ -4,13 +4,14 @@ const mongoose = require('mongoose');
 // Define the child schema
 const childSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true },
-  schoolId: { type: mongoose.Schema.Types.ObjectId, ref: 'schools' },
-  childName: { type: String, required: true },
-  dob: { type: Date, required: true },
-  standard: { type: String, required: true },
-  gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
+  schoolId: { type: mongoose.Schema.Types.ObjectId, ref: 'schools', default: null },
+  childName: { type: String, required: true, default: '' },
+  dob: { type: Date, required: true, default: Date.now },
+  standard: { type: String, required: true, default: '' },
+  gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true, default: 'Other' },
   activeStatus: { type: Boolean, required: true, default: false },
-  totalPoints: { type: Number, default: 0 }
+  totalPoints: { type: Number, default: 0 },
+  profilePic: { type: String, default: "" },
 }, { timestamps: true });
 
 // Create the child model

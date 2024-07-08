@@ -6,15 +6,15 @@ const questionschema = new mongoose.Schema({
     standard_id: { type: mongoose.Schema.Types.ObjectId, ref: 'standards', required: true },
     module_id: { type: mongoose.Schema.Types.ObjectId, ref: 'modules', required: true },
     level_id: { type: mongoose.Schema.Types.ObjectId, ref: 'levels', required: true },
-    question_id: { type: Number, required: true },
-    name: { type: String, required: true },
+    question_id: { type: Number, required: true, default: 0 },
+    name: { type: String, required: true, default: '' },
     options: [{
-        option_id: { type: Number, required: true },
-        name: { type: String, required: true },
-        value: { type: String, required: true }
+        option_id: { type: Number, required: true, default: 0 },
+        name: { type: String, required: true, default: '' },
+        value: { type: String, required: true, default: '' }
     }],
-    right_answer: { type: String, required: true },
-    desc: { type: String, default: ''}
+    right_answer: { type: String, required: true, default: '' },
+    desc: { type: String, default: '' }
 }, { timestamps: true });
 
 // Create the questions model

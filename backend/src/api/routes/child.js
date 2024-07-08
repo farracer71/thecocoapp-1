@@ -18,6 +18,9 @@ router.get('/get-all-childs', verifyToken, controller.getAllChild);
 // Define a route handler for POST requests to the '/create' endpoint
 router.post('/create', verifyToken, controller.createChild);
 
+// Define a route handler for POST requests to the '/update-child' endpoint
+router.put('/update-child', verifyToken, controller.updateChildAPI);
+
 // Define a route handler for POST requests to the '/switch-to-active-child' endpoint
 router.post('/switch-to-active-child', verifyToken, controller.switchToActiveChild);
 

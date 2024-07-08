@@ -36,7 +36,7 @@ const loginPinSchema = Joi.object({
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
         .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required.' }),
-    pin: Joi.string()
+    pin: Joi.string().length(4).pattern(/^\d+$/)
 });
 
 // Example schema for validating verify otp input
@@ -73,7 +73,13 @@ const signupWithVerifiedEmailPinSchema = Joi.object({
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ["com", "net", "in"] } })
         .message("Please provide a valid email address.").required().messages({ 'any.required': 'An email address is required.' }),
-    pin: Joi.string()
+    pin: Joi.string().length(4).pattern(/^\d+$/)
+});
+
+
+const resetPinSchema = Joi.object({
+    new_pin: Joi.string().length(4).pattern(/^\d+$/),
+    confirm_pin: Joi.string().length(4).pattern(/^\d+$/),
 });
 
 // Example schema for validating user input
@@ -109,5 +115,6 @@ module.exports = {
     verifyOTPSchema,
     signupWithVerifiedEmailSchema,
     signupWithVerifiedEmailPinSchema,
-    loginPinSchema
+    loginPinSchema,
+    resetPinSchema
 };

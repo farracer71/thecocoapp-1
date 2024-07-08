@@ -72,6 +72,7 @@ definitions:
       - dob
       - standard
       - gender
+      - profilePic
     properties:
       childName:
         type: string
@@ -90,6 +91,33 @@ definitions:
         type: string
         enum: ["Male", "Female", "Other"]
         example: "Male"
+      profilePic:
+        type: string
+        example: ""
+
+  update_user_def:
+    required:
+      - profilePic
+      - email  
+      - name
+    properties:
+      profilePic:
+        type: string
+        example: ""
+      email:
+        type: string
+        example: "rohit@mailinator.com"
+      name:
+        type: string
+        example: "Rohit Pandit"
+
+  upload_photo_def:
+    required:
+      - photo
+    properties:
+      photo:
+        type: string
+        example: ""
 
   attempt_question_def:
     required:
@@ -118,3 +146,15 @@ definitions:
       demo:
         type: boolean
         example: true
+
+  change_pin_def:
+    required:
+      - new_pin
+      - confirm_pin
+    properties:
+      new_pin:
+        type: string
+        example: "5053"
+      confirm_pin:
+        type: string
+        example: "5053"

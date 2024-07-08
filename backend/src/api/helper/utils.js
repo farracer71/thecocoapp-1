@@ -51,6 +51,24 @@ exports.uploadImageCloudinary = async (base64) => {
     return (await cloudinary.uploader.upload(base64, { resource_type: "auto" })).secure_url
 }
 
+exports.sendPinChangedGenerateOTPMail = async (email, otp) => {
+    let html = emailTemplates.pinChangedGenerateOTP(otp);
+    var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            "user": "panditrohit532@gmail.com",
+            "pass": "sajutseiqfrgitkm"
+        }
+    });
+    var mailOptions = {
+        from: "panditrohit532@gmail.com",
+        to: email,
+        subject: "OTP for PIN Change Verification",
+        html: html,
+    };
+    return await transporter.sendMail(mailOptions);
+}
+
 exports.sendSignupGenerateOTPMail = async (email, otp) => {
     let html = emailTemplates.signupGenerateOTP(otp);
     var transporter = nodemailer.createTransport({

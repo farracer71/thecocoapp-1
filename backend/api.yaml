@@ -118,3 +118,15 @@ definitions:
       demo:
         type: boolean
         example: true
+
+  change_pin_def:
+    required:
+      - new_pin
+      - confirm_pin
+    properties:
+      new_pin:
+        type: string
+        example: "5053"
+      confirm_pin:
+        type: string
+        example: "5053"

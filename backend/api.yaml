@@ -72,6 +72,7 @@ definitions:
       - dob
       - standard
       - gender
+      - profilePic
     properties:
       childName:
         type: string
@@ -90,6 +91,9 @@ definitions:
         type: string
         enum: ["Male", "Female", "Other"]
         example: "Male"
+      profilePic:
+        type: string
+        example: ""
 
   update_user_def:
     required:

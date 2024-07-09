@@ -104,9 +104,9 @@ function AddChild(props) {
               yup.object().shape({
                 name: yup.string().required("Please enter your full name."),
                 schoolId: yup.string(),
-                dob: yup.string().required("Date of birth is required."),
-                gender: yup.string().required("Please select a gender."),
-                standard: yup.string().required("Please choose a standard."),
+                dob: yup.string(),
+                gender: yup.string(),
+                standard: yup.string(),
               })
             ),
           })}

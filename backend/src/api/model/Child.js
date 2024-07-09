@@ -8,7 +8,7 @@ const childSchema = new mongoose.Schema({
   childName: { type: String, required: true, default: '' },
   dob: { type: Date, required: false, default: Date.now },
   standard: { type: String, required: false, default: '' },
-  gender: { type: String, enum: ['Male', 'Female', 'Other'], required: false, default: 'Other' },
+  gender: { type: String, enum: ['Male', 'Female', 'Other', ''], required: false, default: 'Other' },
   activeStatus: { type: Boolean, required: false, default: false },
   totalPoints: { type: Number, default: 0 },
   profilePic: { type: String, default: "" },

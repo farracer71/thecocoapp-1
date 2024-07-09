@@ -86,6 +86,16 @@ exports.createChild = async (req, res, next) => {
             return res.status(400).send({ status: false, message: "Request body should be an array of children." });
         }
 
+        // Validate each child object in the list
+        for (let child of childList) {
+            if (child.schoolId && !child.standard) {
+                return res.status(400).send({
+                    status: false,
+                    message: "Each child must have School Id and Standard fields."
+                });
+            }
+        }
+
         // Add userId to each child object in the list
         childList = childList.map((child) => ({ ...child, userId: req.userId }));
 

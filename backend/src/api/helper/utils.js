@@ -21,7 +21,7 @@ exports.updateCurrentStatus = (array) => {
         } else {
             array[i].current_status = array[i - 1].complete_status;
         }
-
+        
         if (array[i].current_status === true && array[i].complete_status === true) {
             array[i].current_status = false;
         }

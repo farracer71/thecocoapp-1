@@ -58,16 +58,18 @@ exports.getAllModules = async (req, res, next) => {
         // Pipeline to check if modules are present for the child's standard
         const pipelineIsModulePresent = [
             {
-                $match: {
-                    standard_id: Number(child.standard),
-                },
-            },
-            {
                 $lookup: {
                     from: "modules",
                     localField: "_id",
                     foreignField: "standard_id",
                     as: "modules",
+                },
+            },
+            {
+                $match: {
+                    standard_id: {
+                        $gt: 3,
+                    },
                 },
             },
             {
@@ -97,40 +99,49 @@ exports.getAllModules = async (req, res, next) => {
         let currentChapterName = "";
 
         // Process modules to include complete_status for modules and levels
-        let processedModules = result[0].modules.map(module => ({
-            ...module,
-            complete_status: !!completedModulesList.find(element =>
-                element.module_id.toString() === module._id.toString() &&
-                element.child_id.toString() === req.user.currentChildActive &&
-                element.user_id.toString() === req.user._id
-            ),
-            levels: levelsLists
-                .filter(level => level.module_id.toString() === module._id.toString())
-                .map(level => ({
-                    ...level._doc,
-                    complete_status: !!completedLevelsList.find(element =>
-                        element.level_id.toString() === level._id.toString() &&
-                        element.module_id.toString() === module._id.toString() &&
-                        element.child_id.toString() === req.user.currentChildActive.toString() &&
-                        element.user_id.toString() === req.user._id.toString()
-                    )
-                }))
-        }));
+        let processedModules = result.map((resElement) => ({
+            ...resElement, modules: [...resElement.modules.map(module => ({
+                ...module,
+                complete_status: !!completedModulesList.find(element =>
+                    element.module_id.toString() === module._id.toString() &&
+                    element.child_id.toString() === req.user.currentChildActive &&
+                    element.user_id.toString() === req.user._id
+                ),
+                levels: levelsLists
+                    .filter(level => level.module_id.toString() === module._id.toString())
+                    .map(level => ({
+                        ...level._doc,
+                        complete_status: !!completedLevelsList.find(element =>
+                            element.level_id.toString() === level._id.toString() &&
+                            element.module_id.toString() === module._id.toString() &&
+                            element.child_id.toString() === req.user.currentChildActive.toString() &&
+                            element.user_id.toString() === req.user._id.toString()
+                        )
+                    }))
+            }))]
+        }))
 
-        processedModules.forEach(element => {
-            updateCurrentStatus(element.levels);
-            currentChapterName = element.levels.find((level) => level.current_status === true).name;
-        });
+        for (let index = 0; index < processedModules.length; index++) {
+            const element = processedModules[index];
+
+            for (let index = 0; index < element.modules.length; index++) {
+                const modules = element.modules[index];
+                updateCurrentStatus(modules.levels);
+            }
+            
+        }
+
+        // processedModules = processedModules.forEach((element) => ({
+        //     element.modules.map(module => {
+        //         updateCurrentStatus(module.levels),
+        //         currentChapterName = element.levels.find((level) => level.current_status === true).name
+        //     };
+        // }));
 
         return res.status(200).send({
             status: true,
             message: "Get Child Data Successfully.",
-            result: {
-                ...result[0],
-                modules: processedModules,
-                userName: req.user.name,
-                currentChapterName
-            }
+            result: processedModules
         });
     } catch (error) {
         return res.status(500).send({ status: false, message: error.message });
@@ -242,17 +253,17 @@ exports.getQuestions = async (req, res, next) => {
 
         for (let index = 0; index < questionsLists.length; index++) {
             const elementQuestions = questionsLists[index];
-            const isCompletedQuesitons = listCompletedQuestions.find((element) => 
-                element.module_id.toString() == module_id.toString() && 
-                element.level_id.toString() == level_id.toString() && 
+            const isCompletedQuesitons = listCompletedQuestions.find((element) =>
+                element.module_id.toString() == module_id.toString() &&
+                element.level_id.toString() == level_id.toString() &&
                 element.question_id.toString() == elementQuestions._id.toString() &&
                 element.child_id.toString() === req.user.currentChildActive &&
                 element.user_id.toString() === req.user._id
             )
             previousQuestionsComplete = isCompletedQuesitons ? isCompletedQuesitons.correstAnswer : false;
-            if(isCompletedQuesitons){
-                if(isCompletedQuesitons.correstAnswer){
-                    if(index > 0){
+            if (isCompletedQuesitons) {
+                if (isCompletedQuesitons.correstAnswer) {
+                    if (index > 0) {
                         currentQuestion = elementQuestions._id;
                         currentPage = 1;
                     }
@@ -260,7 +271,7 @@ exports.getQuestions = async (req, res, next) => {
             }
         }
 
-        questionsLists = questionsLists.map((element) => ({...element._doc, right_answer: undefined, desc: undefined}))
+        questionsLists = questionsLists.map((element) => ({ ...element._doc, right_answer: undefined, desc: undefined }))
 
         return res.status(200).send({
             status: true,

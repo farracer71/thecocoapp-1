@@ -523,3 +523,43 @@ exports.resetPinPassword = async (req, res, next) => {
         return res.status(500).send({ status: false, message: error.message });
     }
 }
+
+
+/**
+* @swagger
+* /auth/delete-data:
+*   get:
+*     summary: Delete Data
+*     tags:
+*       - Child
+*     description: Delete Data
+*     produces:
+*       - application/json'
+*     parameters:
+*       - in: header
+*         name: token
+*         description: JWT token obtained after user authentication
+*         required: true
+*         type: string
+*     responses:
+*       '200':  
+*         description: OK
+*       '400':
+*         description: Bad Request
+*       '409':
+*         description: Conflict
+*/
+exports.deleteData = async (req, res, next) => {
+    try {
+        let collections = ["questions", "completed_questions", "completed_modules", "completed_levels", "modules", "levels"]
+        collections.map(async (collectionName) => {
+            console.log("collectionName: ", collectionName);
+            await mongoose.connection.db.dropCollection(collectionName);
+            console.log(`Collection ${collectionName} dropped successfully.`);
+            return { collectionName, dropped: true };
+        });
+        return res.status(200).send({ status: true, message: "Data Drop Successfully." });
+    } catch (error) {
+        return res.status(500).send({ status: false, message: error.message });
+    } 
+}

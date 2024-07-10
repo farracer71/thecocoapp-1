@@ -6,7 +6,7 @@ const levelsSchema = new mongoose.Schema({
     standard_id: { type: mongoose.Schema.Types.ObjectId, ref: 'standards', required: true },
     module_id: { type: mongoose.Schema.Types.ObjectId, ref: 'modules', required: true },
     level_id: { type: Number, required: true, default: 0 },
-    name: { type: String, required: true, default: '' },
+    name: { type: String, required: false, default: '' },
 }, { timestamps: true });
 
 // Create the levels model

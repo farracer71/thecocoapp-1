@@ -427,7 +427,7 @@ useEffect(()=>{
                         }}
                       >
                         <Box>
-                          <StyledImg alt="" src="images/Moduleimage.png" />
+                          <StyledImg alt="" src={`images/module/${data.module_id}.png`} />
                         </Box>
                         <Box
                           sx={{

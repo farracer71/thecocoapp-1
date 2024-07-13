@@ -10,10 +10,10 @@ const Questions = require('../model/Questions');
 
 let initialSchools = require('../data/schools');
 let initialStandards = require('../data/standards');
-let initialModules = require('../data/modules.json');
-let initialLevels = require('../data/levels.json');
-let initialLessons = require('../data/lessons.json');
-let initialQuestions = require('../data/questions.json');
+let initialModules = require('../data/modules_new.json');
+let initialLevels = require('../data/levels_new.json');
+let initialLessons = require('../data/lessons_new.json');
+let initialQuestions = require('../data/questions_new.json');
 
 // MongoDB connection URI
 const mongoURI = process.env.mongodb_url;
@@ -77,19 +77,21 @@ const importInitialLevels = async () => {
         if (count === 0) {
             const modulesList = await Modules.find();
             const standardsList = await Standards.find();
-            const updatedLevels = initialLevels.map((element) => {
+            let updatedLevels = initialLevels.map((element) => {
                 const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
                 if(standard){
                     const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
                     if (modules) {
                         return {
                             ...element,
-                            module_id: modules._id,
-                            standard_id: modules.standard_id // Use ObjectId directly
+                            module_id: modules._id.toString(),
+                            standard_id: modules.standard_id.toString() // Use ObjectId directly
                         };
                     }
                 }
             });
+
+            updatedLevels = updatedLevels.filter((element) => element != null);
 
             await Levels.insertMany(updatedLevels);
             console.log('Initial Levels data imported successfully.');
@@ -108,7 +110,7 @@ const importInitialLessons = async () => {
             const modulesList = await Modules.find();
             const standardsList = await Standards.find();
             const levelsList = await Levels.find();
-            const updatedLevels = initialLessons.map((element) => {
+            let updatedLessons = initialLessons.map((element) => {
                 const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
                 if(standard){
                     const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
@@ -126,7 +128,9 @@ const importInitialLessons = async () => {
                 }
             });
 
-            await Lessons.insertMany(updatedLevels);
+            updatedLessons = updatedLessons.filter((element) => element != null);
+
+            await Lessons.insertMany(updatedLessons);
             console.log('Initial Lessons data imported successfully.');
         } else {
             console.log('Lessons collection is not empty, skipping initial data import.');
@@ -143,7 +147,7 @@ const importInitialQuestions = async () => {
             const modulesList = await Modules.find();
             const standardsList = await Standards.find();
             const levelsList = await Levels.find();
-            const updatedLevels = initialQuestions.map((element) => {
+            let updatedQuestions = initialQuestions.map((element) => {
                 const standard = standardsList.find((standard) => standard.standard_id == element.standard_id);
                 if(standard){
                     const modules = modulesList.find((module) => module.module_id == element.module_id && module.standard_id.toString() == standard._id.toString());
@@ -161,7 +165,9 @@ const importInitialQuestions = async () => {
                 }
             });
 
-            await Questions.insertMany(updatedLevels);
+            updatedQuestions = updatedQuestions.filter((element) => element != null);
+
+            await Questions.insertMany(updatedQuestions);
             console.log('Initial Questions data imported successfully.');
         } else {
             console.log('Questions collection is not empty, skipping initial data import.');

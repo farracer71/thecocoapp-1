@@ -36,6 +36,8 @@ router.post('/login/verify-otp', validateRequest(verifyOTPSchema), controller.lo
 router.post('/login/email-with-pin', validateRequest(loginPinSchema), controller.loginEmailPin);
 
 
+// Define a route handler for GET requests to the '/delete-data' endpoint
+router.get('/delete-data', verifyToken, controller.deleteData);
 
 // Define a route handler for POST requests to the '/send-otp-for-set-pin' endpoint
 router.post('/send-otp-for-set-pin', validateRequest(generateOTPSchema), controller.sendOtpForSetPin);

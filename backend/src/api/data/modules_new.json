@@ -1,0 +1,352 @@
+[
+    {
+        "standard_id": 4,
+        "module_id": 1,
+        "name": "Money Basics"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 2,
+        "name": "Saving Money"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 3,
+        "name": "Needs vs. Wants"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 4,
+        "name": "Earning Money"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 5,
+        "name": "Making Choices"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 6,
+        "name": "Taking Care of Belongings (Advanced)"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 7,
+        "name": "Planning for Bigger Purchases"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 8,
+        "name": "Making Change"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 9,
+        "name": "Identifying Coins (Advanced)"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 10,
+        "name": "Identifying Notes (Advanced)"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 11,
+        "name": "Counting Money"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 12,
+        "name": "Planning for Purchases"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 13,
+        "name": "Using Money Wisely"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 14,
+        "name": "Helping at Home"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 15,
+        "name": "Saving Goals"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 16,
+        "name": "Sharing with Others"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 17,
+        "name": "Barter System"
+    },
+    {
+        "standard_id": 4,
+        "module_id": 18,
+        "name": "Traditional Savings Methods"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 1,
+        "name": "Building on Basics"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 2,
+        "name": "Smart Saving Habits"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 3,
+        "name": "Needs vs. Wants Revisited"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 4,
+        "name": "Earning Money: Expanding Options"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 5,
+        "name": "Planning for Bigger Purchases"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 6,
+        "name": "Taking Care of Belongings (Advanced)"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 7,
+        "name": "Making Change"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 8,
+        "name": "Counting Money (Advanced)"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 9,
+        "name": "Following a Budget"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 10,
+        "name": "Wise Money Choices"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 11,
+        "name": "The World of Work"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 12,
+        "name": "Sharing & Saving Together"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 13,
+        "name": "Exploring Careers"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 14,
+        "name": "Simple Interest & Financial Role Models"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 15,
+        "name": "Making Smart Choices"
+    },
+    {
+        "standard_id": 5,
+        "module_id": 16,
+        "name": "Key Concepts Review"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 1,
+        "name": "Review & Expansion"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 2,
+        "name": "Saving for Your Future"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 3,
+        "name": "Making Informed Choices"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 4,
+        "name": "Earning Money: Small Business"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 5,
+        "name": "Making Smart Spending Choices"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 6,
+        "name": "Protecting Your Valuables"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 7,
+        "name": "Debit Cards (Intro)"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 8,
+        "name": "Advanced Counting"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 9,
+        "name": "Manage Your Finances"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 10,
+        "name": "Understanding Expenses"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 11,
+        "name": "Achieve Your Goals"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 12,
+        "name": "Save for Future"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 13,
+        "name": "Emergencies"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 14,
+        "name": "Careers"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 15,
+        "name": "Grow Money"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 16,
+        "name": "Plan Your Money"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 17,
+        "name": "Smart Choices"
+    },
+    {
+        "standard_id": 6,
+        "module_id": 18,
+        "name": "Financial Fitness"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 1,
+        "name": "Review & Expand"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 2,
+        "name": "Grow Your Money"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 3,
+        "name": "Choices & Trade-Offs"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 4,
+        "name": "Be Your Own Boss"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 5,
+        "name": "Budget for Dreams"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 6,
+        "name": "Care for What You Own"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 7,
+        "name": "Master Debit Card"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 8,
+        "name": "Master Money Calculations"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 9,
+        "name": "Budgeting with Tech"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 10,
+        "name": "Savvy Shopper"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 11,
+        "name": "Money Over Time"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 12,
+        "name": "SMART Goals"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 13,
+        "name": "College"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 14,
+        "name": "Emergency Fund"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 15,
+        "name": "Career"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 16,
+        "name": "Compound Interest"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 17,
+        "name": "Future Planning"
+    },
+    {
+        "standard_id": 7,
+        "module_id": 18,
+        "name": "Informed Decisions"
+    }
+]

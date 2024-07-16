@@ -145,6 +145,15 @@ function Home() {
         <FeedBack />
       </SectionFeedBack>
       <section>
+        <Box sx={{ position: "relative", animation: `${bounce} 1s infinite`, zIndex: "-1", display: { xs: "none", sm: "none", md: "block" } }}>
+
+          <img
+            alt=""
+            className="positionAbosolute EnergyIconPositionContactSection"
+            src="images/energy-icon.svg"
+            style={{ top: "unset !important" }}
+          />
+        </Box>
         <CocoApp />
       </section>
       <SectionBenifits>

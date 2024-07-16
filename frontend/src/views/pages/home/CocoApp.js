@@ -93,6 +93,7 @@ function CocoApp() {
                 Contact us
               </Button>
             </Box>
+           
             <img
               alt=""
               className="positionAbosolute StarIconPositionContactSection"

@@ -11,6 +11,8 @@ import { IoMdArrowBack } from "react-icons/io";
 import { MdNavigateNext } from "react-icons/md";
 import { HiSwitchHorizontal } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
+import { redirectToMail } from "src/utils";
+import { LiaUserCircleSolid } from "react-icons/lia";
 const style = {
   HandleMargin: {
     marginTop: "20px",
@@ -28,9 +30,10 @@ const style = {
     padding: "22px",
     border: "2px solid rgba(216, 216, 216, 1)",
     borderRadius: "16px",
+    marginTop: "22px",
     "@media(max-width:767px)": {
-      marginTop: "15px",
       padding: "8px 12px",
+      
     },
   },
   GapBox: {
@@ -70,18 +73,21 @@ const style = {
     padding: "6px",
     borderRadius: "10px",
     border: "2px solid #00BAF2",
-    width: "105px",
+    width: "120px",
     height: "51px",
     position: "absolute",
     top: "-16px",
     background: "#fff",
     textAlign: "center",
-    cursor:"pointer"
+    cursor:"pointer",
+    alignItems: "center",
+    display: "grid",
   },
   textCss: {
     fontSize: "16px",
     fontWeight: "800",
     color: "#00BAF2",
+    lineHeight:"19px"
   },
   desktopDrawer: {
     width: "270px",
@@ -559,7 +565,7 @@ useEffect(()=>{
                 });
               }}
             >
-              <Typography sx={style.textCss}>START</Typography>
+              <Typography  sx={style.textCss}>START</Typography>
             </Box>
           )}
           <LockImg
@@ -775,6 +781,11 @@ useEffect(()=>{
                             handleSublistToggle(j);
                           } else if (item.clickable) {
                             handleItemClick(item.href);
+                          } if (item.title === "Help") {
+
+                            redirectToMail("hello@thecocoapp.com");
+                          } else if (item.title === "About") {
+                            navigate("/")
                           }
                         }}
                       >
@@ -884,6 +895,7 @@ useEffect(()=>{
         padding: "64px 20px 20px 20px", minWidth: "260px" 
       }:{ padding: "20px", minWidth: "260px" }}>
         <Box sx={style.BoxStyle}>
+          {childData.length > 0 ?  <>
           <Typography variant="h4">Switch Profile</Typography>
           {childData.map((values, items) => {
             return (
@@ -918,7 +930,30 @@ useEffect(()=>{
                 </Box>
               </Box>
             );
-          })}
+          })}</> : <Box  onClick={()=>{
+              navigate("/child-profile", {
+                state: {
+                  name: "Add",
+                  img: "",
+                  childId: "",
+                  data: ""
+                }
+              }) 
+              User.setChildOpen(false)
+            }} sx={{ padding: "8px", }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "8px",
+                  alignItems: "center",
+                }}
+              >
+                <LiaUserCircleSolid
+                  style={{ color: "#D8D8D8", fontSize: "25px" }}
+                />
+                <Typography variant="body2">Add child</Typography>
+              </Box>
+          </Box>}
         </Box>
         {contentLog}
       </Box>
@@ -1010,6 +1045,7 @@ useEffect(()=>{
                     </Box>
                   </Box>
                 </Box>
+                {childData.length > 0 ? 
                 <Box sx={style.BoxStyle}>
                   <Typography variant="h4">Switch</Typography>
                   {childData.map((values, items)=>{
@@ -1034,7 +1070,33 @@ useEffect(()=>{
                   </Box>)
                   })}
                  
-                </Box>
+                </Box> :
+                  <Box sx={style.BoxStyle}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: "8px",
+                      alignItems: "center",
+                    }}
+                    onClick={()=>{
+                      navigate("/child-profile", {
+                        state: {
+                          name: "Add",
+                          img: "",
+                          childId: "",
+                          data: ""
+                        }
+                      }) 
+                      User.setChildOpen(false)
+                    }}
+                  >
+                    <LiaUserCircleSolid
+                      style={{ color: "#D8D8D8", fontSize: "25px" }}
+                    />
+                    <Typography variant="body2">Add child</Typography>
+                  </Box>
+                  </Box>
+                }
                 <Box sx={style.BoxStyle}>
                   <AddImg alt="" src="images/add.png" />
                 </Box>

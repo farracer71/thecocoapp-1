@@ -138,7 +138,7 @@ export function TopBarData({ onMobileNavOpen }) {
 
   return (
     <>
-      {isMobile && (location.pathname == "/update-profile" || location.pathname == "/child-profile")  &&
+      {/* {isMobile && (location.pathname == "/update-profile" || location.pathname == "/child-profile")  &&
           <IconButton
             color="#FF2626"
             onClick={()=>onMobileNavOpen()}
@@ -149,7 +149,7 @@ export function TopBarData({ onMobileNavOpen }) {
             style={{ color:"rgba(182, 183, 184, 1)"}}
               />
      
-          </IconButton>}
+          </IconButton>} */}
         
        
       <img

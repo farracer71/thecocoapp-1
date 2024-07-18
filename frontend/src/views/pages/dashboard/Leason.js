@@ -233,10 +233,32 @@ function Leason(props) {
     onSwipedDown: handleSwipedDown,
     onSwiping: handleSwiping,
   });
+  const containerRef = useRef(null);
 
+  useEffect(() => {
+    const handleTouchMove = (event) => {
+      if (event.touches.length > 1) {
+        return;
+      }
+      event.preventDefault();
+    };
+
+    const container = containerRef.current;
+
+    if (container) {
+      container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('touchmove', handleTouchMove);
+      }
+    };
+  }, []);
   return (
 
     <MainBox
+      ref={containerRef}
       sx={{
         background: getBackground(progress),
         backgroundSize: '100% 200%',

@@ -946,6 +946,7 @@ useEffect(()=>{
                   display: "flex",
                   gap: "8px",
                   alignItems: "center",
+                  cursor: "pointer",
                 }}
               >
                 <LiaUserCircleSolid
@@ -1077,6 +1078,7 @@ useEffect(()=>{
                       display: "flex",
                       gap: "8px",
                       alignItems: "center",
+                      cursor: "pointer",
                     }}
                     onClick={()=>{
                       navigate("/child-profile", {

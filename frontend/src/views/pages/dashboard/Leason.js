@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Box, Container, Grid, LinearProgress, Typography, keyframes, styled, useMediaQuery } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import { IoVolumeMediumOutline } from "react-icons/io5";
@@ -14,6 +14,7 @@ import { FaAngleDoubleUp } from "react-icons/fa";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import { useTheme } from "@emotion/react";
 import { useSwipeable } from "react-swipeable";
+import { UserContext } from "src/context/User";
 
 
 const bottomToTop = keyframes`
@@ -125,6 +126,7 @@ function Leason(props) {
   const navigate = useNavigate();
   let min = 1;
   const theme = useTheme();
+  const User = useContext(UserContext);
   const isMobileChild = useMediaQuery(theme.breakpoints.down('md'));
   const [progress, setProgress] = useState(1);
   const location = useLocation();
@@ -308,12 +310,15 @@ function Leason(props) {
                 <Box
                   sx={{ display: "flex", alignItems: "start", gap: "15px" }}
                 >
-                  <SchoolLogo alt="#" src="images/schoolLogo.png" />
+                  {User?.profile?.schoolLogo && 
+                    <SchoolLogo alt="#" src={User?.profile?.schoolLogo} />}
                   <Box>
+
+                    {User?.profile?.schoolName && 
                     <Typography variant="body2">
-                      Pravara Public School
-                    </Typography>
-                    <Typography variant="body2">Pravaranagar</Typography>
+                        {User?.profile?.schoolName}
+                    </Typography>}
+                    {User?.profile?.schoolAddress && <Typography variant="body2">{User?.profile?.schoolAddress}</Typography>}
                   </Box>
                 </Box>
               </Box>

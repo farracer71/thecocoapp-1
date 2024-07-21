@@ -347,6 +347,22 @@ display:"none",
       lineHeight: "24px",
     },
   },
+  makeBack:{
+    backgroundImage: "url('/images/nameBackground.png')",
+    backgroundSize: "cover",
+    minHeight: "56px",
+    width:"100%",
+    textAlign:"center",
+    display:"grid",
+    justifyContent:"center",
+    alignItems:"center",
+    marginTop:"60px",
+    marginBottom:"100px",
+    "@media(max-width:767px)": {
+      marginTop: "40px",
+      marginBottom: "100px",
+    },
+  }
 };
 
 // const TitleWrapper = styled('img')(({ theme }) => ({
@@ -961,24 +977,38 @@ useEffect(()=>{
     </>
   );
  
- 
+  const getOrdinalSuffix=(number) =>{
+    const suffixes = ["th", "st", "nd", "rd"];
+    const value = number % 100;
+    return number + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
+  }
 
 
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">
         <Box>
-          <Grid container spacing={4}>
+          <Grid container spacing={6}>
             {/* <Grid item xs={12} sx={style.switchChildBox}>
               <Box sx={{display:"flex", justifyContent:"end"}}>
                 <Button variant="contained" onClick={() => { setChildOpen(true) }}><HiSwitchHorizontal />Switch</Button>
               </Box>
             </Grid> */}
-            <Grid item xs={12} sm={12} md={7}>
+            <Grid item xs={12} sm={12} md={7} sx={{paddingRight:{
+              xl:"55px",
+              md:"55px",
+              sm:"0",
+              xs:"0"
+            }}}>
              
               {levelData.length !== 0 ?
-              levelData.map((values) => (
-                <>
+              levelData.map((values, i) => (
+               <>
+                  {values?.name &&
+                <Box sx={style.makeBack} style={i === 0 ?{marginTop:"26px"}:{}}>
+                    <Typography variant="h4" color={"#434547"} sx={{marginBottom:"7px"}}>{values?.name}</Typography>  
+                </Box> }
+                
                   {values.modules.map((data) => (
                     <Box>
                       <Box
@@ -1031,24 +1061,26 @@ useEffect(()=>{
                   <Box
                     sx={{ display: "flex", gap: "10px", alignItems: "center" }}
                   >
-                    <TaddyImg alt="" src="images/TaddyIcon.png" />
+                    {/* <TaddyImg alt="" src="images/TaddyIcon.png" /> */}
+                    <TaddyImg src="images/Coco-Hello_Talking.gif" alt="#" />
                     <Box>
-                      <Typography variant="h3" fontWeight={"700"} mb={1}>
-                        Hello {childData.map((values, items) => {
+                      <Typography variant="h3" fontWeight={"700"} mb={1} color={"#4B4B4B"}>
+                        Hey I am Coco!
+                         {/* {childData.map((values, items) => {
                           if (values.activeStatus){
                             return values.childName
                           }
-                        })}
+                        })} */}
                       </Typography>
-                      <Typography variant="h4">
-                        Happy learning! Complete one level daily to top !
+                      <Typography variant="h4" color={"#777777"}>
+                        Happy learning! You’ re on {getOrdinalSuffix(User?.profile?.currentModule)} module {User?.profile?.currentLevel} level.
                       </Typography>
                     </Box>
                   </Box>
                 </Box>
                 {childData.length > 0 ? 
                 <Box sx={style.BoxStyle}>
-                  <Typography variant="h4">Switch</Typography>
+                    <Typography variant="h4" fontWeight={"600"} color={"#434547"}>Switch Profile</Typography>
                   {childData.map((values, items)=>{
                     return(
                       <Box sx={style.profileBox} onClick={() => { switchChild(values._id)}}>

@@ -551,6 +551,7 @@ function Leason(props) {
                   disabled={progress <= min}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
+                  cursor={"pointer"}
                 />
 
                 <IoChevronForwardCircle
@@ -573,7 +574,7 @@ function Leason(props) {
                   disabled={progress >= max}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
-
+                  cursor={"pointer"}
                 />
               </Box>
             </Grid>

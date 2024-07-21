@@ -84,12 +84,12 @@ const TakeImg = styled("img")(({ theme }) => ({
     },
 }));
 const TaddyImg = styled("img")(({ theme }) => ({
-    height: "160px", width: "250px",
+     width: "240px",
     "@media(max-width:650px)": {
-        height: "80px", width: "130px"
+     width: "160px"
     },
     "@media(max-width:500px)": {
-        height: "80px", width: "130px"
+        width: "160px"
     },
 }));
 function Complete() {
@@ -151,7 +151,7 @@ function Complete() {
                 display: "flex",
                 justifyContent: "end"
             }}>
-                <TaddyImg alt="" src="images/winner.png"  />
+                        <TaddyImg alt="" src="images/Coco-Idle_Without_Talking.gif"  />
             </Box></Container>
             <InnerBox>
                

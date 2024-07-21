@@ -974,7 +974,7 @@ useEffect(()=>{
                 <Button variant="contained" onClick={() => { setChildOpen(true) }}><HiSwitchHorizontal />Switch</Button>
               </Box>
             </Grid> */}
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} sm={12} md={7}>
              
               {levelData.length !== 0 ?
               levelData.map((values) => (
@@ -1025,7 +1025,7 @@ useEffect(()=>{
              
             
             </Grid>
-            <Grid item xs={5} sx={{ display: { xs: "none", sm: "block" } }}>
+            <Grid item xs={5} sx={{ display: { xs: "none", sm:"none", md: "block" } }}>
               <Box sx={style.GridBox}>
                 <Box sx={style.BoxStyle}>
                   <Box

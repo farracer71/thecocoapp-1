@@ -25,7 +25,7 @@ const style = {
   },
   CombineBox: {
     display: "grid",
-    padding: "20px",
+    padding: "20px 0",
     gap: "25px",
     maxWidth: "700px",
   },
@@ -50,6 +50,20 @@ const style = {
       display:"block"
      },
   },
+  displaycustom:{
+    display:"block",
+    "@media(max-width:767px)": {
+      display: "none",
+    }
+  },
+  displaycustom1:{
+    display: "none",
+    "@media(max-width:767px)": {
+      display: "flex",
+      gap: "8px",
+      alignItems:"center"
+    }
+  }
 };
 const MainBox = styled(Box)(({ theme }) => ({
   padding: "60px 0px 0 0px",
@@ -78,8 +92,19 @@ const TakeImg = styled("img")(({ theme }) => ({
     width: "55px",
     height: "55px",
 },
+ 
 }));
-
+const TakeImg1 = styled("img")(({ theme }) => ({
+  width: "80px",
+  height: "80px",
+  "@media(max-width:767px)": {
+    width: "30px",
+    height: "30px",
+  },
+  "@media(max-width:1000px)": {
+    width: "30px",
+    height: "30px",
+  },}));
 const CustomLinearProgress = styled(LinearProgress)(({ progressColor }) => ({
   width: "-webkit-fill-available",
   height: "10px",
@@ -199,7 +224,7 @@ function QuetionsScreen() {
             <Box sx={style.manageBoxHeight}>
               <Box sx={style.CombineBox}>
                 <Box sx={{ marginBottom: "20px" }}>
-                  <Typography variant="h3">
+                  <Typography variant="h3" fontWeight={600}>
                     {quetionsData[progress - 1]?.name || "--"}
                   </Typography>
                 </Box>
@@ -211,9 +236,12 @@ function QuetionsScreen() {
                       gap: "8px",
                       padding: "12px",
                       borderRadius: "8px",
-                      border: "1px solid #D8D8D8",
+                      border: activeindex === index ? "1px solid rgba(0, 186, 242, 1)" :"1px solid #D8D8D8",
                       cursor: "pointer",
                       background: activeindex === index ? "#E6F8FE" : "#fff",
+                      "&:hover":{
+                        background:"#E6F8FE"
+                      }
                     }}
                     onClick={() => {
                       setActiveIndex(index);
@@ -259,15 +287,19 @@ function QuetionsScreen() {
                   <Box
                     sx={{ display: "flex", gap: "8px", alignItems: "center" }}
                   >
-                    <TakeImg src="images/wrong.png" alt="" />
+                    <Box sx={style.displaycustom}>
+                    <TakeImg src="images/wrong.png" alt="" /></Box>
                     <Box>
+                      <Box sx={{display:"flex", gap:"8px", alignItems:"center"}}>
+                          <Box sx={style.displaycustom1}>
+                            <TakeImg1 src="images/wrong.png" alt="" /></Box>
                       <Typography
                         variant="h4"
                         color={"#FF4B4B"}
                         fontWeight={600}
                       >
                         Try next time
-                      </Typography>
+                      </Typography></Box>
                       <Typography
                         variant="h4"
                         color={"#FF4B4B"}
@@ -291,7 +323,12 @@ function QuetionsScreen() {
                     md:"155px",
                     sm: "-webkit-fill-available",
                     xs:"-webkit-fill-available"
-                  }
+                  },
+                   marginTop: {
+                      md: "0",
+                      sm: "10px",
+                      xs: "10px"
+                    }
                 }}
                   style={
                     correctAns === true

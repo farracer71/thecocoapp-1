@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {
   AppBar,
   Box,
+  Container,
   IconButton,
   SvgIcon,
   Toolbar,
@@ -71,17 +72,20 @@ const TopBar = ({ sx, onMobileNavOpen, ...rest }) => {
   const themeSeeting = useContext(SettingsContext);
 
   return (
+    
     <AppBar
       style={{
         height: "64px",
         justifyContent: "center",
         zIndex:"1201"
       }}
-    >
+    ><Container maxWidth="lg">
       <Toolbar sx={styles.toolbar}>
         <TopBarData onMobileNavOpen={onMobileNavOpen} />
       </Toolbar>
+      </Container>
     </AppBar>
+    
   );
 };
 
@@ -100,7 +104,7 @@ export function TopBarData({ onMobileNavOpen }) {
   const User = useContext(UserContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const isMobileChild = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobileChild = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [state, setState] = React.useState({

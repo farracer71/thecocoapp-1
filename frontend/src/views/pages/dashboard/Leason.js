@@ -76,7 +76,7 @@ const style = {
   },
 };
 const MainBox = styled(Box)(({ theme }) => ({
-  padding: "60px 0px 0 0px",
+  padding: "54px 0px 0 0px",
   [theme.breakpoints.down("md")]: {
     padding: "36px 0px 0 0px",
   },
@@ -101,10 +101,7 @@ const InnerBox = styled(Box)(({ theme }) => ({
 }));
 const AddImg = styled("img")(({ theme }) => ({
   width: "100%",
-  maxHeight: "400px",
-  "@media(max-width:900px)": {
-    maxHeight: "300px",
-  },
+  maxHeight: "300px",
 }));
 const SchoolLogo = styled("img")(({ theme }) => ({
   width: "60px",
@@ -271,9 +268,9 @@ function Leason(props) {
 
     >
       <Container maxWidth="lg">
-        <Grid container >
+        <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={8} sx={{
-            height: "calc(100vh - 125px)",
+            height: "calc(100vh - 77px)",
             overflow: "auto"
 }}>
             <Box sx={style.CombineBox}>
@@ -325,76 +322,79 @@ function Leason(props) {
             </Box>
           </Grid>
           <Grid item md={4} sm={12} xs={12}>
-            <Box sx={{ background: "rgba(255, 255, 255, 1)" }}>
+            <Box sx={{
+              background: "rgba(255, 255, 255, 1)", height: "325px", borderRadius: "16px", padding: "10px", border: "1px solid rgba(216, 216, 216, 1)", display: {
+
+                md: "block",
+                sm: "none",
+                xs: "none"
+              } }}>
               <Box sx={{
-                display: {
-                  md: "block",
-                  sm: "none",
-                  xs: "none"
-                }
+               
               }}>
                 <AddImg alt="" src="images/add.png" />
               </Box>
+             
+            </Box>
+            <Box sx={{
+              display: {
+                md: "none",
+                sm: "flex",
+                xs: "flex"
+              },
+              position: {
+                md: "relative",
+                sm: "fixed",
+                xs: "fixed"
+              },
+              bottom: {
+                md: "",
+                sm: "54px",
+                xs: "54px"
+              },
+              width: {
+                md: "auto",
+                sm: "-webkit-fill-available",
+                xs: "-webkit-fill-available"
+              },
+              justifyContent: "center",
+              marginBottom: "5px",
+              background: getBackground(progress),
+              backgroundSize: '100% 200%',
+              backgroundPosition: 'bottom',
+              animation: animationTrigger ? `${bottomToTop} 1s forwards` : 'none',
+              transition: 'background 1s',// Smooth transition effect
+            }}
+
+            >
               <Box sx={{
-                display: {
-                  md: "none",
-                  sm: "flex",
-                  xs: "flex"
-                },
-                position: {
-                  md: "relative",
-                  sm: "fixed",
-                  xs: "fixed"
-                },
-                bottom: {
-                  md: "",
-                  sm: "54px",
-                  xs: "54px"
-                },
-                width: {
-                  md: "auto",
-                  sm: "-webkit-fill-available",
-                  xs: "-webkit-fill-available"
-                },
-                justifyContent: "center",
-                marginBottom: "5px",
-                background: getBackground(progress),
-                backgroundSize: '100% 200%',
-                backgroundPosition: 'bottom',
-                animation: animationTrigger ? `${bottomToTop} 1s forwards` : 'none',
-                transition: 'background 1s',// Smooth transition effect
+                animation: `${bounce} 1s infinite`, // Infinite bouncing animation
+
               }}
+              // ref={boxRef}
+              // onMouseDown={handleMouseDown}
+              // onTouchStart={handleTouchStart}
 
               >
-                <Box sx={{
-                  animation: `${bounce} 1s infinite`, // Infinite bouncing animation
-
-                }}
-                // ref={boxRef}
-                // onMouseDown={handleMouseDown}
-                // onTouchStart={handleTouchStart}
-
-                >
-                  {swipingDirection === 'Swiping down' ?  <FaAngleDoubleDown style={
+                {swipingDirection == 'Swiping down' ? <FaAngleDoubleDown style={
+                  progress === 3
+                    ? { color: "rgba(232, 215, 124, 1)" }
+                    : progress === 2
+                      ? { color: "rgba(222, 179, 255, 1)" }
+                      : { color: "rgba(255, 179, 209, 1)" }
+                } /> : <FaAngleDoubleUp
+                  style={
                     progress === 3
                       ? { color: "rgba(232, 215, 124, 1)" }
                       : progress === 2
                         ? { color: "rgba(222, 179, 255, 1)" }
                         : { color: "rgba(255, 179, 209, 1)" }
-                  } />:<FaAngleDoubleUp
-                    style={
-                      progress === 3
-                        ? { color: "rgba(232, 215, 124, 1)" }
-                        : progress === 2
-                          ? { color: "rgba(222, 179, 255, 1)" }
-                          : { color: "rgba(255, 179, 209, 1)" }
-                    }
-                  
-                  />}
+                  }
 
-                </Box>
+                />}
 
               </Box>
+
             </Box>
           </Grid>
         </Grid>
@@ -408,17 +408,17 @@ function Leason(props) {
             xs: "20px 25px"
           },
           position: {
-            md: "relative",
+            md: "fixed",
             sm: "fixed",
             xs: "fixed"
           },
           bottom: {
-            md: "",
+            md: "0",
             sm: "0",
             xs: "0"
           },
           width: {
-            md: "auto",
+            md: "100%",
             sm: "-webkit-fill-available",
             xs: "-webkit-fill-available"
           },
@@ -432,17 +432,17 @@ function Leason(props) {
               xs: "20px 25px"
             },
             position: {
-              md: "relative",
+              md: "fixed",
               sm: "fixed",
               xs: "fixed"
             },
             bottom: {
-              md: "",
+              md: "0",
               sm: "0",
               xs: "0"
             },
             width: {
-              md: "auto",
+              md: "100%",
               sm: "-webkit-fill-available",
               xs: "-webkit-fill-available"
             },
@@ -455,17 +455,17 @@ function Leason(props) {
               xs: "20px 25px"
             },
             position: {
-              md: "relative",
+              md: "fixed",
               sm: "fixed",
               xs: "fixed"
             },
             bottom: {
-              md: "",
+              md: "0",
               sm: "0",
               xs: "0"
             },
             width: {
-              md: "auto",
+              md: "100%",
               sm: "-webkit-fill-available",
               xs: "-webkit-fill-available"
             },
@@ -551,7 +551,6 @@ function Leason(props) {
                   disabled={progress <= min}
                   color="rgba(255, 255, 255, 1)"
                   fontSize={"48px"}
-
                 />
 
                 <IoChevronForwardCircle

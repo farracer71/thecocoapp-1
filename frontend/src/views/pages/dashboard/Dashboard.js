@@ -13,6 +13,7 @@ import { HiSwitchHorizontal } from "react-icons/hi";
 import { FiEdit3 } from "react-icons/fi";
 import { redirectToMail } from "src/utils";
 import { LiaUserCircleSolid } from "react-icons/lia";
+import { Link, animateScroll as scroll, scroller } from 'react-scroll';
 const style = {
   HandleMargin: {
     marginTop: "20px",
@@ -28,7 +29,7 @@ const style = {
   },
   BoxStyle: {
     padding: "22px",
-    border: "2px solid rgba(216, 216, 216, 1)",
+    border: "1px solid rgba(229, 229, 229, 1)",
     borderRadius: "16px",
     marginTop: "22px",
     "@media(max-width:767px)": {
@@ -422,6 +423,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [childData, setChildData] = useState([]);
   const [levelData, setLevelData] = useState([]);
+  const [currentData, setCurrentData] = useState();
   const [profile, setProfile] = useState("");
   useEffect(() => {
     setProfile(User?.profile?.profilePic)
@@ -586,7 +588,7 @@ useEffect(()=>{
           )}
           <LockImg
             onClick={() => {
-              if (level.complete_status) {
+              if (level.complete_status || level.current_status) {
                 navigate("/leason", {
                   state: {
                     module_id: level.module_id,
@@ -603,7 +605,7 @@ useEffect(()=>{
                   : "images/lock.png"
             }
             alt=""
-            style={level.complete_status ? { cursor: "pointer" } : {}}
+            style={level.complete_status || level.current_status ? { cursor: "pointer" } : {}}
           />
         </Grid>
       );
@@ -693,6 +695,17 @@ useEffect(()=>{
       });
       if (res.status === 200) {
         setLevelData(res?.data?.result || [])
+        setCurrentData({
+          currentLevel: res?.data?.currentLevel,
+          currentModule: res?.data?.currentModule,
+          currentStandard: res?.data?.currentStandard,
+          isStanard: res?.data?.standard,
+         })
+        scroller.scrollTo(`${res?.data?.currentStandard + " " + "Standard"}`, {
+          duration: 500,
+          delay: 0,
+          smooth: 'easeInOutQuart'
+        });
       }
     } catch (error) {
       console.log(error, "error");
@@ -931,8 +944,8 @@ useEffect(()=>{
                         values.profilePic
                           ? values.profilePic
                           : values.gender === "Male"
-                            ? "images/boyprofile.jpg"
-                            : "images/girlprofile.jpg"
+                            ? "images/boyprofile.png"
+                            : "images/girlprofile.png"
                       }
                     />
                     <Box>
@@ -978,12 +991,16 @@ useEffect(()=>{
   );
  
   const getOrdinalSuffix=(number) =>{
+    console.log("currentLevel: ", number);
     const suffixes = ["th", "st", "nd", "rd"];
     const value = number % 100;
     return number + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
   }
 
-
+  const removeOrdinalSuffixes =(value)=> {
+    console.log(value.replace(/(\d+)(st|nd|rd|th)/g, '$1'));
+    return value.replace(/(\d+)(st|nd|rd|th)/g, '$1');
+  }
   return (
     <Page title="Dashboard">
       <Container maxWidth="lg">
@@ -1004,8 +1021,8 @@ useEffect(()=>{
               {levelData.length !== 0 ?
               levelData.map((values, i) => (
                <>
-                  {values?.name &&
-                <Box sx={style.makeBack} style={i === 0 ?{marginTop:"26px"}:{}}>
+                  {(values?.name && currentData?.isStanard) &&
+                    <Box sx={style.makeBack} style={i === 0 ? { marginTop: "26px" } : {}} id={removeOrdinalSuffixes(values?.name)}>
                     <Typography variant="h4" color={"#434547"} sx={{marginBottom:"7px"}}>{values?.name}</Typography>  
                 </Box> }
                 
@@ -1039,7 +1056,7 @@ useEffect(()=>{
                             color={"#fff"}
                             sx={{ fontWeight: "600" }}
                           >
-                            Module {data.module_id}
+                            Module {data.module_number ? data.module_number : data.module_id}
                           </Typography>
                         </Box>
                       </Box>
@@ -1073,7 +1090,7 @@ useEffect(()=>{
                         })} */}
                       </Typography>
                       <Typography variant="h4" color={"#777777"}>
-                        Happy learning! You’ re on {getOrdinalSuffix(User?.profile?.currentModule)} module {User?.profile?.currentLevel} level.
+                        Happy learning! You’ re on {getOrdinalSuffix(currentData?.currentModule)} module {getOrdinalSuffix(currentData?.currentLevel)} level.
                       </Typography>
                     </Box>
                   </Box>
@@ -1093,7 +1110,7 @@ useEffect(()=>{
                         <Box sx={{display:"flex", alignItems:"center", gap:"10px"}}>
                           <ProfileImg alt="" src={
                               values.profilePic ? values.profilePic :
-                            values.gender == "Male" ? "images/boyprofile.jpg" : "images/girlprofile.jpg"} />
+                            values.gender == "Male" ? "images/boyprofile.png" : "images/girlprofile.png"} />
                             <Box > <Typography variant="body1">{values.childName}</Typography>
                         <Box sx={style.GapBox}>
                             <Typography variant="body1">{values.totalPoints}</Typography>

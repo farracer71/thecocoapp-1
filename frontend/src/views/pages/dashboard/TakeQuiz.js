@@ -53,10 +53,10 @@ const MainBox = styled(Box)(({ theme }) => ({
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
   padding: "45px",
-  borderTop: "2px solid #D8D8D8",
+  borderTop: "1px solid #E5E5E5",
   "@media(max-width:100px)": {
     padding: "30px",
-    borderTop: "2px solid #D8D8D8",
+    borderTop: "1px solid #E5E5E5",
 },
   "@media(max-width:767px)": { padding: "20px", border:"none" },
   background:"#fff"
@@ -90,10 +90,10 @@ function TakeQuiz() {
                 display: "grid",
     justifyContent: "center",
     alignItems: "center",
-    width: "330px",
+    width: "354px",
               }}>
               <TakeImg src="images/Coco-Idle_Without_Talking.gif" alt="" />
-              <Box sx={{ borderRadius: "8px", border:"1px solid #D8D8D8", padding:"27px", width:"329px", position:"absolute", bottom:{
+              <Box sx={{ borderRadius: "8px", border:"1px solid #D8D8D8", padding:"25px", width:"354px", position:"absolute", bottom:{
                 md:"-90px",
                 sm:"-90px",
                 xs:"-50px"

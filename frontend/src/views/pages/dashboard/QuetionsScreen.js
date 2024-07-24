@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Container, Grid, LinearProgress, Snackbar, styled, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, LinearProgress, Snackbar, styled, Typography, useMediaQuery } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { generateLabels } from "src/utils";
 import { IoMdClose } from "react-icons/io";
 import ApiConfig from "src/config/APICongig";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useTheme } from "@emotion/react";
 
 const style = {
   flexBox: {
@@ -45,25 +46,13 @@ const style = {
     display: "grid",
     overflow: "auto",
     "@media(max-width:767px)": {
-      height: "calc(100vh - 314px)",
+      height: "calc(100vh - 300px)",
       justifyContent: "start",
       alignItems: "start",
       display: "block"
     },
   },
-  manageBoxHeight: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: "calc(100vh - 259px)",
-    display: "grid",
-    overflow: "auto",
-    "@media(max-width:767px)": {
-      height: "calc(100vh - 314px)",
-      justifyContent: "start",
-      alignItems: "start",
-      display:"block"
-     },
-  },
+
   displaycustom:{
     display:"block",
     "@media(max-width:767px)": {
@@ -89,7 +78,7 @@ const MainBox = styled(Box)(({ theme }) => ({
 }));
 const InnerBox = styled(Box)(({ theme }) => ({
     padding: "45px",
-    borderTop: "2px solid #D8D8D8",
+    borderTop: "1px solid #E5E5E5",
     position: "fixed",
     bottom: "0",
     width: "-webkit-fill-available",
@@ -137,9 +126,11 @@ function QuetionsScreen() {
     const [progress, setProgress] = useState(1);
     const nextProgress = () => {
       setProgress(correctAnsData.nextQuestionNo); // Increment or reset to minimum
+      setCorrectAns(null);
     };
   const[activeindex, setActiveIndex] =useState("");
-  const [correctAns, setCorrectAns] = useState("");
+  const [correctAns, setCorrectAns] = useState(null);
+  console.log(correctAns, "correctAns");
   const handleClose = (event, reason) => {
 
     setOpen(false);
@@ -147,11 +138,14 @@ function QuetionsScreen() {
   const [open, setOpen] = useState(false);
   const [attempt, setAttempt] = useState(false);
   const [percentage, setPercentage] = useState(1);
+  const [susscessQuestions, setSusscessQuestions] = useState(1);
   const [correctAnsData, setCorrectAnsData] = useState({});
   const location = useLocation();
   const [quetionsData, setQuetionsData] = useState([]);
   const calculateProgressValue = () => (((progress - min) / (max - min)) * 100) || 1;
   const labels = generateLabels(10);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   console.log(quetionsData, "quetionsData");
   const [max, setMax] = useState(quetionsData.length);
   useEffect(() => {
@@ -172,7 +166,7 @@ function QuetionsScreen() {
       if (res.status === 200) {
         setQuetionsData(res.data.result.quesitons)
         setMax(res.data.result.quesitons.length)
-        setAttempt(res.data.result.loaderPercentage)
+        setAttempt(res.data.result.attamptedQuestions)
       }
     } catch (error) {
       console.log(error, "error");
@@ -193,7 +187,7 @@ function QuetionsScreen() {
           "module_id": location?.state?.module_id,
           "level_id": location?.state?.level_id,
           "answer": answer,
-          "demo": false
+          "demo": attempt
         }
       });
       if (res.status === 200) {
@@ -201,6 +195,7 @@ function QuetionsScreen() {
         setCorrectAnsData(res.data.result)
         //res.data.result.loaderPercentage
         setPercentage(res.data.result.loaderPercentage)
+        setSusscessQuestions(res.data.result.susscessQuestions)
       }
     } catch (error) {
       console.log(error, "error");
@@ -229,10 +224,11 @@ function QuetionsScreen() {
               />
               <CustomLinearProgress
                 variant="determinate"
-                value={attempt ? percentage : calculateProgressValue()}
+                value={percentage}
+                // value={attempt ? percentage : calculateProgressValue()}
               />
               <Typography variant="body2" color={"#FE8A36"}>
-                {progress}/{max}
+                {percentage > 1 ? susscessQuestions : 1}/{max}
               </Typography>
             </Box>
           </Grid>
@@ -275,7 +271,7 @@ function QuetionsScreen() {
         </Grid>
       </Container>
       {correctAns === true && 
-      <Container>
+        <Container sx={isMobile ? { marginTop:"-7px"} :{}}>
         <Box sx={{
           display: "flex",
           justifyContent: "end"
@@ -346,6 +342,7 @@ function QuetionsScreen() {
                 )}
 
                 <Button
+                  disabled={correctAns == null }
                  sx={{
                   width:{
                     md:"155px",
@@ -363,16 +360,13 @@ function QuetionsScreen() {
                       ? { background: "#58CC02" }
                       : correctAns === false
                       ? { background: "#FF4B4B" }
-                      : { background: "#FE8A36" }
+                        : { background: "#FE8A36", color:"rgb(188 102 40)" }
                   }
                   variant="contained"
                   onClick={() => { 
+                    setCorrectAns(null);
                   
-                    if(activeindex === ""){
-                      setOpen(true)
-                    }else{
                     setActiveIndex("");  
-                    setCorrectAns("");
                     if (correctAnsData.nextScreen === "SCORE_BOARD"){
                       navigate("/complete",
                         {state:{
@@ -382,7 +376,7 @@ function QuetionsScreen() {
                       )
                     }else{
                       nextProgress();
-                    }}
+                    }
                   }}
                 >
                   Continue
